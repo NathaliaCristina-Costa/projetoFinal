@@ -1,0 +1,30 @@
+body{
+    background-color:whitesmoke;
+}
+
+.fonte-titulo{
+    font-family: 'Lobster', cursive;
+    
+}
+
+
+.cor-especial{
+    color:#282828;
+}
+
+
+.cor-botao{
+    background-color: #005cdb;
+    color: white;
+    border-color: #282828;
+}
+
+.card{
+    border-color: #282828;
+    max-width: 18rem;
+}
+
+.card-posicao-imagem{
+    object-fit: cover;
+    height: 200px;
+}
