@@ -52,9 +52,9 @@
                   $senha = addslashes($_POST['senha']);
 
                   if ($cliente->cadastrarCliente($nome, $telefone, $email, $senha) == true) {
+                      echo "<script>alert('Conta Registrada com Sucesso!');</script>"; 
+                      header('location: /projetoFinal/cliente/login.php');    
                       
-                      header('location: /projetoFinal/cliente/login.php');
-                      echo "<script>alert(Conta Registrada com Sucesso!)</script>"; 
                   }
                   //Preenchimento obrigatório, VERIFICAR SE VARIÁVEIS ESTÃO VAZIAS
                   else if (!empty($email)) {
@@ -68,21 +68,21 @@
               <form class="user" method="POST" action="">
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-6">
-                    <input type="text" class="form-control form-control-user" name="nome" id="nome" placeholder="Nome">
+                    <input type="text" class="form-control form-control-user" name="nome" id="nome" placeholder="Nome" required>
                   </div>
                   <div class="col-sm-6">
                     <input type="tel" class="form-control form-control-user" name="telefone" id="telefone"
-                      placeholder="Telefone">
+                      placeholder="Telefone" required>
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-6">
                     <input type="email" class="form-control form-control-user" name="email" id="email"
-                      placeholder="Email">
+                      placeholder="Email" required>
                   </div>
                   <div class="col-sm-6 mb-3 mb-sm-6">
                     <input type="password" class="form-control form-control-user" name="senha" id="senha"
-                      placeholder="Senha">
+                      placeholder="Senha" required>
                   </div>
                 </div>
                 <hr>
@@ -110,7 +110,11 @@
   
 
   <!-- Core plugin JavaScript-->
-
+  <script type="text/javascript">
+        $(document).ready(function() {
+            $('#registrar').onClik();
+        });
+    </script>
 
 </body>
 

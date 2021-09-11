@@ -2,10 +2,9 @@
 include_once("classe/Freelancer.php");
 include_once("classe/Categoria.php");
 $freela = new Freelancer("projetofinal", "localhost", "root", "");
-$cat = new Categoria("projetofinal", "localhost", "root", "");
 
 
-$cat->buscarDados();
+
 
 
 ?>
@@ -51,42 +50,82 @@ $cat->buscarDados();
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form method='POST' action="">
-                                            <div class="row">
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <input type="text" name="nome" class="form-control" placeholder="Nome" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <input type="email" name="email" class="form-control" placeholder="Email" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <input type="password" name="senha" class="form-control" placeholder="Senha" required>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <input type="text" data-mask="(00) 00000-0000" class="form-control" placeholder="Telefone" id="telefone" name="telefone">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12 mb-3 mb-sm-6">
-                                                    <select class="form-select form-select-md mb-3" aria-label=".form-select-md example" name='categoria'>
-                                                        <option>Escolha Categoria</option>
+                                        <form action="#" id="step-form-horizontal" class="step-form-horizontal">
+                                            <div>
+                                                <h4>Informações Da Conta</h4>
+                                                <section>
+                                                    <form>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <input type="text" name="nome" class="form-control" placeholder="Nome" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <input type="password" name="senha" class="form-control" placeholder="Senha" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <input type="text" data-mask="(00) 00000-0000" class="form-control" placeholder="Telefone" id="telefone" name="telefone">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12 mb-3 mb-sm-6">
+                                                                <select class="form-control">
+                                                                    <?php
+                                                                    while ($linha = mysqli_fetch_array($consulta_cargo)) {
+                                                                        echo '<option value="' . $linha['id_cargo'] . '">' . $linha['nome_cargo'] . '</option>';
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </section>
 
-                                                        <?php while ($prod = $freela) { ?>
-                                                            <option value="<?php echo $prod['id_Categoria'] ?>"><?php echo $prod['nomeCategoria'] ?></option>
-                                                        <?php } ?>
-
-                                                    </select>
-                                                </div>
+                                                <h4>Pagamento</h4>
+                                                <section>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <input class="form-control" type="number" name="numCartao" placeholder="Número Cartão">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <input class="form-control" type="month" name="data" placeholder="Data Validade">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <div class="form-group">
+                                                                <input class="form-control" type="text" name="nomeCartao" placeholder="Nome Impresso no Cartão">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <div class="form-group">
+                                                                <input class="form-control" type="number" name="codSeguranca" placeholder="CVC">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="cardPg">
+                                                        <div class="card-footer">
+                                                            <h6>Total </h6>
+                                                            <hr> R$ 90,00
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                                <input type="submit" class="btn btn-info" value="registrar" />
                                             </div>
-                                            <input type="submit" value="Registrar" class="btn btn-info" id="registrar">
                                         </form>
                                     </div>
                                 </div>

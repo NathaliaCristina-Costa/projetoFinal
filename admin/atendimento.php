@@ -1,3 +1,7 @@
+<?php
+    require_once "../classe/Atendimento.php";
+    $atend = new Atendimento("projetofinal", "localhost", "root", "");
+?>
 <!DOCTYPE html>
 <html>
 
@@ -77,13 +81,40 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Assunto</th>
-                                            <th>Mensagem</th>
+                                            <th>Nome</th>
+                                            <th>Assunto</th>>
                                             <th>Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+                                        $dados = $atend->totalRegistroAtendimento();
+                                        if (count($dados) > 0) {
+                                            for ($i = 0; $i < count($dados); $i++) {
+                                                echo "<tr>";
+                                                foreach ($dados[$i] as $k => $v) {
+                                                    if ($k != "id_Atendimento" && $k != "mensagem" && $k != "id_Cliente") {
+                                                        echo "<td>" . $v . "</td>";
+                                                    }
+                                                }
+                                        ?>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Ações
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="">Visualizar</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                        <?php
+                                                echo "</tr>";
+                                            }
+                                        } else //Não há registros.
+                                        {
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

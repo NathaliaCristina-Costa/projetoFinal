@@ -1,3 +1,8 @@
+<?php
+require_once "../classe/Freelancer.php";
+$freela = new Freelancer("projetofinal", "localhost", "root", "");
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -70,20 +75,42 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-dark">Lista de Freelancers</h6>
+                            <h6 class="m-0 font-weight-bold text-dark">Lista de Freelancers</h6><br>
+                            <h6 ><button class="btn btn-dark">Relatório</button></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                           
                                             <th>Nome</th>
+                                            <th>Email</th>
+                                            <th>Telefone</th>
                                             <th>Categoria</th>
-                                            <th>Ações</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                        $dados = $freela->buscarDados();
+                                        if (count($dados) > 0) {
+                                            for ($i = 0; $i < count($dados); $i++) {
+                                                echo "<tr>";
+                                                foreach ($dados[$i] as $k => $v) {
+                                                    if ($k != "id_Freelancer" && $k != "senha") {
+                                                        echo "<td>" . $v . "</td>";
+                                                    }
+                                                }
+                                        ?>
+                                              
+                                        <?php
+                                                echo "</tr>";
+                                            }
+                                        } else //Não há registros.
+                                        {
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

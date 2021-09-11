@@ -40,7 +40,7 @@
                 $cmd->bindValue(":n", $nome);
                 $cmd->bindValue(":t", $telefone);
                 $cmd->bindValue(":e", $email);
-                $cmd->bindValue(":s", $senha);
+                $cmd->bindValue(":s", md5($senha));
                 $cmd->execute();
                 return true;
             }
@@ -50,7 +50,7 @@
         //FAZER O LOGIN
         public function logar($email, $senha){
             //Verificar se existe cadastro do cliente
-            $cmd = $this->pdo->prepare("SELECT id_Cliente FROM cliente WHERE emailCliente = :e AND senhaCliente :s");
+            $cmd = $this->pdo->prepare("SELECT id_Cliente FROM cliente WHERE emailCliente = :e AND senhaCliente = :s");
             $cmd->bindValue(":e", $email);
             $cmd->bindValue(":s", $senha);
             $cmd->execute();
@@ -58,7 +58,7 @@
             //se retornou ID a pessoa está cadastrada
             if ($cmd->rowCount()>0) {
                //Entrar no sistema
-               $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
+               $res = $cmd->fetch();
                session_start();
                $_SESSION['id_Cliente'] = $res['id_Cliente']; 
                return true; // Login Efetuado

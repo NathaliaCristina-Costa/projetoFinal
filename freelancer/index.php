@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['id_Freelancer'])) {
+        header('location: /projetoFinal/freelancer/login.php');
+        exit();
+    }
+?>
 <!DOCTYPE html>
 
 <html>
