@@ -1,9 +1,18 @@
 <?php
+    require_once "../classe/Freelancer.php";
+    $freela = new Freelancer("projetofinal", "localhost", "root", "");
+
     session_start();
-    if (!isset($_SESSION['id_Freelancer'])&&!empty($_SESSION['email'])&&!empty($_SESSION['senha'])) {
-        header('location: /projetoFinal/freelancer/login.php');
-        exit();
+    if (!isset($_SESSION['id_Freelancer']) && !empty($_SESSION['id_Freelancer'])) {
+        header('location: login.php');
+      
     }
+    if(isset($_GET['sair'])){
+        unset($_SESSION['id_Freelancer']);
+        header('location: login.php');
+    }
+
+    
 ?>
 <!DOCTYPE html>
 
@@ -32,7 +41,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar" style="background-color: black;">
             <div class="sidebar-header" style="background-color: black;">
-                <h3><i class="fas fa-people-carry"></i> Freelancer</h3>
+                <h3><i class="fas fa-people-carry"></i> <?php echo $_SESSION['id_Freelancer'];?></h3>
             </div>
 
             <ul class="list-unstyled components">

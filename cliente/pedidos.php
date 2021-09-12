@@ -1,6 +1,6 @@
 <?php
-require_once "../classe/Categoria.php";
-$cat = new Categoria("projetofinal", "localhost", "root", "");
+require_once "../classe/Pedido.php";
+$p = new Pedido("projetofinal", "localhost", "root", "");
 
 ?>
 
@@ -74,23 +74,56 @@ $cat = new Categoria("projetofinal", "localhost", "root", "");
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title"><i class="fa fa-envelope" aria-hidden="true"></i> Fale Conosco</h4>
+                                    <h4 class="card-title"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Faça Seu Pedido</h4>
                                     <br>
                                     <div class="basic-form">
 
-                                        <form>
-                                            <div class="mb-3">
-                                                <label for="nome" class="form-label">Nome</label>
-                                                <input type="text" class="form-control" id="nome" placeholder="Nome">
+                                        <form actio=POST>
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <input type="text" class="form-control form-control-user" name="cep" id="cep" placeholder="CEP" required>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <button type="button" class="btn btn-success" id="buscar_cep">
+                                                        buscar
+                                                        <i class="fa fa-search" action=""></i>
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control form-control-user" name="rua" id="rua" placeholder="Rua" required>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <input type="text" class="form-control form-control-user" name="bairro" id="bairro" placeholder="Bairro" required>
+                                                </div>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="email" class="form-label">Email</label>
-                                                <input type="email" class="form-control" id="email" placeholder="nome@examplo.com">
+                                            <div class="form-group row">
+                                                <div class="col-sm-2">
+                                                    <input type="text" class="form-control form-control-user" name="cidade" id="cidade" placeholder="Cidade" required>
+                                                </div>
+                                                <div class="col-sm-1">
+                                                    <select class="form-control" name="estadfo">
+                                                        <option value="selecione" selected>UF</option>
+                                                        
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <input type="tel" class="form-control form-control-user" data-mask="(00) 00000-0000" name="telefone" id="telefone" placeholder="Telefone" required>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <select class="form-control" name="categoria">
+                                                        <option value="selecione" selected>Categoria do Pedido</option>
+                                                        <?php $p->buscarCategoria(); ?>
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="mensagem" class="form-label">Mensagem</label>
-                                                <textarea class="form-control" id="mensagem" rows="3"></textarea>
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                    <label for="mensagem" class="form-label">Derscrição do Pedido:</label>
+                                                    <textarea class="form-control" id="mensagem" rows="3"></textarea>
+                                                </div>
                                             </div>
+                                            <input type="submit" value="Finalizar" class="btn btn-warning">
                                         </form>
                                     </div>
                                 </div>

@@ -1,9 +1,18 @@
 <?php
+    require_once "../classe/Cliente.php";
+    $cli = new Cliente("projetofinal", "localhost", "root", "");
+
     session_start();
-    if (!isset($_SESSION['id_Cliente'])) {
-        header('location: /projetoFinal/cliente/login.php');
-        exit();
+    if (!isset($_SESSION['id_Cliente']) && !empty($_SESSION['id_Cliente'])) {
+        header('location: login.php');
+      
     }
+    if(isset($_GET['sair'])){
+        unset($_SESSION['id_Cliente']);
+        header('location: login.php');
+    }
+
+    
 ?>
 <!DOCTYPE html>
 
@@ -32,7 +41,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar" s>
             <div class="sidebar-header">
-                <h3><i class="fas fa-user-friends"></i> Cliente</h3>
+                <h3><i class="fas fa-user-friends"></i>  <?php echo $_SESSION['id_Cliente'];?></h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -50,7 +59,7 @@
                 </li>
 
                 <li>
-                    <a href="login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
+                    <a href="index.php?sair=true"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
                 </li>
             </ul>
         </nav>

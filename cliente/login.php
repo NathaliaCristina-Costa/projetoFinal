@@ -64,14 +64,19 @@
                                     <hr>
                                 </div>
                                 <?php
-                                    if (isset($_POST['email'])) {
+                                    if (isset($_POST['email']) && !empty($_POST['email'])&& isset($_POST['senha']) && !empty($_POST['senha'])) {
                                         $email = addslashes($_POST['email']);
                                         $senha = addslashes($_POST['senha']);
                                         if (!empty($email) && !empty($senha)) {
-                                           if($cli->logar($email, $senha)){
-                                                header('location: /projetoFinal/cliente/index.php');
+                                           if($cli->logar($email, $senha) == true){
+                                               if(isset($_SESSION['id_Cliente'])){
+                                                header('location: index.php');
+                                               }else{
+                                                header('location: login.php');
+                                               }
                                            }else{
                                                echo"<script>alert('Email e/ou senha estão incorretos!');</script>";
+                                               
                                            }
                                         }
                                     }

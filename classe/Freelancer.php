@@ -87,7 +87,7 @@
         //FAZER O LOGIN
         public function logar($email, $senha){
             //Verificar se existe cadastro do cliente
-            $cmd = $this->pdo->prepare("SELECT id_Freelancer FROM freelancer WHERE email = :e AND senha = :s");
+            $cmd = $this->pdo->prepare("SELECT id_Freelancer,nome FROM freelancer WHERE email = :e AND senha = :s");
             $cmd->bindValue(":e", $email);
             $cmd->bindValue(":s", $senha);
             $cmd->execute();
