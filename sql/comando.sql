@@ -5,7 +5,7 @@ ALTER TABLE servico ADD CONSTRAINT FK_categoria_idCategoria FOREIGN KEY(id_Categ
 
 
 
-ALTER TABLE freelancer ADD CONSTRAINT fk_CatgFreelancer FOREIGN KEY (id_Categoria) REFERENCES categoria (id_Categoria)
+ALTER TABLE freelancer ADD CONSTRAINT fk_CatgFreelancer FOREIGN KEY (idCategoria) REFERENCES categoria (id_Categoria)
 
 ALTER TABLE atendimentocliente ADD CONSTRAINT fk_ClienAtendimento FOREIGN KEY (id_Cliente) REFERENCES cliente (id_Cliente)
 
@@ -14,3 +14,5 @@ ALTER TABLE pedido ADD CONSTRAINT fk_CatgPedido FOREIGN KEY (id_Categoria) REFER
 ALTER TABLE pedido ADD CONSTRAINT fk_ClientePedido FOREIGN KEY (id_Cliente) REFERENCES cliente (id_Cliente)
 
 ALTER TABLE pedido ADD CONSTRAINT fk_FreelaPedido FOREIGN KEY (id_Freelancer) REFERENCES freelancer (id_Freelancer)
+
+ALTER TABLE pagamento ADD CONSTRAINT fk_FreelaPagamento FOREIGN KEY (idFreelancer) REFERENCES freelancer (id_Freelancer)

@@ -18,10 +18,24 @@
         public function buscarDados(){
 
             $res = array();
-            $cmd = $this->pdo->query("SELECT nome,email, telefone, id_Categoria FROM freelancer ORDER BY id_Freelancer ");
+            $cmd = $this->pdo->query("SELECT nome,email, telefone, idCategoria FROM freelancer ORDER BY id_Freelancer ");
             $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $res;
         }
+        public function buscarCategoria(){
+
+            $cmd = $this->pdo->prepare("SELECT nomeCategoria, id_Categoria FROM categoria");
+            $cmd->execute();
+
+            $cmd->execute();
+
+            if ($cmd->rowCount()>0) {
+                while ($dados = $cmd->fetch(PDO::FETCH_ASSOC)) {
+                    echo "<option value='{$dados['id_Categoria']}'>{$dados['nomeCategoria']}</option>";
+                }
+            }
+        }
+
 
         //FUNÇÃO CADASTRA FREELANCER NO BANCO DE DADOS
         public function cadastrarFreelancer($nome, $email, $senha, $telefone, $id_Categoria){
@@ -35,13 +49,13 @@
                 return false;
             }else{ 
              //pessoa não encontrada retornar verdadeiro
-                $cmd = $this->pdo->prepare("INSERT INTO frelancer (nome, email, senha, telefone, id_Categoria) VALUES (:n, :e, :s, :t, :idC)");
+                $cmd = $this->pdo->prepare("INSERT INTO freelancer (nome, email, senha, telefone, idCategoria) VALUES (:n, :e, :s, :t, :idC)");
 
                 $cmd->bindValue(":n", $nome);
                 $cmd->bindValue(":e", $email);
                 $cmd->bindValue(":s", $senha);
-                $cmd->bindValue(":t", $telefone);
-                $cmd->bindValue(":idC", $id_Categoria);               
+                $cmd->bindValue(":t", $telefone);  
+                $cmd->bindValue(":idC", $id_Categoria);           
                 
                 $cmd->execute();
                 return true;
@@ -70,6 +84,7 @@
            
         }
 
+        //FAZER O LOGIN
         public function logar($email, $senha){
             //Verificar se existe cadastro do cliente
             $cmd = $this->pdo->prepare("SELECT id_Freelancer FROM freelancer WHERE email = :e AND senha = :s");

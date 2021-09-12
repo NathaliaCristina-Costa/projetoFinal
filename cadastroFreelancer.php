@@ -50,11 +50,36 @@ $freela = new Freelancer("projetofinal", "localhost", "root", "");
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <form action="#" id="step-form-horizontal" class="step-form-horizontal">
+                                        <form method="POST" id="step-form-horizontal" class="step-form-horizontal">
                                             <div>
                                                 <h4>Informações Da Conta</h4>
                                                 <section>
-                                                    <form>
+                                                    <?php
+                                                    
+                                                    //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
+                                                    if (isset($_POST['nome'])) {
+                                                      //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
+                                                      $nome = addslashes($_POST['nome']);
+                                                      $email = addslashes($_POST['email']);
+                                                      $senha = addslashes($_POST['senha']);
+                                                      $telefone = addslashes($_POST['telefone']);
+                                                      $id_Categoria = addslashes($_POST['idCategoria']);                                                      
+                                                      
+                                      
+                                                      if ($freela->cadastrarFreelancer($nome, $email, $senha, $telefone, $id_Categoria) == true) {
+                                                        echo "<script>alert('Conta Registrada com Sucesso!');</script>";
+                                                        header('location: /projetoFinal/freelancer/login.php');
+                                                      }
+                                                      //Preenchimento obrigatório, VERIFICAR SE VARIÁVEIS ESTÃO VAZIAS
+                                                      else if (!empty($email)) {
+                                                        if (!$freela->cadastrarFreelancer($nome, $email, $senha, $telefone, $id_Categoria)) {
+                                                          echo  "<script>alert('Email já Cadastrado! Cadastre Um novo Email');</script>";
+                                                        }
+                                                      }
+                                                    }
+                                                    ?>
+                                                    
+                                                    <form method="POST">
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
@@ -79,19 +104,19 @@ $freela = new Freelancer("projetofinal", "localhost", "root", "");
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-12 mb-3 mb-sm-6">
-                                                                <select class="form-control">
+                                                                <select class="form-control" name="idCategoria">
+                                                                    <option value="selecione" selected>Escolha sua Categoria</option>
                                                                     <?php
-                                                                    while ($linha = mysqli_fetch_array($consulta_cargo)) {
-                                                                        echo '<option value="' . $linha['id_cargo'] . '">' . $linha['nome_cargo'] . '</option>';
-                                                                    }
+                                                                    $freela->buscarCategoria();
                                                                     ?>
+
                                                                 </select>
                                                             </div>
                                                         </div>
                                                     </form>
                                                 </section>
 
-                                                <h4>Pagamento</h4>
+                                                <!--h4>Pagamento</h4>
                                                 <section>
                                                     <div class="row">
                                                         <div class="col-6">
@@ -123,7 +148,7 @@ $freela = new Freelancer("projetofinal", "localhost", "root", "");
                                                             <hr> R$ 90,00
                                                         </div>
                                                     </div>
-                                                </section>
+                                                </section-->
                                                 <input type="submit" class="btn btn-info" value="registrar" />
                                             </div>
                                         </form>

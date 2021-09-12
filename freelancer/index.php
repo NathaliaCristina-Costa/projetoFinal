@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (!isset($_SESSION['id_Freelancer'])) {
+    if (!isset($_SESSION['id_Freelancer'])&&!empty($_SESSION['email'])&&!empty($_SESSION['senha'])) {
         header('location: /projetoFinal/freelancer/login.php');
         exit();
     }
@@ -51,7 +51,7 @@
                     <a href="atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Fale Conosco</a>
                 </li>
                 <li>
-                    <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
+                    <a href="login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
                 </li>
             </ul>
         </nav>
