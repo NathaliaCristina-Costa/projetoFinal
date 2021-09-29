@@ -1,7 +1,9 @@
 <?php
-    require_once "../classe/Atendimento.php";
-    $atend = new Atendimento("projetofinal", "localhost", "root", "");
+require_once "../../classe/Categoria.php";
+$cat = new Categoria();
+
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -16,8 +18,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="../css/style.css">
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
@@ -29,7 +30,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3><i class="fas fa-user-shield"></i><a href="index.php"> Admin</a></h3>
+                <h3><i class="fas fa-user-shield"></i><a href="../index.php"> Admin</a></h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -41,13 +42,13 @@
                     <a href="servico.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Serviços</a>
                 </li-->
                 <li>
-                    <a href="freelancer.php"><i class="fas fa-people-carry mr-2 text-gray-400"></i> Freelancers</a>
+                    <a href="../freelancer.php"><i class="fas fa-people-carry mr-2 text-gray-400"></i> Freelancers</a>
                 </li>
                 <li>
-                    <a href="cliente.php"><i class="fas fa-user-friends mr-2 text-gray-400"></i> Clientes</a>
+                    <a href="../cliente/cliente.php"><i class="fas fa-user-friends mr-2 text-gray-400"></i> Clientes</a>
                 </li>
                 <li>
-                    <a href="atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
+                    <a href="../atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
                 </li>
                 <li>
                     <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
@@ -62,63 +63,61 @@
                 <div class="row page-titles mx-0">
                     <div class="col p-md-0">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Freelancer</a></li>
-                            <li class="breadcrumb-item active"><a href="index.php">Home</a></li>
+                            <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="categoria.php">Categoria</a></li>
                         </ol>
                     </div>
                 </div>
                 <!-- row -->
 
                 <div class="container-fluid">
+                    <div class="row">
+                    <?php
+                    ?>
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Categoria</h4>
+                                    <p class="text-muted"><small>Cadastre a Categoria</small></p>
+                                    <div class="basic-form">
+                                    <?php
+                                        //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
+                                        if (isset($_POST['nome'])) {
+                                            //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
+                                            $nome = addslashes($_POST['nome']);
 
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-dark">Lista de Mensagens</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Nome</th>
-                                            <th>Assunto</th>>
-                                            <th>Ações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $dados = $atend->totalRegistroAtendimento();
-                                        if (count($dados) > 0) {
-                                            for ($i = 0; $i < count($dados); $i++) {
-                                                echo "<tr>";
-                                                foreach ($dados[$i] as $k => $v) {
-                                                    if ($k != "id_Atendimento" && $k != "mensagem" && $k != "id_Cliente") {
-                                                        echo "<td>" . $v . "</td>";
-                                                    }
-                                                }
-                                        ?>
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Ações
-                                                        </button>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="">Visualizar</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                        <?php
-                                                echo "</tr>";
+                                            if ($cat->cadastrarCategoria($nome) == true) {
+                                                
+                                                header('location: /projetoFinal/admin/categoria/categoria.php');
+                                                echo  "<script>alert('Categoria já Cadastrada! Cadastre Uma nova Categoria');</script>";
                                             }
-                                        } else //Não há registros.
-                                        {
+                                            //Preenchimento obrigatório, VERIFICAR SE VARIÁVEIS ESTÃO VAZIAS
+                                            else if (!empty($nome)) {
+                                                if (!$cat->cadastrarCategoria($nome)) {
+                                                    echo  "<script>alert('Categoria já Cadastrada! Cadastre Uma nova Categoria');</script>";
+
+                                                }
+                                                else if($cat->cadastrarCategoria($nome) == '') {
+                                                    echo  "Preencha o Campo da Categoria!";
+                                                }
+                                            } 
+                                            
+                                            
+
+                                            
                                         }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                    ?>
+                                        <form class="form-inline" method="POST" action="">
+                                            <div class="form-group mx-sm-2 mb-2">
+                                                <input type="text" class="form-control" placeholder="Digite a Categoria" name="nome" require>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary mb-2" name="btCadastrar">Confirmar</button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 <!-- #/ container -->
@@ -143,12 +142,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
-    <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('#dataTable').DataTable();
-        });
+
     </script>
 </body>
 

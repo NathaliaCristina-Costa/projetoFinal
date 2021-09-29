@@ -1,24 +1,18 @@
 <?php
-
+    require_once 'Conexao.php';
     class Freelancer{
         private $pdo;
         
-        //CONEXAO BANCO DE DADOS
-        public function __construct($dbname, $host, $user, $senha){
-            try {
-                $this->pdo = new PDO("mysql:dbname=".$dbname.";host=".$host,$user,$senha);
-            } catch (PDOException $e) {
-                echo "Erro com banco de dados: ".$e->getMessage();
-            } catch (Exception $e) {
-                echo "Erro generico: ".$e->getMessage();
-            }
+       
+        public function __construct(){
+            $this->pdo = Conexao::getConexao();
         }
 
         //BUSCAR DADOS DO BANCO E MOSTRAR NA TABELA DA TELA
         public function buscarDados(){
 
             $res = array();
-            $cmd = $this->pdo->query("SELECT nome,email, telefone, idCategoria FROM freelancer ORDER BY id_Freelancer ");
+            $cmd = $this->pdo->query("SELECT nome,email, telefone, nomeCategoria FROM freelancer JOIN categoria ON idCategoria = id_Categoria; ");
             $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $res;
         }
@@ -34,6 +28,16 @@
                     echo "<option value='{$dados['id_Categoria']}'>{$dados['nomeCategoria']}</option>";
                 }
             }
+        }
+
+        public function buscarPedido(){
+            
+            $cmd = $this->pdo->prepare("SELECT nomeCategoria, cidade, estado, mensagem FROM pedido JOIN categoria ON idCategoria = id_Categoria");
+            $cmd->execute();
+
+            $cmd->execute();
+
+           
         }
 
 

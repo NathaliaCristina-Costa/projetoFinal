@@ -1,8 +1,9 @@
 <?php
-require_once "../classe/Freelancer.php";
-$freela = new Freelancer("projetofinal", "localhost", "root", "");
+require_once "../../classe/Cliente.php";
+$cli = new Cliente();
 
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -17,7 +18,7 @@ $freela = new Freelancer("projetofinal", "localhost", "root", "");
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 
     <!-- Font Awesome JS -->
@@ -30,25 +31,26 @@ $freela = new Freelancer("projetofinal", "localhost", "root", "");
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3><i class="fas fa-user-shield"></i><a href="index.php"> Admin</a></h3>
+                <h3><i class="fas fa-user-shield"></i><a href="../index.php"> Admin</a></h3>
             </div>
 
             <ul class="list-unstyled components">
 
                 <li>
-                    <a href="categoria.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Categorias</a>
+                    <a href="../categoria/categoria.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Categorias</a>
                 </li>
-                <!--li>
-                    <a href="servico.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Serviços</a>
-                </li-->
                 <li>
-                    <a href="freelancer.php"><i class="fas fa-people-carry mr-2 text-gray-400"></i> Freelancers</a>
+                    <a href="../freelancer/freelancer.php"><i class="fas fa-people-carry mr-2 text-gray-400"></i> Freelancers</a>
                 </li>
                 <li>
                     <a href="cliente.php"><i class="fas fa-user-friends mr-2 text-gray-400"></i> Clientes</a>
                 </li>
                 <li>
-                    <a href="atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
+                    <a href="../atendimento/atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
+                </li>
+                
+                <li>
+                    <a href="../pedido/registroPedido.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Pedidos Registrados</a>
                 </li>
                 <li>
                     <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
@@ -63,8 +65,8 @@ $freela = new Freelancer("projetofinal", "localhost", "root", "");
                 <div class="row page-titles mx-0">
                     <div class="col p-md-0">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">Freelancer</a></li>
-                            <li class="breadcrumb-item active"><a href="index.php">Home</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Clientes</a></li>
+                            <li class="breadcrumb-item active"><a href="../index.php">Home</a></li>
                         </ol>
                     </div>
                 </div>
@@ -75,7 +77,7 @@ $freela = new Freelancer("projetofinal", "localhost", "root", "");
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-dark">Lista de Freelancers</h6><br>
+                            <h6 class="m-0 font-weight-bold text-dark">Lista de Clientes</h6><br>
                             <h6 ><button class="btn btn-dark">Relatório</button></h6>
                         </div>
                         <div class="card-body">
@@ -83,32 +85,40 @@ $freela = new Freelancer("projetofinal", "localhost", "root", "");
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                           
                                             <th>Nome</th>
                                             <th>Email</th>
                                             <th>Telefone</th>
-                                            <th>Categoria</th>
-                                            
+                                            <th>Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
-                                        $dados = $freela->buscarDados();
+                                        <?php
+                                        $dados = $cli->buscarDados();
                                         if (count($dados) > 0) {
                                             for ($i = 0; $i < count($dados); $i++) {
                                                 echo "<tr>";
                                                 foreach ($dados[$i] as $k => $v) {
-                                                    if ($k != "id_Freelancer" && $k != "senha") {
+                                                    if ($k != "id_Cliente" && $k != "senhaCliente") {
                                                         echo "<td>" . $v . "</td>";
                                                     }
                                                 }
                                         ?>
-                                              
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Ações
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" href="excluirCliente.php?id=<?php echo $dados[$i]['id_Cliente']; ?>">Excluir</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                         <?php
                                                 echo "</tr>";
                                             }
                                         } else //Não há registros.
                                         {
+                                           
                                         }
                                         ?>
                                     </tbody>

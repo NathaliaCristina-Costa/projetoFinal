@@ -1,17 +1,11 @@
 <?php
-
+    require_once 'Conexao.php';
     class Cliente{
         private $pdo;
         
-        //CONEXAO BANCO DE DADOS
-        public function __construct($dbname, $host, $user, $senha){
-            try {
-                $this->pdo = new PDO("mysql:dbname=".$dbname.";host=".$host,$user,$senha);
-            } catch (PDOException $e) {
-                echo "Erro com banco de dados: ".$e->getMessage();
-            } catch (Exception $e) {
-                echo "Erro generico: ".$e->getMessage();
-            }
+       
+        public function __construct(){
+            $this->pdo = Conexao::getConexao();
         }
 
         //BUSCAR DADOS DO BANCO E MOSTRAR NA TABELA DA TELA
@@ -40,7 +34,7 @@
                 $cmd->bindValue(":n", $nome);
                 $cmd->bindValue(":t", $telefone);
                 $cmd->bindValue(":e", $email);
-                $cmd->bindValue(":s", md5($senha));
+                $cmd->bindValue(":s", $senha);
                 $cmd->execute();
                 return true;
             }

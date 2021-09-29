@@ -1,6 +1,6 @@
 <?php
-require_once "../classe/Categoria.php";
-$cat = new Categoria("projetofinal", "localhost", "root", "");
+require_once "../../classe/Categoria.php";
+$cat = new Categoria();
 
 ?>
 <!DOCTYPE html>
@@ -17,7 +17,7 @@ $cat = new Categoria("projetofinal", "localhost", "root", "");
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 
     <!-- Font Awesome JS -->
@@ -30,7 +30,7 @@ $cat = new Categoria("projetofinal", "localhost", "root", "");
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3><i class="fas fa-user-shield"></i><a href="index.php"> Admin</a></h3>
+                <h3><i class="fas fa-user-shield"></i><a href="../index.php"> Admin</a></h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -38,17 +38,17 @@ $cat = new Categoria("projetofinal", "localhost", "root", "");
                 <li>
                     <a href="categoria.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Categorias</a>
                 </li>
-                <!--li>
-                    <a href="servico.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Serviços</a>
-                </li-->
                 <li>
-                    <a href="freelancer.php"><i class="fas fa-people-carry mr-2 text-gray-400"></i> Freelancers</a>
+                    <a href="../freelancer/freelancer.php"><i class="fas fa-people-carry mr-2 text-gray-400"></i> Freelancers</a>
                 </li>
                 <li>
-                    <a href="cliente.php"><i class="fas fa-user-friends mr-2 text-gray-400"></i> Clientes</a>
+                    <a href="../cliente/cliente.php"><i class="fas fa-user-friends mr-2 text-gray-400"></i> Clientes</a>
                 </li>
                 <li>
-                    <a href="atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
+                    <a href="../atendimento/"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
+                </li>                
+                <li>
+                    <a href="../pedido/registroPedido.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Pedidos Registrados</a>
                 </li>
                 <li>
                     <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
@@ -64,7 +64,7 @@ $cat = new Categoria("projetofinal", "localhost", "root", "");
                     <div class="col p-md-0">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="javascript:void(0)">Categoria</a></li>
-                            <li class="breadcrumb-item active"><a href="index.php">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="../index.php">Home</a></li>
                         </ol>
                     </div>
                 </div>
@@ -78,8 +78,13 @@ $cat = new Categoria("projetofinal", "localhost", "root", "");
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary"><a href="cadastroCategoria.php"><button type="button" class="btn btn-dark">Adicionar</button></a></h6>
+                                <h6 class="m-0 font-weight-bold text-primary">
+                                    <a href="cadastroCategoria.php"><button  type="button" class="btn btn-dark">Adicionar</button></a>
+                                    <a href="cadastroCategoria.php"><button style="float:right" type="button" class="btn btn-dark">Relatório</button></a>
+                                </h6>
+                                
                             </div>
+                            
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

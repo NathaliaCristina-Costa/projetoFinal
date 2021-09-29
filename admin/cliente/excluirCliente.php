@@ -1,5 +1,5 @@
 <?php
-    require_once "../classe/Cliente.php";
+    require_once "../../classe/Cliente.php";
     $cat = new Cliente("projetofinal", "localhost", "root", "");
 
 

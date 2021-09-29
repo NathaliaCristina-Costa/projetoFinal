@@ -1,6 +1,6 @@
 <?php
     require_once "../classe/Freelancer.php";
-    $freela = new Freelancer("projetofinal", "localhost", "root", "");
+    $freela = new Freelancer();
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,6 +1,6 @@
 <?php
     require_once "../classe/Cliente.php";
-    $cli = new Cliente("projetofinal", "localhost", "root", "");
+    $cli = new Cliente();
 ?>
 <!DOCTYPE html>
 <html lang="en">

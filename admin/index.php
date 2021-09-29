@@ -3,22 +3,13 @@ require_once "../classe/Categoria.php";
 require_once "../classe/Cliente.php";
 require_once "../classe/Freelancer.php";
 require_once "../classe/Atendimento.php";
-$cat = new Categoria("projetofinal", "localhost", "root", "");
-$cli = new Cliente("projetofinal", "localhost", "root", "");
-$freela = new Freelancer("projetofinal", "localhost", "root", "");
-$atend = new Atendimento("projetofinal", "localhost", "root", "");
+$cat = new Categoria();
+$cli = new Cliente();
+$freela = new Freelancer();
+$atend = new Atendimento();
 
 
-// Inicia sessões
-session_start();
 
-// Verifica se existe os dados da sessão de login
-if(!isset($_SESSION["id_Admin"]) || !isset($_SESSION["nomeAdmin"]))
-{
-// Usuário não logado! Redireciona para a página de login
-header("Location: login.php");
-exit;
-}
 
 ?>
 <!DOCTYPE html>
@@ -54,19 +45,19 @@ exit;
             <ul class="list-unstyled components">
 
                 <li>
-                    <a href="categoria.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Categorias</a>
-                </li>
-                <!--li>
-                    <a href="servico.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Serviços</a>
-                </li-->
-                <li>
-                    <a href="freelancer.php"><i class="fas fa-people-carry mr-2 text-gray-400"></i> Freelancers</a>
+                    <a href="categoria/categoria.php    "><i class="fas fa-bars mr-2 text-gray-400"></i> Categorias</a>
                 </li>
                 <li>
-                    <a href="cliente.php"><i class="fas fa-user-friends mr-2 text-gray-400"></i> Clientes</a>
+                    <a href="freelancer/freelancer.php"><i class="fas fa-people-carry mr-2 text-gray-400"></i> Freelancers</a>
                 </li>
                 <li>
-                    <a href="atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
+                    <a href="cliente/cliente.php"><i class="fas fa-user-friends mr-2 text-gray-400"></i> Clientes</a>
+                </li>
+                <li>
+                    <a href="atendimento/atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
+                </li>                
+                <li>
+                    <a href="pedido/registroPedido.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Pedidos Registrados</a>
                 </li>
                 <li>
                     <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
@@ -85,9 +76,9 @@ exit;
             <div class="row">
 
                 <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-6 col-md-6 mb-4">
+                <div class="col-xl-4 col-md-4 mb-4">
                     <div class="card border-left-primary shadow h-100 py-2">
-                        <a href="categoria.php">
+                        <a href="categoria/categoria.php">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
@@ -113,9 +104,9 @@ exit;
                 </div>
 
                 <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-6 col-md-6 mb-4">
+                <div class="col-xl-4 col-md-4 mb-4">
                     <div class="card border-left-success shadow h-100 py-2">
-                        <a href="freelancer.php">
+                        <a href="freelancer/freelancer.php">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
@@ -136,12 +127,9 @@ exit;
                         </a>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-6 col-md-6 mb-4">
+                <div class="col-xl-4 col-md-4 mb-4">
                     <div class="card border-left-info shadow h-100 py-2">
-                        <a href="cliente.php">
+                        <a href="cliente/cliente.php">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
@@ -168,11 +156,40 @@ exit;
                         </a>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <!-- Earnings (Monthly) Card Example -->
+                <div class="col-xl-6 col-md-6 mb-4">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <a href="pedido/registroPedido.php">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                            Total de Pedidos
+                                        </div>
+                                        <div class="text-center font-weight-bold text-danger text-uppercase mb-1">
+                                           
+                                        </div>
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-auto">
+                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
 
                 <!-- Pending Requests Card Example -->
                 <div class="col-xl-6 col-md-6 mb-4">
                     <div class="card border-left-warning shadow h-100 py-2">
-                        <a href="atendimento.php">
+                        <a href="atendimento/atendimento.php">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">

@@ -1,6 +1,6 @@
 <?php
 include_once("classe/Cliente.php");
-$cliente = new Cliente("projetofinal", "localhost", "root", "");
+$cliente = new Cliente();
 ?>
 
 <!DOCTYPE html>

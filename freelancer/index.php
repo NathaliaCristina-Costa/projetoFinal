@@ -1,6 +1,6 @@
 <?php
     require_once "../classe/Freelancer.php";
-    $freela = new Freelancer("projetofinal", "localhost", "root", "");
+    $freela = new Freelancer();
 
     session_start();
     if (!isset($_SESSION['id_Freelancer']) && !empty($_SESSION['id_Freelancer'])) {
@@ -51,7 +51,7 @@
                     <a href="freelancer.php"><i class="fas fa-edit mr-2 text-gray-400"></i> Editar Meus Dados</a>
                 </li>
                 <li>
-                    <a href="freelancer.php"><i class="fas fa-receipt mr-2 text-gray-400"></i> Pedidos Disponíveis</a>
+                    <a href="pedidoDisponivel.php"><i class="fas fa-receipt mr-2 text-gray-400"></i> Pedidos Disponíveis</a>
                 </li>
                 <li>
                     <a href="cliente.php"><i class="fas fa-dollar-sign mr-2 text-gray-400"></i> Meus Pedidos</a>

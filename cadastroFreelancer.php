@@ -1,7 +1,7 @@
 <?php
 include_once("classe/Freelancer.php");
 include_once("classe/Categoria.php");
-$freela = new Freelancer("projetofinal", "localhost", "root", "");
+$freela = new Freelancer();
 
 
 
@@ -103,7 +103,7 @@ $freela = new Freelancer("projetofinal", "localhost", "root", "");
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-12 mb-3 mb-sm-6">
+                                                            <div class="col-sm-6 mb-3 mb-sm-6">
                                                                 <select class="form-control" name="idCategoria">
                                                                     <option value="selecione" selected>Escolha sua Categoria</option>
                                                                     <?php
@@ -175,7 +175,7 @@ $freela = new Freelancer("projetofinal", "localhost", "root", "");
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="js/freelancer.js"></script>
+        
 
 
 </body>

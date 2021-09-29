@@ -1,6 +1,15 @@
 <?php
 require_once "../classe/Pedido.php";
-$p = new Pedido("projetofinal", "localhost", "root", "");
+$p = new Pedido();
+session_start();
+    if (!isset($_SESSION['id_Cliente']) && !empty($_SESSION['id_Cliente'])) {
+        header('location: login.php');
+      
+    }
+    if(isset($_GET['sair'])){
+        unset($_SESSION['id_Cliente']);
+        header('location: login.php');
+    }
 
 ?>
 
@@ -30,7 +39,7 @@ $p = new Pedido("projetofinal", "localhost", "root", "");
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3><i class="fas fa-user-shield"></i><a href="index.php"> Cliente</a></h3>
+                <h3><i class="fas fa-user-shield"></i><a href="index.php"> <?php echo $_SESSION['id_Cliente'];?></a></h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -49,7 +58,7 @@ $p = new Pedido("projetofinal", "localhost", "root", "");
                 </li>
 
                 <li>
-                    <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
+                    <a href="login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
                 </li>
             </ul>
         </nav>
@@ -77,17 +86,33 @@ $p = new Pedido("projetofinal", "localhost", "root", "");
                                     <h4 class="card-title"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Faça Seu Pedido</h4>
                                     <br>
                                     <div class="basic-form">
+                                        <?php
 
-                                        <form actio=POST>
+                                        //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
+                                        if (isset($_POST['cep'])) {
+                                            //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
+                                       
+                                            $cep = addslashes($_POST['cep']);
+                                            $rua = addslashes($_POST['rua']);
+                                            $bairro = addslashes($_POST['bairro']);
+                                            $cidade = addslashes($_POST['cidade']);
+                                            $estado = addslashes($_POST['estado']);
+                                            $telefone = addslashes($_POST['telefone']);
+                                            $mensagem = addslashes($_POST['mensagem']);
+                                            $id_Categoria = addslashes($_POST['categoria']);
+
+
+                                            if ($p->cadastrarPedido( $cep, $rua, $bairro,$cidade, $estado, $telefone,$mensagem, $id_Categoria) == true) {
+                                                echo "<script>alert('Pedido Registrado com Sucesso!');</script>";
+                                               
+                                            }
+                                        }
+                                        ?>
+                                        <form method=POST>
+                                            <input type="hidden" name="idCliente">
                                             <div class="form-group row">
-                                                <div class="col-sm-2">
+                                                <div class="col-sm-4">
                                                     <input type="text" class="form-control form-control-user" name="cep" id="cep" placeholder="CEP" required>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <button type="button" class="btn btn-success" id="buscar_cep">
-                                                        buscar
-                                                        <i class="fa fa-search" action=""></i>
-                                                    </button>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <input type="text" class="form-control form-control-user" name="rua" id="rua" placeholder="Rua" required>
@@ -101,11 +126,7 @@ $p = new Pedido("projetofinal", "localhost", "root", "");
                                                     <input type="text" class="form-control form-control-user" name="cidade" id="cidade" placeholder="Cidade" required>
                                                 </div>
                                                 <div class="col-sm-1">
-                                                    <select class="form-control" name="estadfo">
-                                                        <option value="selecione" selected>UF</option>
-                                                        
-                                                    </select>
-
+                                                    <input type="text" class="form-control form-control-user" name="estado" id="uf" placeholder="UF" required>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <input type="tel" class="form-control form-control-user" data-mask="(00) 00000-0000" name="telefone" id="telefone" placeholder="Telefone" required>
@@ -120,7 +141,7 @@ $p = new Pedido("projetofinal", "localhost", "root", "");
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
                                                     <label for="mensagem" class="form-label">Derscrição do Pedido:</label>
-                                                    <textarea class="form-control" id="mensagem" rows="3"></textarea>
+                                                    <textarea class="form-control" name="mensagem" id="mensagem" rows="3"></textarea>
                                                 </div>
                                             </div>
                                             <input type="submit" value="Finalizar" class="btn btn-warning">
@@ -147,6 +168,7 @@ $p = new Pedido("projetofinal", "localhost", "root", "");
     </footer>
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
@@ -154,10 +176,74 @@ $p = new Pedido("projetofinal", "localhost", "root", "");
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
 
     <script type="text/javascript">
+        $(document).ready(function() {
 
+            function limpa_formulário_cep() {
+                // Limpa valores do formulário de cep.
+                $("#rua").val("");
+                $("#bairro").val("");
+                $("#cidade").val("");
+                $("#uf").val("");
+                $("#ibge").val("");
+            }
+
+            //Quando o campo cep perde o foco.
+            $("#cep").blur(function() {
+
+                //Nova variável "cep" somente com dígitos.
+                var cep = $(this).val().replace(/\D/g, '');
+
+                //Verifica se campo cep possui valor informado.
+                if (cep != "") {
+
+                    //Expressão regular para validar o CEP.
+                    var validacep = /^[0-9]{8}$/;
+
+                    //Valida o formato do CEP.
+                    if (validacep.test(cep)) {
+
+                        //Preenche os campos com "..." enquanto consulta webservice.
+                        $("#rua").val("...");
+                        $("#bairro").val("...");
+                        $("#cidade").val("...");
+                        $("#uf").val("...");
+                        $("#ibge").val("...");
+
+                        //Consulta o webservice viacep.com.br/
+                        $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function(dados) {
+
+                            if (!("erro" in dados)) {
+                                //Atualiza os campos com os valores da consulta.
+                                $("#rua").val(dados.logradouro);
+                                $("#bairro").val(dados.bairro);
+                                $("#cidade").val(dados.localidade);
+                                $("#uf").val(dados.uf);
+                                $("#ibge").val(dados.ibge);
+                            } //end if.
+                            else {
+                                //CEP pesquisado não foi encontrado.
+                                limpa_formulário_cep();
+                                alert("CEP não encontrado.");
+                            }
+                        });
+                    } //end if.
+                    else {
+                        //cep é inválido.
+                        limpa_formulário_cep();
+                        alert("Formato de CEP inválido.");
+                    }
+                } //end if.
+                else {
+                    //cep sem valor, limpa formulário.
+                    limpa_formulário_cep();
+                }
+            });
+        });
     </script>
 </body>
 

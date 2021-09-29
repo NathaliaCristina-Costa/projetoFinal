@@ -1,18 +1,17 @@
 <?php
-    require_once "../classe/Cliente.php";
-    $cli = new Cliente();
+require_once "../classe/Freelancer.php";
+$freela = new Freelancer();
 
-    session_start();
-    if (!isset($_SESSION['id_Cliente']) && !empty($_SESSION['id_Cliente'])) {
-        header('location: login.php');
-      
-    }
-    if(isset($_GET['sair'])){
-        unset($_SESSION['id_Cliente']);
-        header('location: login.php');
-    }
+session_start();
+if (!isset($_SESSION['id_Freelancer']) && !empty($_SESSION['id_Freelancer'])) {
+    header('location: login.php');
+}
+if (isset($_GET['sair'])) {
+    unset($_SESSION['id_Freelancer']);
+    header('location: login.php');
+}
 
-    
+
 ?>
 <!DOCTYPE html>
 
@@ -23,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Clientes</title>
+    <title>Freelancer</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -39,27 +38,28 @@
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
-        <nav id="sidebar" s>
-            <div class="sidebar-header">
-                <h3><i class="fas fa-user-friends"></i>  <?php echo $_SESSION['id_Cliente'];?></h3>
+        <nav id="sidebar" style="background-color: black;">
+            <div class="sidebar-header" style="background-color: black;">
+                <h3><i class="fas fa-people-carry"></i> <?php echo $_SESSION['id_Freelancer']; ?></h3>
             </div>
 
             <ul class="list-unstyled components">
-                <li>
-                    <a href=""><i class="fas fa-edit mr-2 text-gray-400"></i> Editar Minha Conta</a>
-                </li>
-                <li>
-                    <a href="index.php"><i class="fas fa-hand-holding-usd mr-2 text-gray-400"></i> Pedidos que Fiz</a>
-                </li>
-                <li>
-                    <a href="pedidos.php"><i class="fas fa-shopping-cart mr-2 text-gray-400"></i> Novo Pedido</a>
-                </li>
-                <li>
-                    <a href="atendimentoCliente.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Atendimento ao Cliente</a>
-                </li>
+
 
                 <li>
-                    <a href="index.php?sair=true"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
+                    <a href="freelancer.php"><i class="fas fa-edit mr-2 text-gray-400"></i> Editar Meus Dados</a>
+                </li>
+                <li>
+                    <a href="pedidoDisponivel.php"><i class="fas fa-receipt mr-2 text-gray-400"></i> Pedidos Disponíveis</a>
+                </li>
+                <li>
+                    <a href=""><i class="fas fa-dollar-sign mr-2 text-gray-400"></i> Meus Pedidos</a>
+                </li>
+                <li>
+                    <a href="atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Fale Conosco</a>
+                </li>
+                <li>
+                    <a href="login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
                 </li>
             </ul>
         </nav>
@@ -67,14 +67,38 @@
         <!-- Page Content  -->
         <div id="content">
 
-
-
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Pedidos que Fiz</h1>
+                <h1 class="h3 mb-0 text-gray-800">Pedidos Disponíveis</h1>
             </div>
 
-            <!-- Content Row -->
-            
+
+            <div class="row">
+                <!-- Earnings (Monthly) Card Example -->
+                <div class="col-xl-12 col-md-6 mb-4">
+                    <div class="card border-left-info shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-auto">
+                                            
+                                                
+                                           
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
 
         </div>
     </div>
@@ -82,7 +106,7 @@
     <footer class="bg-dark text-center text-white">
 
         <!-- Copyright -->
-        <div class="text-center p-3 " style="background-color: #000">
+        <div class="text-center p-3" style="background-color: #000">
             © Projeto Final
 
         </div>
