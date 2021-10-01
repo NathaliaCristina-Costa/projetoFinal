@@ -38,9 +38,6 @@ $cat = new Categoria();
                 <li>
                     <a href="categoria.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Categorias</a>
                 </li>
-                <!--li>
-                    <a href="servico.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Serviços</a>
-                </li-->
                 <li>
                     <a href="../freelancer.php"><i class="fas fa-people-carry mr-2 text-gray-400"></i> Freelancers</a>
                 </li>
@@ -49,6 +46,16 @@ $cat = new Categoria();
                 </li>
                 <li>
                     <a href="../atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" type="button" id="moduleDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-bars mr-2 text-gray-400"></i>Pedidos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="moduleDropDown">
+                        <a class="dropdown-item" href="pedido/registroPedido.php">Registrados</a>
+                        <a class="dropdown-item" href="pedido/andamentoPedido.php">Andamento</a>
+                        <a class="dropdown-item" href="pedido/concluidoPedido.php">Conluídos</a>
+                    </div>
                 </li>
                 <li>
                     <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
@@ -72,22 +79,22 @@ $cat = new Categoria();
 
                 <div class="container-fluid">
                     <div class="row">
-                    <?php
-                    ?>
+                        <?php
+                        ?>
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Categoria</h4>
                                     <p class="text-muted"><small>Cadastre a Categoria</small></p>
                                     <div class="basic-form">
-                                    <?php
+                                        <?php
                                         //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
                                         if (isset($_POST['nome'])) {
                                             //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
                                             $nome = addslashes($_POST['nome']);
 
                                             if ($cat->cadastrarCategoria($nome) == true) {
-                                                
+
                                                 header('location: /projetoFinal/admin/categoria/categoria.php');
                                                 echo  "<script>alert('Categoria já Cadastrada! Cadastre Uma nova Categoria');</script>";
                                             }
@@ -95,18 +102,12 @@ $cat = new Categoria();
                                             else if (!empty($nome)) {
                                                 if (!$cat->cadastrarCategoria($nome)) {
                                                     echo  "<script>alert('Categoria já Cadastrada! Cadastre Uma nova Categoria');</script>";
-
-                                                }
-                                                else if($cat->cadastrarCategoria($nome) == '') {
+                                                } else if ($cat->cadastrarCategoria($nome) == '') {
                                                     echo  "Preencha o Campo da Categoria!";
                                                 }
-                                            } 
-                                            
-                                            
-
-                                            
+                                            }
                                         }
-                                    ?>
+                                        ?>
                                         <form class="form-inline" method="POST" action="">
                                             <div class="form-group mx-sm-2 mb-2">
                                                 <input type="text" class="form-control" placeholder="Digite a Categoria" name="nome" require>

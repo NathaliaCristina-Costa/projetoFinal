@@ -46,9 +46,15 @@ $atend = new Atendimento();
                 <li>
                     <a href="../atendimento/atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
                 </li>
-
-                <li>
-                    <a href="../pedido/registroPedido.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Pedidos Registrados</a>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" type="button" id="moduleDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bars mr-2 text-gray-400"></i>Pedidos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="moduleDropDown">
+                    <a class="dropdown-item" href="pedido/registroPedido.php">Registrados</a>
+                        <a class="dropdown-item" href="pedido/andamentoPedido.php">Andamento</a>
+                        <a class="dropdown-item" href="pedido/concluidoPedido.php">Conluídos</a>
+                    </div>
                 </li>
                 <li>
                     <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>

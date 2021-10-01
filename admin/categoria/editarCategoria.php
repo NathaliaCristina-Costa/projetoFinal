@@ -51,6 +51,16 @@ $cat = new Categoria();
                 <li>
                     <a href="../atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
                 </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" type="button" id="moduleDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-bars mr-2 text-gray-400"></i>Pedidos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="moduleDropDown">
+                        <a class="dropdown-item" href="pedido/registroPedido.php">Registrados</a>
+                        <a class="dropdown-item" href="pedido/andamentoPedido.php">Andamento</a>
+                        <a class="dropdown-item" href="pedido/concluidoPedido.php">Conluídos</a>
+                    </div>
+                </li>
                 <li>
                     <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
                 </li>
@@ -85,11 +95,11 @@ $cat = new Categoria();
                                     <h4 class="card-title">Categoria</h4>
                                     <p class="text-muted"><small>Edite a Categoria</small></p>
                                     <div class="basic-form">
-                                    <?php
+                                        <?php
                                         //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
                                         if (isset($_POST['nome'])) {
 
-                                            if (isset($_GET['idEditar'])&& !empty($_GET['idEditar'])) {
+                                            if (isset($_GET['idEditar']) && !empty($_GET['idEditar'])) {
                                                 //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
                                                 $idEditar = addslashes($_GET['idEditar']);
                                                 $nome = addslashes($_POST['nome']);
@@ -101,18 +111,15 @@ $cat = new Categoria();
                                                 else if (!empty($nome)) {
                                                     if (!$cat->atualizarDados($idEditar, $nome)) {
                                                         echo  "<script>alert('Categoria já Cadastrada! Cadastre Uma nova Categoria');</script>";
-
-                                                    }
-                                                    else if($cat->atualizarDados($idEditar, $nome) == '') {
+                                                    } else if ($cat->atualizarDados($idEditar, $nome) == '') {
                                                         echo  "Preencha o Campo da Categoria!";
-                                                    }else{
+                                                    } else {
                                                         header('location: /projetoFinal/admin/categoria.php');
                                                     }
                                                 }
-
-                                            }                                            
+                                            }
                                         }
-                                    ?>
+                                        ?>
                                         <form class="form-inline" method="POST" action="">
                                             <div class="form-group mx-sm-2 mb-2">
                                                 <input type="text" class="form-control" placeholder="Digite a Categoria" name="nome" value="<?php if (isset($res)) {

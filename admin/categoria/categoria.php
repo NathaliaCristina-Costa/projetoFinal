@@ -46,9 +46,16 @@ $cat = new Categoria();
                 </li>
                 <li>
                     <a href="../atendimento/"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
-                </li>                
-                <li>
-                    <a href="../pedido/registroPedido.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Pedidos Registrados</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" type="button" id="moduleDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-bars mr-2 text-gray-400"></i>Pedidos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="moduleDropDown">
+                        <a class="dropdown-item" href="pedido/registroPedido.php">Registrados</a>
+                        <a class="dropdown-item" href="pedido/andamentoPedido.php">Andamento</a>
+                        <a class="dropdown-item" href="pedido/concluidoPedido.php">Conluídos</a>
+                    </div>
                 </li>
                 <li>
                     <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
@@ -77,14 +84,14 @@ $cat = new Categoria();
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">
-                                    <a href="cadastroCategoria.php"><button  type="button" class="btn btn-dark">Adicionar</button></a>
-                                    <a href="cadastroCategoria.php"><button style="float:right" type="button" class="btn btn-dark">Relatório</button></a>
-                                </h6>
-                                
-                            </div>
-                            
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                <a href="cadastroCategoria.php"><button type="button" class="btn btn-dark">Adicionar</button></a>
+                                <a href="relatorio/relatorioCategoria.php"><button style="float:right" type="button" class="btn btn-dark">Relatório</button></a>
+                            </h6>
+
+                        </div>
+
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -162,4 +169,3 @@ $cat = new Categoria();
 </body>
 
 </html>
-

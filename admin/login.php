@@ -1,3 +1,7 @@
+<?php
+    require_once "../classe/Admin.php";
+    $admin = new Admin();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,32 +46,39 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Bem Vindo!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" method="POST">
                                         <div class="form-group">
                                             <div class="col-sm-12 mb-3 mb-sm-6">
-                                                <input type="email" class="form-control form-control-user"
-                                                    id="exampleInputEmail" placeholder="Email">
+                                                <input type="text" class="form-control form-control-user"
+                                                    id="nomeInput" name="nome" placeholder="Nome">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-12 mb-3 mb-sm-6">
                                                 <input type="password" class="form-control form-control-user"
-                                                    id="exampleInputPassword" placeholder="Senha">
+                                                    id="exampleInputPassword" name="senha" placeholder="Senha">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div>
-                                        <a href="../cliente/index.php" class="btn btn-success btn-user btn-block">
-                                            Login
-                                        </a>
+                                        <input type="submit" class="btn btn-success btn-user btn-block" value="Login">
                                     </form>
                                     <hr>
                                 </div>
+                                <?php
+                                    if (isset($_POST['nome']) && !empty($_POST['nome'])&& isset($_POST['senha']) && !empty($_POST['senha'])) {
+                                        $nome = addslashes($_POST['nome']);
+                                        $senha = addslashes($_POST['senha']);
+                                        if (!empty($nome) && !empty($senha)) {
+                                           if($admin->logar($nome, $senha) == true){
+                                               if(isset($_SESSION['id_Admin'])){
+                                                header('location: index.php');
+                                               }
+                                            }else{
+                                               echo"<script>alert('Nome e/ou senha estão incorretos!');</script>";
+                                               
+                                           }
+                                        }
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>

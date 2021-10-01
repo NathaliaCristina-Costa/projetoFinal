@@ -48,9 +48,15 @@ $cli = new Cliente();
                 <li>
                     <a href="../atendimento/atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
                 </li>
-                
-                <li>
-                    <a href="../pedido/registroPedido.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Pedidos Registrados</a>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" type="button" id="moduleDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-bars mr-2 text-gray-400"></i>Pedidos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="moduleDropDown">
+                        <a class="dropdown-item" href="pedido/registroPedido.php">Registrados</a>
+                        <a class="dropdown-item" href="pedido/andamentoPedido.php">Andamento</a>
+                        <a class="dropdown-item" href="pedido/concluidoPedido.php">Conluídos</a>
+                    </div>
                 </li>
                 <li>
                     <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
@@ -78,7 +84,7 @@ $cli = new Cliente();
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-dark">Lista de Clientes</h6><br>
-                            <h6 ><button class="btn btn-dark">Relatório</button></h6>
+                            <h6><button class="btn btn-dark">Relatório</button></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -109,7 +115,7 @@ $cli = new Cliente();
                                                             Ações
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="excluirCliente.php?id=<?php echo $dados[$i]['id_Cliente']; ?>">Excluir</a>
+                                                            <a class="dropdown-item" href="excluirCliente.php?id=<?php echo $dados[$i]['id_Cliente']; ?>">Excluir</a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -118,7 +124,6 @@ $cli = new Cliente();
                                             }
                                         } else //Não há registros.
                                         {
-                                           
                                         }
                                         ?>
                                     </tbody>

@@ -41,7 +41,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar" s>
             <div class="sidebar-header">
-                <h3><i class="fas fa-user-friends"></i>  <?php echo $_SESSION['id_Cliente'];?></h3>
+                <h3><i class="fas fa-user-friends"></i>  <?php echo $_SESSION[' '];?></h3>
             </div>
 
             <ul class="list-unstyled components">

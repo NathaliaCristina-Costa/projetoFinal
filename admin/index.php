@@ -1,12 +1,25 @@
 <?php
+
+    
+
 require_once "../classe/Categoria.php";
 require_once "../classe/Cliente.php";
 require_once "../classe/Freelancer.php";
 require_once "../classe/Atendimento.php";
-$cat = new Categoria();
-$cli = new Cliente();
+require_once "../classe/Admin.php";
+$cat    = new Categoria();
+$cli    = new Cliente();
 $freela = new Freelancer();
-$atend = new Atendimento();
+$atend  = new Atendimento();
+$admin  = new Admin();
+
+// Inicia sessões
+
+session_start();
+
+    if (!isset($_SESSION['id_Admin'])) {
+        header('location: login.php');      
+    }
 
 
 
@@ -39,7 +52,7 @@ $atend = new Atendimento();
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3><i class="fas fa-user-shield"></i> Admin</h3>
+                <h3><i class="fas fa-user-shield"></i> <?php echo $_SESSION['id_Admin'];?></h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -55,12 +68,19 @@ $atend = new Atendimento();
                 </li>
                 <li>
                     <a href="atendimento/atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
-                </li>                
-                <li>
-                    <a href="pedido/registroPedido.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Pedidos Registrados</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" type="button" id="moduleDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bars mr-2 text-gray-400"></i>Pedidos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="moduleDropDown">
+                        <a class="dropdown-item" href="pedido/registroPedido.php">Registrados</a>
+                        <a class="dropdown-item" href="pedido/andamentoPedido.php">Andamento</a>
+                        <a class="dropdown-item" href="pedido/concluidoPedido.php">Conluídos</a>
+                    </div>
                 </li>
                 <li>
-                    <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
+                    <a href="logout.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
                 </li>
             </ul>
         </nav>
@@ -169,7 +189,7 @@ $atend = new Atendimento();
                                             Total de Pedidos
                                         </div>
                                         <div class="text-center font-weight-bold text-danger text-uppercase mb-1">
-                                           
+
                                         </div>
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
