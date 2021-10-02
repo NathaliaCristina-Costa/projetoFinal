@@ -1,6 +1,5 @@
 <?php
-require_once "../../classe/Categoria.php";
-$cat = new Categoria();
+
 
 ?>
 
@@ -79,8 +78,6 @@ $cat = new Categoria();
 
                 <div class="container-fluid">
                     <div class="row">
-                        <?php
-                        ?>
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
@@ -88,27 +85,9 @@ $cat = new Categoria();
                                     <p class="text-muted"><small>Cadastre a Categoria</small></p>
                                     <div class="basic-form">
                                         <?php
-                                        //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
-                                        if (isset($_POST['nome'])) {
-                                            //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
-                                            $nome = addslashes($_POST['nome']);
-
-                                            if ($cat->cadastrarCategoria($nome) == true) {
-
-                                                header('location: /projetoFinal/admin/categoria/categoria.php');
-                                                echo  "<script>alert('Categoria já Cadastrada! Cadastre Uma nova Categoria');</script>";
-                                            }
-                                            //Preenchimento obrigatório, VERIFICAR SE VARIÁVEIS ESTÃO VAZIAS
-                                            else if (!empty($nome)) {
-                                                if (!$cat->cadastrarCategoria($nome)) {
-                                                    echo  "<script>alert('Categoria já Cadastrada! Cadastre Uma nova Categoria');</script>";
-                                                } else if ($cat->cadastrarCategoria($nome) == '') {
-                                                    echo  "Preencha o Campo da Categoria!";
-                                                }
-                                            }
-                                        }
-                                        ?>
-                                        <form class="form-inline" method="POST" action="">
+                                        
+                                    ?>
+                                        <form class="form-inline" method="POST" action="salva.php">
                                             <div class="form-group mx-sm-2 mb-2">
                                                 <input type="text" class="form-control" placeholder="Digite a Categoria" name="nome" require>
                                             </div>

@@ -1,6 +1,8 @@
 <?php
+
 include_once("classe/Cliente.php");
 $cliente = new Cliente();
+
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +53,7 @@ $cliente = new Cliente();
 
                 if ($cliente->cadastrarCliente($nome, $telefone, $email, $senha) == true) {
                   echo "<script>alert('Conta Registrada com Sucesso!');</script>";
+                  
                   header('location: /projetoFinal/cliente/login.php');
                 }
                 //Preenchimento obrigatório, VERIFICAR SE VARIÁVEIS ESTÃO VAZIAS

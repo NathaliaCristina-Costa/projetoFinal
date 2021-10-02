@@ -83,7 +83,7 @@ $freela = new Freelancer();
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-dark">Lista de Freelancers</h6><br>
-                            <h6><button class="btn btn-dark">Relatório</button></h6>
+                            <h6><a href="relatorio/relatorioFreelancer.php"><button class="btn btn-dark">Relatório</button></a></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">

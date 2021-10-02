@@ -19,6 +19,7 @@ session_start();
 
     if (!isset($_SESSION['id_Admin'])) {
         header('location: login.php');      
+        die();
     }
 
 

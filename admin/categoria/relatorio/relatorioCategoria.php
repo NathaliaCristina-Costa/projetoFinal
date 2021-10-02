@@ -1,34 +1,53 @@
-<?php
-    require_once "../../../classe/fpdf/fpdf.php";
-    require_once "../../../classe/Categoria.php";
+<?php        
+    require_once "../../../dompdf/autoload.inc.php";
 
-    $cat = new Categoria();
-    //Documento PDF com orientação P - retrato
-    $pdf = new FPDF("P");
+    use Dompdf\Dompdf;
+    use Dompdf\Options;
 
-    $pdf->AddPage();
+    
+    $options = new Options();
 
-    $arquivo  = "relatorioCategoira.pdf";
-    $fonte   = "Arial";      
-    $estilo  = "B";
-    $border  = "1";
-    $alinhaC = "C";
+    $pdf = new DOMPDF($options);
 
-    //Envia o arquivo para o navegador
-    $tipo_pdf = "I";
-    //$pdf->
-    // Begin with regular font
-    $pdf->SetFont('Arial','',14);
-    $pdf->Write(5,'Visit ');
-// Then put a blue underlined link
-    $pdf->SetTextColor(0,0,255);
-    $pdf->SetFont('','U');
-    $pdf->Write(5, 'www.fpdf.org', 'http://www.fpdf.org');
-    foreach ($cat->buscarDados() as $rstCat) {
+    $pdo = new PDO('mysql:host=localhost; dbname=projetofinal', 'root', '');
+
+    $sql = $pdo->query('SELECT * FROM categoria');
+
+    $html = '<table border=1 width=100%>';	
+	$html .= '<thead>';
+	$html .= '<tr>';
+	$html .= '<th>ID</th>';
+	$html .= '<th>Categoria</th>';
+	$html .= '</thead>';
+	$html .= '<tbody>';
+
+    while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
+        $html .= '<tr><td>'. $linha['id_Categoria'] . '</td>';
+        $html .= '<td>'. $linha['nomeCategoria'] . '</td></tr>';
         
-        $pdf->SetFont($fonte, $estilo, 15);      
-        $pdf->Cell(190, 10, $rstCat['nomeCategoria'], $border, 1, $alinhaC);
     }
 
-    $pdf->Output($arquivo, $tipo_pdf);
+    $html .= '</tbody>';
+	$html .= '</table>';
+
+    //Criando a Instancia
+	$dompdf = new DOMPDF();
+	
+	// Carrega seu HTML
+	$dompdf->loadHtml('
+			<h1 style="text-align: center;"> Relatório Categorias</h1>
+			'. $html .'
+		');
+
+	//Renderizar o html
+	$dompdf->render();
+
+	//Exibibir a página
+	$dompdf->stream(
+		"relatorioCategoria.pdf", 
+		array(
+			"Attachment" => false //Para realizar o download somente alterar para true
+		)
+	);
+    
 ?>

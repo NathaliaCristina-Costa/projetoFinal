@@ -105,7 +105,7 @@ $cat = new Categoria();
                                                 $nome = addslashes($_POST['nome']);
 
                                                 if ($cat->atualizarDados($idEditar, $nome) == true) {
-                                                    header('location: /projetoFinal/admin/categoria/categoria.php');
+                                                    header('location: /projetoFinal/admin/index.php');
                                                 }
                                                 //Preenchimento obrigatório, VERIFICAR SE VARIÁVEIS ESTÃO VAZIAS
                                                 else if (!empty($nome)) {
