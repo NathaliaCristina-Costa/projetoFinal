@@ -1,4 +1,6 @@
 <?php
+require_once "../../classe/Atendimento.php";
+$atende = new Atendimento();
 
 
 ?>
@@ -39,7 +41,7 @@
                     <div class="col p-md-0">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="../index.php">Home</a></li>
-                            <li class="breadcrumb-item active"><a href="categoria.php">Categoria</a></li>
+                            <li class="breadcrumb-item active"><a href="atendimento.php">Mensagens</a></li>
                         </ol>
                     </div>
                 </div>
@@ -47,20 +49,37 @@
 
                 <div class="container-fluid">
                     <div class="row">
+                        <?php
+                        if (isset($_GET['id'])) {
+                            $id = addslashes($_GET['id']);
+                            $res = $atende->buscarDadosAtendimento($id);
+                        }
+                        ?>
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Categoria</h4>
-                                    <p class="text-muted"><small>Cadastre a Categoria</small></p>
+                                    <h4 class="card-title">Atendimento Ao Cliente</h4>
+                                    <p class="text-muted"><small>Mensagem Atendimento</small></p>
                                     <div class="basic-form">
-                                        <?php
-                                        
-                                    ?>
-                                        <form class="form-inline" method="POST" action="salva.php">
-                                            <div class="form-group mx-sm-2 mb-2">
-                                                <input type="text" class="form-control" placeholder="Digite a Categoria" name="nome" require>
+
+                                        <form class="" method="POST" action="">
+                                            <div class="mb-3">
+                                                <label for="nome" class="form-label">Nome</label>
+                                                <input type="text" class="form-control" id="nome" placeholder="Nome" disabled value="<?php if (isset($res)) {echo $res['nome']; } ?>">
                                             </div>
-                                            <button type="submit" class="btn btn-primary mb-2" name="btCadastrar">Confirmar</button>
+                                            <div class="mb-3">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="email" class="form-control" name="email" id="email" placeholder="nome@examplo.com" disabled value="<?php if (isset($res)) {echo $res['email']; } ?>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="assunto" class="form-label">Assunto</label>
+                                                <input type="text" class="form-control" name="assunto" id="assunto" placeholder="" disabled value="<?php if (isset($res)) {echo $res['assunto']; } ?>">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="mensagem" class="form-label">Mensagem</label>
+                                                <textarea class="form-control" name="mensagem" id="mensagem" rows="3" disabled value="<?php if (isset($res)) {echo $res['mensagem']; } ?>"></textarea>
+                                            </div>
+                                            
                                         </form>
                                     </div>
                                 </div>

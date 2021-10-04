@@ -53,7 +53,7 @@ session_start();
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3><i class="fas fa-user-shield"></i> <?php echo $_SESSION['id_Admin'];?></h3>
+                <h3><i class="fas fa-user-shield"></i> Admin</h3>
             </div>
 
             <ul class="list-unstyled components">

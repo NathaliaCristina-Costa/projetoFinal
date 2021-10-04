@@ -35,7 +35,19 @@
         }
 
         
+        //BUSCAR DADOS DE CATEGORIA ESPECÍFICA
+        public function buscarDadosAtendimento($id){
+            
+            $res = array();
+            
+            $cmd = $this->pdo->prepare("SELECT nome, email, assunto, mensagem FROM atendimentocliente WHERE id_Atendimento = :id");
+            $cmd->bindValue(":id", $id);
+            $cmd->execute();
 
+            //fetchAll SE FOSSE VARIOS REGISTROS
+            $res = $cmd->fetch(PDO::FETCH_ASSOC);
+            return $res;
+        }
 
        
 
