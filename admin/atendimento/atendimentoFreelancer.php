@@ -1,6 +1,6 @@
 <?php
-require_once "../../classe/Atendimento.php";
-$atend = new Atendimento();
+require_once "../../classe/AtendeFreelancer.php";
+$atend = new AtendeFreelancer();
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,8 +50,8 @@ $atend = new Atendimento();
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-dark">Lista de Mensagens - CLIENTES</h6><br>
-                            <a href="relatorio/relatorioMensagemCliente.php"><button type="button" class="btn btn-dark">Relatório</button></a>
+                            <h6 class="m-0 font-weight-bold text-dark">Lista de Mensagens - FREELANCER</h6><br>
+                            <a href="relatorio/relatorioMensagemFreelancer.php"><button type="button" class="btn btn-dark">Relatório</button></a>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -72,7 +72,7 @@ $atend = new Atendimento();
                                             for ($i = 0; $i < count($dados); $i++) {
                                                 echo "<tr>";
                                                 foreach ($dados[$i] as $k => $v) {
-                                                    if ($k != "id_Atendimento" && $k != "mensagem" && $k != "id_Cliente") {
+                                                    if ($k != "idAtenFreelancer" && $k != "mensagem" && $k != "idFreelancer") {
                                                         echo "<td>" . $v . "</td>";
                                                     }
                                                 }

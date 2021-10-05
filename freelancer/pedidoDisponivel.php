@@ -2,14 +2,7 @@
 require_once "../classe/Freelancer.php";
 $freela = new Freelancer();
 
-session_start();
-if (!isset($_SESSION['id_Freelancer']) && !empty($_SESSION['id_Freelancer'])) {
-    header('location: login.php');
-}
-if (isset($_GET['sair'])) {
-    unset($_SESSION['id_Freelancer']);
-    header('location: login.php');
-}
+
 
 
 ?>
@@ -39,29 +32,7 @@ if (isset($_GET['sair'])) {
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar" style="background-color: black;">
-            <div class="sidebar-header" style="background-color: black;">
-                <h3><i class="fas fa-people-carry"></i> <?php echo $_SESSION['id_Freelancer']; ?></h3>
-            </div>
-
-            <ul class="list-unstyled components">
-
-
-                <li>
-                    <a href="freelancer.php"><i class="fas fa-edit mr-2 text-gray-400"></i> Editar Meus Dados</a>
-                </li>
-                <li>
-                    <a href="pedidoDisponivel.php"><i class="fas fa-receipt mr-2 text-gray-400"></i> Pedidos Disponíveis</a>
-                </li>
-                <li>
-                    <a href=""><i class="fas fa-dollar-sign mr-2 text-gray-400"></i> Meus Pedidos</a>
-                </li>
-                <li>
-                    <a href="atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Fale Conosco</a>
-                </li>
-                <li>
-                    <a href="login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
-                </li>
-            </ul>
+           <?php include 'menu.php';?>
         </nav>
 
         <!-- Page Content  -->

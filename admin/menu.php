@@ -14,8 +14,14 @@
     <li>
         <a href="../cliente/cliente.php"><i class="fas fa-user-friends mr-2 text-gray-400"></i> Clientes</a>
     </li>
-    <li>
-        <a href="../atendimento/atendimento.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens do Atendimento</a>
+    <li class="dropdown">
+        <a class="dropdown-toggle" type="button" id="moduleDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-comments mr-2 text-gray-400"></i> Mensagens
+        </a>
+        <div class="dropdown-menu" aria-labelledby="moduleDropDown">
+            <a class="dropdown-item" href="../atendimento/atendimento.php">Clientes</a>
+            <a class="dropdown-item" href="../atendimento/atendimentoFreelancer.php">Freelancers</a>
+        </div>
     </li>
     <li class="dropdown">
         <a class="dropdown-toggle" type="button" id="moduleDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

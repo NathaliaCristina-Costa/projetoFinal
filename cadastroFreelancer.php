@@ -52,40 +52,41 @@ $freela = new Freelancer();
                                     <div class="col-md-12">
                                         <form method="POST" id="step-form-horizontal" class="step-form-horizontal">
                                             <div>
-                                                <h4>Informações Da Conta</h4>
                                                 <section>
                                                     <?php
-                                                    
+
                                                     //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
                                                     if (isset($_POST['nome'])) {
-                                                      //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
-                                                      $nome = addslashes($_POST['nome']);
-                                                      $email = addslashes($_POST['email']);
-                                                      $senha = addslashes($_POST['senha']);
-                                                      $telefone = addslashes($_POST['telefone']);
-                                                      $id_Categoria = addslashes($_POST['idCategoria']);                                                      
-                                                      
-                                      
-                                                      if ($freela->cadastrarFreelancer($nome, $email, $senha, $telefone, $id_Categoria) == true) {
-                                                        echo "<script>alert('Conta Registrada com Sucesso!');</script>";
-                                                        header('location: /projetoFinal/freelancer/login.php');
-                                                      }
-                                                      //Preenchimento obrigatório, VERIFICAR SE VARIÁVEIS ESTÃO VAZIAS
-                                                      else if (!empty($email)) {
-                                                        if (!$freela->cadastrarFreelancer($nome, $email, $senha, $telefone, $id_Categoria)) {
-                                                          echo  "<script>alert('Email já Cadastrado! Cadastre Um novo Email');</script>";
+                                                        //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
+                                                        $nome = addslashes($_POST['nome']);
+                                                        $email = addslashes($_POST['email']);
+                                                        $senha = addslashes($_POST['senha']);
+                                                        $telefone = addslashes($_POST['telefone']);
+                                                        $id_Categoria = addslashes($_POST['idCategoria']);
+
+
+                                                        if ($freela->cadastrarFreelancer($nome, $email, $senha, $telefone, $id_Categoria) == true) {
+                                                            echo "<script>alert('Conta Registrada com Sucesso!');</script>";
+                                                            header('location: /projetoFinal/freelancer/login.php');
                                                         }
-                                                      }
+                                                        //Preenchimento obrigatório, VERIFICAR SE VARIÁVEIS ESTÃO VAZIAS
+                                                        else if (!empty($email)) {
+                                                            if (!$freela->cadastrarFreelancer($nome, $email, $senha, $telefone, $id_Categoria)) {
+                                                                echo  "<script>alert('Email já Cadastrado! Cadastre Um novo Email');</script>";
+                                                            }
+                                                        }
                                                     }
                                                     ?>
-                                                    
+
                                                     <form method="POST">
                                                         <div class="row">
-                                                            <div class="col-lg-6">
+                                                            <div class="col-lg-12">
                                                                 <div class="form-group">
                                                                     <input type="text" name="nome" class="form-control" placeholder="Nome" required>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <input type="email" name="email" class="form-control" placeholder="Email" required>
@@ -96,14 +97,50 @@ $freela = new Freelancer();
                                                                     <input type="password" name="senha" class="form-control" placeholder="Senha" required>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                        <div class="row">
                                                             <div class="col-lg-6">
                                                                 <div class="form-group">
                                                                     <input type="text" data-mask="(00) 00000-0000" class="form-control" placeholder="Telefone" id="telefone" name="telefone">
                                                                 </div>
                                                             </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control" placeholder="CPF" id="cpf" name="cpf">
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-6 mb-3 mb-sm-6">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control form-control-user" name="cep" id="cep" placeholder="CEP" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control form-control-user" name="rua" id="rua" placeholder="Rua" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-5">
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control form-control-user" name="bairro" id="bairro" placeholder="Bairro" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-5">
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control form-control-user" name="cidade" id="cidade" placeholder="Cidade" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-2">
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control form-control-user" name="estado" id="uf" placeholder="UF" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12 mb-3 mb-sm-12">
                                                                 <select class="form-control" name="idCategoria">
                                                                     <option value="selecione" selected>Escolha sua Categoria</option>
                                                                     <?php
@@ -175,7 +212,7 @@ $freela = new Freelancer();
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        
+
 
 
 </body>
