@@ -61,8 +61,8 @@ $cli = new Cliente();
                             $email = addslashes($_POST['email']);
 
                             if ($cli->editarMinhaConta($idEditar, $nome, $email, $telefone) == true) {
-                            
-                                header("location: conta.php?idConta=". $_SESSION['id_Cliente']);
+
+                                header("location: conta.php?idConta=" . $_SESSION['id_Cliente']);
                             }
                         }
                     }
@@ -76,11 +76,13 @@ $cli = new Cliente();
                                     <form class="user" method="POST" action="">
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-6">
+                                                <label for="assunto" class="form-label">Nome</label>
                                                 <input type="text" class="form-control form-control-user" name="nome" id="nome" placeholder="Nome" value="<?php if (isset($res)) {
                                                                                                                                                                 echo $res['nomeCliente'];
                                                                                                                                                             } ?>">
                                             </div>
                                             <div class="col-sm-6">
+                                                <label for="assunto" class="form-label">Telefone</label>
                                                 <input type="tel" class="form-control form-control-user" data-mask="(00) 00000-0000" name="telefone" id="telefone" placeholder="Telefone" value="<?php if (isset($res)) {
                                                                                                                                                                                                         echo $res['telefoneCliente'];
                                                                                                                                                                                                     } ?>">
@@ -88,6 +90,7 @@ $cli = new Cliente();
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-6">
+                                                <label for="assunto" class="form-label">E-mail</label>
                                                 <input type="email" class="form-control form-control-user" name="email" id="email" placeholder="Email" value="<?php if (isset($res)) {
                                                                                                                                                                     echo $res['emailCliente'];
                                                                                                                                                                 } ?>">

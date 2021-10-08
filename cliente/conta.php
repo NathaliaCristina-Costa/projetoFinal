@@ -58,21 +58,24 @@ $cli = new Cliente();
                                     <form class="user" method="POST" action="">
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-6">
+                                                <label for="assunto" class="form-label">Nome</label>
                                                 <input type="text" class="form-control form-control-user" name="nome" id="nome" disabled placeholder="Nome" value="<?php if (isset($res)) {
-                                                                                                                                                echo $res['nomeCliente'];
-                                                                                                                                            } ?>">
+                                                                                                                                                                        echo $res['nomeCliente'];
+                                                                                                                                                                    } ?>">
                                             </div>
                                             <div class="col-sm-6">
+                                                <label for="assunto" class="form-label">Telefone</label>
                                                 <input type="tel" class="form-control form-control-user" data-mask="(00) 00000-0000" disabled name="telefone" id="telefone" placeholder="Telefone" value="<?php if (isset($res)) {
-                                                                                                                                                echo $res['telefoneCliente'];
-                                                                                                                                            } ?>">
+                                                                                                                                                                                                                echo $res['telefoneCliente'];
+                                                                                                                                                                                                            } ?>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-6">
+                                                <label for="assunto" class="form-label">E-mail</label>
                                                 <input type="email" class="form-control form-control-user" name="email" id="email" disabled placeholder="Email" value="<?php if (isset($res)) {
-                                                                                                                                                echo $res['emailCliente'];
-                                                                                                                                            } ?>">
+                                                                                                                                                                            echo $res['emailCliente'];
+                                                                                                                                                                        } ?>">
                                             </div>
                                         </div>
                                         <a href="editarConta.php?idEditar=<?php echo $_SESSION['id_Cliente']; ?>" type="submit" class="btn btn-dark" name="btEditar">Editar</a>
