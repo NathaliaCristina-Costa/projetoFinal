@@ -30,6 +30,7 @@ $freela = new Freelancer();
 
 <body>
     <div class="wrapper">
+        
         <!-- Sidebar  -->
         <nav id="sidebar" style="background-color: black;">
             <?php include 'menu.php';?>

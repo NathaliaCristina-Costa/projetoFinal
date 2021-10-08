@@ -30,7 +30,7 @@ $cat = new Categoria();
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
-         <?php include '../menu.php';?>
+            <?php include '../menu.php'; ?>
         </nav>
 
         <!-- Page Content  -->
@@ -62,6 +62,7 @@ $cat = new Categoria();
                                     <p class="text-muted"><small>Edite a Categoria</small></p>
                                     <div class="basic-form">
                                         <?php
+
                                         //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
                                         if (isset($_POST['nome'])) {
 
@@ -71,22 +72,14 @@ $cat = new Categoria();
                                                 $nome = addslashes($_POST['nome']);
 
                                                 if ($cat->atualizarDados($idEditar, $nome) == true) {
-                                                    header('location: /projetoFinal/admin/index.php');
-                                                }
-                                                //Preenchimento obrigatório, VERIFICAR SE VARIÁVEIS ESTÃO VAZIAS
-                                                else if (!empty($nome)) {
-                                                    if (!$cat->atualizarDados($idEditar, $nome)) {
-                                                        echo  "<script>alert('Categoria já Cadastrada! Cadastre Uma nova Categoria');</script>";
-                                                    } else if ($cat->atualizarDados($idEditar, $nome) == '') {
-                                                        echo  "Preencha o Campo da Categoria!";
-                                                    } else {
-                                                        header('location: /projetoFinal/admin/categoria.php');
-                                                    }
+                                                    echo  "<script>window.location.replace('http://localhost/projetoFinal/admin/categoria/categoria.php');</script>";
+                                                    
                                                 }
                                             }
                                         }
+
                                         ?>
-                                        <form class="form-inline" method="POST" action="">
+                                        <form class="form-inline" method="POST">
                                             <div class="form-group mx-sm-2 mb-2">
                                                 <input type="text" class="form-control" placeholder="Digite a Categoria" name="nome" value="<?php if (isset($res)) {
                                                                                                                                                 echo $res['nomeCategoria'];

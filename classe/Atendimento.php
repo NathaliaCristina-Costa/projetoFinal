@@ -12,21 +12,21 @@
         public function buscarDados(){
 
             $res = array();
-            $cmd = $this->pdo->query("SELECT * FROM atendimentocliente ORDER BY id_Atendimento ");
+            $cmd = $this->pdo->query("SELECT nomeCliente,emailCliente, telefoneCliente, assunto, dataMensagem FROM atendimentocliente 
+            JOIN cliente ON idCliente= id_Cliente");
             $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $res;
         }
 
         //FUNÇÃO CADASTRA FREELANCER NO BANCO DE DADOS
-        public function cadastrarAtendimento($nome,$email, $assunto, $mensagem,$id_Cliente){
+        public function cadastrarAtendimento( $assunto, $mensagem,$idCliente){
             
-                $cmd = $this->pdo->prepare("INSERT INTO atendimentocliente (nome,email, assunto, mensagem, id_Cliente) VALUES (:n,:e, :a, :m, :idC)");
+                $cmd = $this->pdo->prepare("INSERT INTO atendimentocliente (assunto, mensagem, idCliente) VALUES ( :a, :m, :idC)");
 
-                $cmd->bindValue(":n", $nome);
-                $cmd->bindValue(":e", $email);
+                
                 $cmd->bindValue(":a", $assunto);
                 $cmd->bindValue(":m", $mensagem); 
-                $cmd->bindValue(":idC", $id_Cliente);              
+                $cmd->bindValue(":idC", $idCliente);              
                 
                 $cmd->execute();
                 return true;
@@ -40,13 +40,13 @@
             
             $res = array();
             
-            $cmd = $this->pdo->prepare("SELECT nome, email, assunto, mensagem FROM atendimentocliente WHERE id_Atendimento = :id");
+            $cmd = $this->pdo->prepare("SELECT email,telefone, assunto, mensagem, idCliente FROM atendimentocliente WHERE id_Atendimento = :id");
             $cmd->bindValue(":id", $id);
             $cmd->execute();
 
             //fetchAll SE FOSSE VARIOS REGISTROS
             $res = $cmd->fetch(PDO::FETCH_ASSOC);
-            return $res;
+            return $res;    
         }
 
        

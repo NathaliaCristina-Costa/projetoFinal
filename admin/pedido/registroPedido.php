@@ -1,5 +1,6 @@
 <?php
-
+require_once "../../classe/Pedido.php";
+$p = new Pedido();
 
 ?>
 <!DOCTYPE html>
@@ -90,15 +91,45 @@
                                     <thead>
                                         <tr>
 
-                                            <th>Nome</th>
-                                            <th>Email</th>
-                                            <th>Telefone</th>
-                                            <th>Categoria</th>
+
+                                            <th>Cliente</th>
+                                            <th>Categoria</th>                                            
+                                            <th>Telefone</th>                                            
+                                            <th>Cidade</th>
+                                            <th>Estado</th>
+                                            <th>Ações</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        <?php
+                                        $dados = $p->buscarDados();
+                                        if (count($dados) > 0) {
+                                            for ($i = 0; $i < count($dados); $i++) {
+                                                echo "<tr>";
+                                                foreach ($dados[$i] as $k => $v) {
+                                                    if ($k != "id_Pedido") {
+                                                        echo "<td>" . $v . "</td>";
+                                                    }
+                                                }
+                                        ?>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Ações
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item" href="visualizaPedido.php">Visualizar</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                        <?php
+                                                echo "</tr>";
+                                            }
+                                        } else //Não há registros.
+                                        {
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

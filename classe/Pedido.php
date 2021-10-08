@@ -8,16 +8,6 @@
             $this->pdo = Conexao::getConexao();
         }
 
-        //BUSCAR DADOS DO BANCO E MOSTRAR NA TABELA DA TELA
-        public function buscarDados(){
-
-            $res = array();
-            $cmd = $this->pdo->query("SELECT 'pedido.id_Pedido', 'cliente.nomecliente'
-            FROM PEDIDO JOIN CLIENTE
-            ON 'PEDIDO.id_Cliente' = 'CLIENTE.id_Cliente';");
-            $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
-            return $res;
-        }
         public function buscarCategoria(){
 
             $cmd = $this->pdo->prepare("SELECT nomeCategoria, id_Categoria FROM categoria");
@@ -34,9 +24,9 @@
 
 
         //FUNÇÃO CADASTRA FREELANCER NO BANCO DE DADOS
-        public function cadastrarPedido($cep, $rua, $bairro,$cidade, $estado, $telefone,$mensagem, $id_Categoria){
+        public function cadastrarPedido($cep, $rua, $bairro,$cidade, $estado, $telefone,$mensagem, $idCategoria, $idCliente){
       
-             $cmd = $this->pdo->prepare("INSERT INTO pedido (cep, rua, bairro, cidade, estado, telefone,mensagem, id_Categoria) VALUES ( :cep, :r, :b,:c,:e, :t,:m, :idC)");
+             $cmd = $this->pdo->prepare("INSERT INTO pedido (cep, rua, bairro, cidade, estado, telefone,mensagem, idCategoria, idCliente) VALUES ( :cep, :r, :b,:c,:e, :t,:m, :idC, :idCl)");
 
              
              $cmd->bindValue(":cep", $cep);
@@ -46,13 +36,24 @@
              $cmd->bindValue(":e", $estado);               
              $cmd->bindValue(":t", $telefone); 
              $cmd->bindValue(":m", $mensagem);  
-             $cmd->bindValue(":idC", $id_Categoria);           
-             
+             $cmd->bindValue(":idC", $idCategoria);       
+             $cmd->bindValue(":idCl", $idCliente); 
+
              $cmd->execute();
               
                 
                
             
+        }
+
+        //BUSCAR DADOS DO BANCO E MOSTRAR NA TABELA DA TELA
+        public function buscarDados(){
+
+            $res = array();
+            $cmd = $this->pdo->query("SELECT nomeCliente, nomeCategoria,telefone, cidade, estado  FROM pedido 
+            JOIN cliente ON idCliente = id_Cliente JOIN categoria ON idCategoria = id_Categoria");
+            $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
         }
 
         

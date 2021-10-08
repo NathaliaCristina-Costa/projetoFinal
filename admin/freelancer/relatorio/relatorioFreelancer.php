@@ -11,14 +11,17 @@
 
     $pdo = new PDO('mysql:host=localhost; dbname=projetofinal', 'root', '');
 
-    $sql = $pdo->query("SELECT  nome,email, telefone, nomeCategoria FROM freelancer JOIN categoria ON idCategoria = id_Categoria; ");
+    $sql = $pdo->query("SELECT  nome,email, telefone,cpf,cidade,uf, nomeCategoria FROM freelancer JOIN categoria ON idCategoria = id_Categoria; ");
 
     $html = '<table border=1 width=100%>';	
 	$html .= '<thead>';
 	$html .= '<tr>';
 	$html .= '<th>Nome</th>';
-	$html .= '<th>Email</th>';
-    $html .= '<th>Telefone</th>';
+	$html .= '<th>Telefone</th>';
+    $html .= '<th>E-mail</th>';
+	$html .= '<th>CPF</th>';
+	$html .= '<th>Cidade</th>';
+	$html .= '<th>Estado</th>';
     $html .= '<th>Categoria</th>';
     $html .= '</tr>';
 	$html .= '</thead>';
@@ -26,10 +29,13 @@
 
     while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
        
-        $html .= '<tr><td>'. $linha['nome'] . '</td>';
-        $html .= '<td>'. $linha['telefone'] . '</td>';
-        $html .= '<td>'. $linha['email'] . '</td>';
-        $html .= '<td>'. $linha['nomeCategoria'] . '</td></tr>';
+        $html .= '<tr><td>'. $linha['nome'] 	 	 . '</td>';
+        $html .= '<td>'	   . $linha['telefone'] 	 . '</td>';
+        $html .= '<td>'	   . $linha['email'] 		 . '</td>';
+		$html .= '<td>'	   . $linha['cpf']			 . '</td>';
+		$html .= '<td>'	   . $linha['cidade']			 . '</td>';
+		$html .= '<td>'	   . $linha['uf']			 . '</td>';
+        $html .= '<td>'	   . $linha['nomeCategoria'] . '</td></tr>';
         
     }
 

@@ -1,15 +1,7 @@
 <?php
 require_once "../classe/Atendimento.php";
 $at = new Atendimento();
-session_start();
-    if (!isset($_SESSION['id_Cliente']) && !empty($_SESSION['id_Cliente'])) {
-        header('location: login.php');
-      
-    }
-    if(isset($_GET['sair'])){
-        unset($_SESSION['id_Cliente']);
-        header('location: login.php');
-    }
+
 ?>
 
 <!DOCTYPE html>
@@ -37,29 +29,7 @@ session_start();
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3><i class="fas fa-user-shield"></i><a href="index.php"><?php echo $_SESSION['id_Cliente'];?></a></h3>
-            </div>
-
-            <ul class="list-unstyled components">
-
-                <li>
-                    <a href=""><i class="fas fa-edit mr-2 text-gray-400"></i> Editar Minha Conta</a>
-                </li>
-                <li>
-                    <a href="index.php"><i class="fas fa-hand-holding-usd mr-2 text-gray-400"></i> Pedidos que Fiz</a>
-                </li>
-                <li>
-                    <a href="pedidos.php"><i class="fas fa-shopping-cart mr-2 text-gray-400"></i> Novo Pedido</a>
-                </li>
-                <li>
-                    <a href="atendimentoCliente.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Atendimento ao Cliente</a>
-                </li>
-
-                <li>
-                    <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
-                </li>
-            </ul>
+            <?php include 'menu.php'; ?>
         </nav>
 
         <!-- Page Content  -->
@@ -82,45 +52,39 @@ session_start();
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title"><i class="fa fa-envelope" aria-hidden="true"></i> Fale Conosco</h4>
+                                    <h4 class="card-title""><i class=" fa fa-envelope" aria-hidden="true"></i> Fale Conosco, <?php echo $exibeNome['nomeCliente'] ?></h4>
                                     <br>
                                     <div class="basic-form">
                                         <?php
 
                                         //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
-                                        if (isset($_POST['nome'])) {
+                                        if (isset($_POST['assunto'])) {
                                             //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
-                                            $nome = addslashes($_POST['nome']);
-                                            $email = addslashes($_POST['email']);
+                                           
                                             $assunto = addslashes($_POST['assunto']);
                                             $mensagem = addslashes($_POST['mensagem']);
-                                            $id_Cliente = addslashes($_POST['id_Cliente']);
+                                            $idCliente = addslashes($_POST['idCliente']);
 
 
-                                            if ($at->cadastrarAtendimento($nome,$email, $assunto, $mensagem,$id_Cliente) == true) {
-                                                echo "<script>alert('Pedido Registrado com Sucesso!');</script>";
+                                            if ($at->cadastrarAtendimento($assunto, $mensagem,$idCliente) == true) {
+                                                echo "<script>alert('Mensagem Registrado com Sucesso!Em breve Retornaremos');</script>";
                                             }
                                         }
                                         ?>
-                                        <form method="POST">
-                                            
-                                            <div class="mb-3">
-                                                <label for="nome" class="form-label">Nome</label>
-                                                <input type="text" class="form-control" id="nome" placeholder="Nome">
+                                        <form method=POST>
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                    <label for="assunto" class="form-label">Assunto</label>
+                                                    <input type="text" class="form-control" name="assunto" id="assunto" placeholder="">
+                                                </div>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="email" class="form-label">Email</label>
-                                                <input type="email" class="form-control" name="email" id="email" placeholder="nome@examplo.com">
+                                            <div class="form-group row">
+                                                <div class="col-sm-12">
+                                                    <label for="mensagem" class="form-label">Mensagem</label>
+                                                    <textarea class="form-control" name="mensagem" id="mensagem" rows="3"></textarea>
+                                                </div>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="assunto" class="form-label">Assunto</label>
-                                                <input type="text" class="form-control" name="assunto" id="assunto" placeholder="">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="mensagem" class="form-label">Mensagem</label>
-                                                <textarea class="form-control" name="mensagem" id="mensagem" rows="3"></textarea>
-                                            </div>
-                                            <input type="hidden" name="id_Cliente">
+                                            <input type="hidden" name="idCliente" value="<?php echo $_SESSION['id_Cliente']; ?>">
                                             <input type="submit" value="Enviar" class="btn btn-warning">
                                         </form>
                                     </div>

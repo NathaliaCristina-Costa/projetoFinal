@@ -1,18 +1,7 @@
 <?php
-require_once "../classe/Pedido.php";
-$p = new Pedido();
-session_start();
-    if (!isset($_SESSION['id_Cliente']) && !empty($_SESSION['id_Cliente'])) {
-        header('location: login.php');
-      
-    }
-    if(isset($_GET['sair'])){
-        unset($_SESSION['id_Cliente']);
-        header('location: login.php');
-    }
-
+    require_once "../classe/Pedido.php";
+    $p = new Pedido();
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -38,29 +27,7 @@ session_start();
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3><i class="fas fa-user-shield"></i><a href="index.php"> <?php echo $_SESSION['id_Cliente'];?></a></h3>
-            </div>
-
-            <ul class="list-unstyled components">
-
-                <li>
-                    <a href=""><i class="fas fa-edit mr-2 text-gray-400"></i> Editar Minha Conta</a>
-                </li>
-                <li>
-                    <a href="index.php"><i class="fas fa-hand-holding-usd mr-2 text-gray-400"></i> Pedidos que Fiz</a>
-                </li>
-                <li>
-                    <a href="pedidos.php"><i class="fas fa-shopping-cart mr-2 text-gray-400"></i> Novo Pedido</a>
-                </li>
-                <li>
-                    <a href="atendimentoCliente.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Atendimento ao Cliente</a>
-                </li>
-
-                <li>
-                    <a href="login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
-                </li>
-            </ul>
+            <?php include 'menu.php'; ?>
         </nav>
 
         <!-- Page Content  -->
@@ -91,7 +58,7 @@ session_start();
                                         //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
                                         if (isset($_POST['cep'])) {
                                             //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
-                                       
+
                                             $cep = addslashes($_POST['cep']);
                                             $rua = addslashes($_POST['rua']);
                                             $bairro = addslashes($_POST['bairro']);
@@ -99,20 +66,18 @@ session_start();
                                             $estado = addslashes($_POST['estado']);
                                             $telefone = addslashes($_POST['telefone']);
                                             $mensagem = addslashes($_POST['mensagem']);
-                                            $id_Categoria = addslashes($_POST['categoria']);
+                                            $idCategoria = addslashes($_POST['categoria']);
+                                            $idCliente = addslashes($_POST['idCliente']);
 
-
-                                            if ($p->cadastrarPedido( $cep, $rua, $bairro,$cidade, $estado, $telefone,$mensagem, $id_Categoria) == true) {
+                                            if ($p->cadastrarPedido($cep, $rua, $bairro, $cidade, $estado, $telefone, $mensagem, $idCategoria, $idCliente) == true) {
                                                 echo "<script>alert('Pedido Registrado com Sucesso!');</script>";
-                                               
                                             }
                                         }
                                         ?>
                                         <form method=POST>
-                                            <input type="hidden" name="idCliente">
                                             <div class="form-group row">
                                                 <div class="col-sm-4">
-                                                    <input type="text" class="form-control form-control-user" name="cep" id="cep" placeholder="CEP" required>
+                                                    <input type="text" class="form-control form-control-user" data-mask='00000-000' name="cep" id="cep" placeholder="CEP" required>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <input type="text" class="form-control form-control-user" name="rua" id="rua" placeholder="Rua" required>
@@ -144,6 +109,7 @@ session_start();
                                                     <textarea class="form-control" name="mensagem" id="mensagem" rows="3"></textarea>
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="idCliente" value="<?php echo $_SESSION['id_Cliente']; ?>">
                                             <input type="submit" value="Finalizar" class="btn btn-warning">
                                         </form>
                                     </div>

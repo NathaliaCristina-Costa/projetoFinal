@@ -1,11 +1,4 @@
-<?php
-    require_once "../classe/Freelancer.php";
-    $freela = new Freelancer();
 
-   
-
-    
-?>
 <!DOCTYPE html>
 
 <html>
@@ -30,6 +23,7 @@
 
 <body>
     <div class="wrapper">
+        
         <!-- Sidebar  -->
         <nav id="sidebar" style="background-color: black;">
             <?php include 'menu.php';?>

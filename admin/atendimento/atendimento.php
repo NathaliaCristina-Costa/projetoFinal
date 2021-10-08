@@ -60,6 +60,7 @@ $atend = new Atendimento();
                                         <tr>
                                             <th>Nome</th>
                                             <th>E-mail</th>
+                                            <th>Telefone</th>
                                             <th>Assunto</th>
                                             <th>Data Registro</th>
                                             <th>Ações</th>
@@ -72,7 +73,7 @@ $atend = new Atendimento();
                                             for ($i = 0; $i < count($dados); $i++) {
                                                 echo "<tr>";
                                                 foreach ($dados[$i] as $k => $v) {
-                                                    if ($k != "id_Atendimento" && $k != "mensagem" && $k != "id_Cliente") {
+                                                    if ($k != "id_Atendimento" && $k != "mensagem") {
                                                         echo "<td>" . $v . "</td>";
                                                     }
                                                 }

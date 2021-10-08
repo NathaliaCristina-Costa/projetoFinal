@@ -1,6 +1,6 @@
 <?php
     require_once "../../classe/Cliente.php";
-    $cat = new Cliente("projetofinal", "localhost", "root", "");
+    $cat = new Cliente();
 
 
     //EXCLUIR E ATUALIZAR
@@ -8,6 +8,6 @@
         $idCliente = addslashes($_GET['id']);
         $cat->excluirCliente($idCliente);
 
-        header('location: /projetoFinal/admin/cliente.php');
+        header('location: /projetoFinal/admin/cliente/cliente.php');
     }
 ?>

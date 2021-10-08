@@ -1,19 +1,3 @@
-<?php
-    require_once "../classe/Cliente.php";
-    $cli = new Cliente();
-
-    session_start();
-    if (!isset($_SESSION['id_Cliente']) && !empty($_SESSION['id_Cliente'])) {
-        header('location: login.php');
-      
-    }
-    if(isset($_GET['sair'])){
-        unset($_SESSION['id_Cliente']);
-        header('location: login.php');
-    }
-
-    
-?>
 <!DOCTYPE html>
 
 <html>
@@ -40,28 +24,7 @@
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar" s>
-            <div class="sidebar-header">
-                <h3><i class="fas fa-user-friends"></i>  <?php echo $_SESSION[' '];?></h3>
-            </div>
-
-            <ul class="list-unstyled components">
-                <li>
-                    <a href=""><i class="fas fa-edit mr-2 text-gray-400"></i> Editar Minha Conta</a>
-                </li>
-                <li>
-                    <a href="index.php"><i class="fas fa-hand-holding-usd mr-2 text-gray-400"></i> Pedidos que Fiz</a>
-                </li>
-                <li>
-                    <a href="pedidos.php"><i class="fas fa-shopping-cart mr-2 text-gray-400"></i> Novo Pedido</a>
-                </li>
-                <li>
-                    <a href="atendimentoCliente.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Atendimento ao Cliente</a>
-                </li>
-
-                <li>
-                    <a href="index.php?sair=true"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
-                </li>
-            </ul>
+            <?php include 'menu.php'; ?>
         </nav>
 
         <!-- Page Content  -->
@@ -74,7 +37,23 @@
             </div>
 
             <!-- Content Row -->
-            
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Collapsible Group Item #1
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>

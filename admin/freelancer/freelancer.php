@@ -3,6 +3,7 @@ require_once "../../classe/Freelancer.php";
 $freela = new Freelancer();
 
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -29,7 +30,7 @@ $freela = new Freelancer();
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
-         <?php include '../menu.php';?>
+            <?php include '../menu.php';?>
         </nav>
 
         <!-- Page Content  -->
@@ -51,25 +52,22 @@ $freela = new Freelancer();
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-dark">Lista de Freelancers</h6><br>
-                            <h6><a href="relatorio/relatorioFreelancer.php"><button class="btn btn-dark">Relatório</button></a></h6>
+                            <h6 class="m-0 font-weight-bold text-dark">Lista de Freelancer</h6><br>
+                            <h6><a href="relatorio/relatorioFreelancer.php"><button type="button" class="btn btn-dark">Relatório</button></a></h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-
                                             <th>Nome</th>
-                                            <th>Email</th>
-                                            <th>Telefone</th>
+                                            <th>CPF</th>
                                             <th>Categoria</th>
-
+                                            <th>Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-
                                         $dados = $freela->buscarDados();
                                         if (count($dados) > 0) {
                                             for ($i = 0; $i < count($dados); $i++) {
@@ -80,7 +78,16 @@ $freela = new Freelancer();
                                                     }
                                                 }
                                         ?>
-
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Ações
+                                                        </button>
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                            <a class="dropdown-item">Excluir</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                         <?php
                                                 echo "</tr>";
                                             }

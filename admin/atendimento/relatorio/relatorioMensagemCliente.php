@@ -11,14 +11,14 @@
 
     $pdo = new PDO('mysql:host=localhost; dbname=projetofinal', 'root', '');
 
-    $sql = $pdo->query("SELECT  nome,email, assunto, dataMensagem FROM atendimentocliente; ");
+    $sql = $pdo->query("SELECT  assunto,mensagem, dataMensagem, nomeCliente FROM atendimentocliente JOIN cliente ON idCliente = id_Cliente; ");
 
     $html = '<table border=1 width=100%>';	
 	$html .= '<thead>';
 	$html .= '<tr>';
 	$html .= '<th>Nome</th>';
-	$html .= '<th>Email</th>';
-    $html .= '<th>Assunto</th>';
+	$html .= '<th>Assunto</th>';
+	$html .= '<th>Mensagem</th>';
     $html .= '<th>Data Registro</th>';
     $html .= '</tr>';
 	$html .= '</thead>';
@@ -26,9 +26,9 @@
 
     while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
        
-        $html .= '<tr><td>'. $linha['nome'] . '</td>';
-        $html .= '<td>'. $linha['email'] . '</td>';
+		$html .= '<tr><td>'. $linha['nomeCliente'] . '</td>';
 		$html .= '<td>'. $linha['assunto'] . '</td>';
+		$html .= '<td>'. $linha['mensagem'] . '</td>';
         $html .= '<td>'. $linha['dataMensagem'] . '</td></tr>';
         
     }

@@ -1,6 +1,6 @@
 <?php
-    require_once "../classe/Freelancer.php";
-    $freela = new Freelancer();
+require_once "../classe/Freelancer.php";
+$freela = new Freelancer();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,28 +54,25 @@
                                                 <input type="password" class="form-control form-control-user" id="exampleInputPassword" name="senha" placeholder="Senha">
                                             </div>
                                         </div>
-                                        
+
                                         <input type="submit" class="btn btn-success btn-user btn-block" value="Login">
                                     </form>
                                     <hr>
                                     <?php
-                                    if (isset($_POST['email']) && !empty($_POST['email'])&& isset($_POST['senha']) && !empty($_POST['senha'])) {
+                                    if (isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['senha']) && !empty($_POST['senha'])) {
                                         $email = addslashes($_POST['email']);
                                         $senha = addslashes($_POST['senha']);
                                         if (!empty($email) && !empty($senha)) {
-                                           if($freela->logar($email, $senha) == true){
-                                               if(isset($_SESSION['id_Freelancer'])){
-                                                header('location: index.php');
-                                               }else{
-                                                header('location: login.php');
-                                               }
-                                           }else{
-                                               echo"<script>alert('Email e/ou senha estão incorretos!');</script>";
-                                               
-                                           }
+                                            if ($freela->logar($email, $senha) == true) {
+                                                if (isset($_SESSION['id_Freelancer'])) {
+                                                    header('location: index.php');
+                                                }
+                                            } else {
+                                                echo "<script>alert('Email e/ou senha estão incorretos!');</script>";
+                                            }
                                         }
                                     }
-                                ?>
+                                    ?>
                                 </div>
                             </div>
                         </div>

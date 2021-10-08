@@ -30,9 +30,11 @@ $freela = new Freelancer();
 
 <body>
     <div class="wrapper">
+        
         <!-- Sidebar  -->
         <nav id="sidebar" style="background-color: black;">
-           <?php include 'menu.php';?>
+        
+            <?php include 'menu.php'; ?>
         </nav>
 
         <!-- Page Content  -->
@@ -50,18 +52,18 @@ $freela = new Freelancer();
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    
+
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-auto">
-                                            
-                                                
-                                           
+
+
+
                                             <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-auto">
-                                   
+
                                 </div>
                             </div>
                         </div>

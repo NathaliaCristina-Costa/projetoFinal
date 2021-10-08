@@ -1,8 +1,6 @@
 <?php
-   require_once "../classe/AtendeFreelancer.php";
-   $at = new AtendeFreelancer();
-
-    
+require_once "../classe/Cliente.php";
+$cli = new Cliente();
 ?>
 <!DOCTYPE html>
 
@@ -13,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Freelancer</title>
+    <title>Clientes</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -28,79 +26,72 @@
 
 <body>
     <div class="wrapper">
-        
         <!-- Sidebar  -->
-        <nav id="sidebar" style="background-color: black;">
-            <?php include 'menu.php';?>
+        <nav id="sidebar" s>
+            <?php include 'menu.php'; ?>
         </nav>
 
         <!-- Page Content  -->
         <div id="content">
-            <div class="content-body">
 
-                <div class="row page-titles mx-0">
-                    <div class="col p-md-0">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                        </ol>
-                    </div>
-                </div>
-                <!-- row -->
+            <?php
+            if (isset($_GET['idConta'])) {
+                $idConta = addslashes($_GET['idConta']);
+                $res = $cli->buscarDadosCliente($idConta);
+            }
+            ?>
 
-                <div class="container-fluid">
-                    <div class="row">
-                        <?php
-                        ?>
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title"><i class="fa fa-envelope" aria-hidden="true"></i> Fale Conosco</h4>
-                                    <br>
-                                    <div class="basic-form">
-                                        <?php
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Minha Conta</h1>
+            </div>
 
-                                        //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
-                                        if (isset($_POST['assunto'])) {
-                                            //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
-                                            
-                                            $assunto = addslashes($_POST['assunto']);
-                                            $mensagem = addslashes($_POST['mensagem']);
-                                            $idFreelancer = addslashes($_POST['idFreelancer']);
+            <!-- Content Row -->
+            <div class="container-fluid">
+                <div class="row">
+                    <?php
+                    ?>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
 
-
-                                            if ($at->cadastrarAtendimentoFree( $assunto, $mensagem,$idFreelancer) == true) {
-                                                echo "<script>alert('Pedido Registrado com Sucesso!');</script>";
-                                            }
-                                        }
-                                        ?>
-                                        <form method="POST">
-                                            <div class="mb-3">
-                                                <label for="assunto" class="form-label">Assunto</label>
-                                                <input type="text" class="form-control" name="assunto" id="assunto" placeholder="">
+                                <div class="basic-form">
+                                    <form class="user" method="POST" action="">
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 mb-3 mb-sm-6">
+                                                <input type="text" class="form-control form-control-user" name="nome" id="nome" disabled placeholder="Nome" value="<?php if (isset($res)) {
+                                                                                                                                                echo $res['nomeCliente'];
+                                                                                                                                            } ?>">
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="mensagem" class="form-label">Mensagem</label>
-                                                <textarea class="form-control" name="mensagem" id="mensagem" rows="3"></textarea>
+                                            <div class="col-sm-6">
+                                                <input type="tel" class="form-control form-control-user" data-mask="(00) 00000-0000" disabled name="telefone" id="telefone" placeholder="Telefone" value="<?php if (isset($res)) {
+                                                                                                                                                echo $res['telefoneCliente'];
+                                                                                                                                            } ?>">
                                             </div>
-                                            <input type="hidden" name="idFreelancer" value="<?php echo $_SESSION['id_Freelancer']; ?>">
-                                            <input type="submit" value="Enviar" class="btn btn-warning">
-                                        </form>
-                                    </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 mb-3 mb-sm-6">
+                                                <input type="email" class="form-control form-control-user" name="email" id="email" disabled placeholder="Email" value="<?php if (isset($res)) {
+                                                                                                                                                echo $res['emailCliente'];
+                                                                                                                                            } ?>">
+                                            </div>
+                                        </div>
+                                        <a href="editarConta.php?idEditar=<?php echo $_SESSION['id_Cliente']; ?>" type="submit" class="btn btn-dark" name="btEditar">Editar</a>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
-                <!-- #/ container -->
             </div>
+
         </div>
     </div>
 
     <footer class="bg-dark text-center text-white">
 
         <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: #000">
+        <div class="text-center p-3 " style="background-color: #000">
             © Projeto Final
 
         </div>
