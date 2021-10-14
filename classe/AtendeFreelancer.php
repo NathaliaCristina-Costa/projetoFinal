@@ -1,6 +1,10 @@
 <?php
     require_once 'Conexao.php';
     class   AtendeFreelancer{
+        public $id;
+        public $assunto;
+        public $mensagem; 
+        public $idFreelancer; 
         private $pdo;
         
        

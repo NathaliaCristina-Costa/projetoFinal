@@ -21,7 +21,7 @@
         <a href="conta.php?idConta=<?php echo $_SESSION['id_Cliente']; ?>"><i class="fas fa-edit mr-2 text-gray-400"></i> Minha Conta</a>
     </li>
     <li>
-        <a href="index.php"><i class="fas fa-hand-holding-usd mr-2 text-gray-400"></i> Pedidos que Fiz</a>
+        <a href="pedidosFeitos.php"><i class="fas fa-hand-holding-usd mr-2 text-gray-400"></i> Pedidos que Fiz</a>
     </li>
     <li>
         <a href="pedidos.php"><i class="fas fa-shopping-cart mr-2 text-gray-400"></i> Novo Pedido</a>

@@ -1,6 +1,11 @@
 <?php
     require_once 'Conexao.php';
     class Cliente{
+        public $id;
+        public $nome;
+        public $telefone;
+        public $email;
+        public $senha;
         private $pdo;
         
        

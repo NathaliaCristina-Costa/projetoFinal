@@ -54,7 +54,7 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title"><i class="fa fa-envelope" aria-hidden="true"></i> Fale Conosco</h4>
+                                    <h4 class="card-title"><i class="fa fa-envelope" aria-hidden="true"></i> Fale Conosco, <?php echo $exibeNome['nome']?></h4>
                                     <br>
                                     <div class="basic-form">
                                         <?php

@@ -2,7 +2,8 @@
     require_once 'Conexao.php';
     class Categoria{
         
-      
+        public $id;
+        public $nome;
         private $pdo;
         
        

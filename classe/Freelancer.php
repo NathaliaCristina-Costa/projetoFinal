@@ -1,6 +1,18 @@
 <?php
     require_once 'Conexao.php';
     class Freelancer{
+        public $id;
+        public $nome;
+        public $email;
+        public $senha;
+        public $telefone;
+        public $cpf; 
+        public $cep;
+        public $rua;
+        public $bairro;
+        public $cidade;
+        public $uf;                
+        public $id_Categoria;
         private $pdo;
         
        
@@ -36,8 +48,7 @@
         //FUNÇÃO CADASTRA FREELANCER NO BANCO DE DADOS
         public function cadastrarFreelancer($nome, $email, $senha, $telefone, $cpf, $cep, $rua, $bairro, $cidade, $uf, $id_Categoria){
             //ANTES DE CADASTRAR, VERIFICAR SE CATEGORIA JÁ FOI CADASTRADA
-            $cmd = $this->pdo->prepare("SELECT id_Freelancer FROM freelancer WHERE email = :e OR cpf = :cpf");
-            $cmd->bindValue(":e", $email);
+            $cmd = $this->pdo->prepare("SELECT id_Freelancer FROM freelancer WHERE cpf = :cpf");
             $cmd->bindValue(":cpf", $cpf);
             $cmd->execute();
 

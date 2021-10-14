@@ -1,6 +1,10 @@
 <?php
     require_once 'Conexao.php';
     class   Atendimento{
+        public $id;
+        public $assunto;
+        public $mensagem; 
+        public $idCliente;
         private $pdo;
         
        

@@ -76,9 +76,9 @@ $freela = new Freelancer();
                                                             header('location: /projetoFinal/freelancer/login.php');
                                                         }
                                                         //Preenchimento obrigatório, VERIFICAR SE VARIÁVEIS ESTÃO VAZIAS
-                                                        else if (!empty($email) || (!empty($cpf))) {
+                                                        else if ((!empty($cpf))) {
                                                             if (!$freela->cadastrarFreelancer($nome, $email, $senha, $telefone, $cpf, $cep, $rua, $bairro, $cidade, $uf, $id_Categoria)) {
-                                                                echo  "<script>alert('Email ou CPF já Cadastrado! Cadastre Um novo Email ou CPF');</script>";
+                                                                echo  "<script>alert('CPF já Cadastrado! Cadastre Um novo CPF');</script>";
                                                             }
                                                         }
                                                     }

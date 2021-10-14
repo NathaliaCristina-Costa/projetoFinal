@@ -13,7 +13,8 @@ p {
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #999;
+    color: #000;
+    text-align: center;
 }
 
 a,
@@ -33,7 +34,16 @@ a:focus {
     margin-bottom: 40px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
-
+#imagem{
+    /*definimos a largura do box*/
+	width:300px;
+	/* definimos a altura do box */
+	height:100px;
+	/* definimos a cor de fundo do box */
+	background-color:#666;
+	/* definimos o quão arredondado irá ficar nosso box */
+	border-radius: 10px;
+}
 .navbar-btn {
     box-shadow: none;
     outline: none !important;
@@ -156,8 +166,9 @@ a.article:hover {
     width: 100%;
     padding: 20px;
     min-height: 100vh;
-    transition: all 0.3s;
+    transition: all 0.3s;   
 }
+
 
 /* ---------------------------------------------------
     MEDIAQUERIES
