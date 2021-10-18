@@ -70,7 +70,7 @@
                                             $idCliente = addslashes($_POST['idCliente']);
 
                                             if ($p->cadastrarPedido($cep, $rua, $bairro, $cidade, $estado, $telefone, $mensagem, $idCategoria, $idCliente) == true) {
-                                                echo  "<script>window.location.replace('http://localhost/projetoFinal/cliente/pedidosFeitos.php');</script>";
+                                                echo "<script>alert('Mensagem Registrado com Sucesso!Em breve Retornaremos');</script>";
                                             }
                                         }
                                         ?>

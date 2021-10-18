@@ -42,7 +42,7 @@ $cli = new Cliente();
             ?>
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Minha Conta</h1>
+                <h1 class="h3 mb-0 text-gray-800">Editar Minha Conta</h1>
             </div>
 
             <!-- Content Row -->

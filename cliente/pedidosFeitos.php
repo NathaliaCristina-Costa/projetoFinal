@@ -4,6 +4,8 @@
 
     $p = new Pedido();
     $c = new Cliente();
+
+  
 ?>
 <!DOCTYPE html>
 
@@ -45,8 +47,7 @@
 
             <!-- Content Row -->
             <?php
-            $dados = $p->pedidosCliente($_SESSION['id_Cliente']);
-                
+            $dados = $p->pedidosCliente($_SESSION['id_Cliente']);           
             
             ?>
 

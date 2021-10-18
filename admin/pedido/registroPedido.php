@@ -108,7 +108,7 @@ $p = new Pedido();
                                             for ($i = 0; $i < count($dados); $i++) {
                                                 echo "<tr>";
                                                 foreach ($dados[$i] as $k => $v) {
-                                                    if ($k != "id_Pedido") {
+                                                    if ($k != "id_Categoria" && $k != "dataCadastro") {
                                                         echo "<td>" . $v . "</td>";
                                                     }
                                                 }
@@ -119,7 +119,8 @@ $p = new Pedido();
                                                             Ações
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="visualizaPedido.php">Visualizar</a>
+                                                            <a class="dropdown-item" href="editarCategoria.php?idEditar=<?php echo $dados[$i]['id_Categoria']; ?>">Editar</a>
+                                                            <a class="dropdown-item" href="excluirCategoria.php?id=<?php echo $dados[$i]['id_Categoria']; ?>">Excluir</a>
                                                         </div>
                                                     </div>
                                                 </td>

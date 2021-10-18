@@ -19,7 +19,8 @@
         public function __construct(){
             $this->pdo = Conexao::getConexao();
         }
-    //BUSCAR DADOS DO BANCO E MOSTRAR NA TABELA DA TELA
+
+        //BUSCAR DADOS DO BANCO E MOSTRAR NA TABELA DA TELA
         public function buscarDados()
         {
 
@@ -28,11 +29,11 @@
             $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $res;
         }
+
+        //BUSCAR CATEGORIAS PARA TELA DE CADASTRO
         public function buscarCategoria(){
 
             $cmd = $this->pdo->prepare("SELECT nomeCategoria, id_Categoria FROM categoria");
-            $cmd->execute();
-
             $cmd->execute();
 
             if ($cmd->rowCount()>0) {
@@ -41,9 +42,6 @@
                 }
             }
         }
-
-   
-
 
         //FUNÇÃO CADASTRA FREELANCER NO BANCO DE DADOS
         public function cadastrarFreelancer($nome, $email, $senha, $telefone, $cpf, $cep, $rua, $bairro, $cidade, $uf, $id_Categoria){
@@ -78,8 +76,6 @@
             
         }
 
-        
-
         //METODO DE EXCLUSÃO
         public function excluirFreelancer($id){
             $cmd = $this->pdo->prepare("DELETE FROM freelancer WHERE id_Freelancer  = :id");
@@ -87,9 +83,7 @@
             $cmd->execute();
         }
 
-       
-
-        //TOTAL DE CATEGORIAS REGISTRADAS
+        //TOTAL DE FREELANCERS REGISTRADAS
         public function totalRegistroFreelancer(){
             
             $res = array();
@@ -112,7 +106,7 @@
                //Entrar no sistema
                $res     = $cmd->fetch();
                session_start();
-               $_SESSION['id_Freelancer'] = $res['id_Freelancer']; 
+               $_SESSION['id_Freelancer'] = $res['id_Freelancer'];
                return true; // Login Efetuado
             }else{
               
@@ -120,6 +114,7 @@
             }
         }
 
+        //EXIBIR NOME USUARIO LOGADO
         public function exibeNomeLogado($id){
             $array = array();
 
@@ -134,6 +129,62 @@
             return $array;
         }
         
+        //BUSCAR DADOS DE FREELANCER ESPECÍFICO
+        public function buscarDadosFreelancer($id){
+            
+            $res = array();
+            
+            $cmd = $this->pdo->prepare("SELECT nome, email, telefone, cep, rua, bairro, cidade, uf,nomeCategoria FROM freelancer
+             JOIN categoria ON idCategoria = id_Categoria  WHERE id_Freelancer = :id");
+            $cmd->bindValue(":id", $id);
+            $cmd->execute();
+
+            //fetchAll SE FOSSE VARIOS REGISTROS
+            $res = $cmd->fetch(PDO::FETCH_ASSOC);
+            return $res;
+        }
+
+        //ATUALIZAR DADOS NO BANCO DE DADOS
+        public function editarMinhaConta($id, $nome, $email, $telefone, $cep, $rua, $bairro, $cidade, $uf, $idCategoria){
+            $cmd = $this->pdo->prepare("SELECT id_Freelancer FROM freelancer WHERE nome = :n AND email = :e AND telefone = :t AND cep = :cep AND rua = :r 
+            AND bairro = :b AND cidade = :c AND uf = :uf AND idCategoria = :idC");
+            $cmd->bindValue(":n", $nome);
+            $cmd->bindValue(":e", $email);
+            $cmd->bindValue(":t", $telefone);
+            $cmd->bindValue(":cep", $cep);
+            $cmd->bindValue(":r", $rua);
+            $cmd->bindValue(":b", $bairro);
+            $cmd->bindValue(":c", $cidade);
+            $cmd->bindValue(":uf", $uf);
+            $cmd->bindValue(":idC", $idCategoria);
+            
+            $cmd->execute();
+
+            //Se rowCount for > 0 é pq Categoria já existe no banco de dados então retorna falso
+            if($cmd->rowCount()>0){
+                return false;
+            }else{ 
+
+                $cmd = $this->pdo->prepare("UPDATE freelancer SET 
+                nome= :n, email = :e, telefone = :t, cep = :cep, rua = :r, bairro = :b, cidade = :c, uf = :uf, idCategoria = :idC 
+                WHERE id_Freelancer = :id");
+                $cmd->bindValue(":n", $nome);
+                $cmd->bindValue(":e", $email);
+                $cmd->bindValue(":t", $telefone);
+                $cmd->bindValue(":id", $id);
+                $cmd->bindValue(":cep", $cep);
+                $cmd->bindValue(":r", $rua);
+                $cmd->bindValue(":b", $bairro);
+                $cmd->bindValue(":c", $cidade);
+                $cmd->bindValue(":uf", $uf);
+                $cmd->bindValue(":idC", $idCategoria);
+            
+
+                $cmd->execute();
+                return true;
+            }
+
+        }
 
         
     }

@@ -2,7 +2,8 @@
 require_once "../classe/Freelancer.php";
 $freela = new Freelancer();
 
-
+require_once "../classe/Pedido.php";
+$p = new Pedido();
 
 
 ?>
@@ -55,9 +56,9 @@ $freela = new Freelancer();
 
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-auto">
-
-
-
+                                                <?php
+                                                    $p->totalPedidosPorCategoria($_SESSION['id_Freelancer']);
+                                                ?>
                                             <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
                                         </div>
                                     </div>

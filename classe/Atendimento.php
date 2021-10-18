@@ -37,14 +37,14 @@
             
             
         }
-
         
         //VISUALIZAR
         public function buscarDadosAtendimento($id){
             
             $res = array();
             
-            $cmd = $this->pdo->prepare("SELECT email,telefone, assunto, mensagem, idCliente FROM atendimentocliente WHERE id_Atendimento = :id");
+            $cmd = $this->pdo->prepare("SELECT email,telefone, assunto, mensagem, idCliente 
+            FROM atendimentocliente WHERE id_Atendimento = :id");
             $cmd->bindValue(":id", $id);
             $cmd->execute();
 
@@ -52,10 +52,8 @@
             $res = $cmd->fetch(PDO::FETCH_ASSOC);
             return $res;    
         }
-
-       
-
-        //TOTAL DE CATEGORIAS REGISTRADAS
+  
+        //TOTAL DE ATENDIMENTOS REGISTRADAS
         public function totalRegistroAtendimento(){
             
             $res = array();

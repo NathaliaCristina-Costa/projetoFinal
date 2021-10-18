@@ -74,9 +74,7 @@
             $cmd->execute();
         }
 
-       
-
-        //TOTAL DE CATEGORIAS REGISTRADAS
+        //TOTAL DE CLIENTES REGISTRADOS
         public function totalRegistroCliente(){
             
             $res = array();
@@ -86,6 +84,7 @@
            
         }
 
+        //EXIBIR NOME DO USUARIO LOGADO
         public function exibeNomeLogado($id){
             $array = array();
 
@@ -99,6 +98,7 @@
 
             return $array;
         }
+
         //BUSCAR DADOS DE CLIENTE ESPECÍFICO
         public function buscarDadosCliente($id){
             

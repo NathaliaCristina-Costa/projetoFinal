@@ -59,6 +59,7 @@
             $res = $cmd->fetch(PDO::FETCH_ASSOC);
             return $res;
         }
+        
         //ATUALIZAR DADOS NO BANCO DE DADOS
         public function atualizarDados($id, $nome){
             $cmd = $this->pdo->prepare("SELECT id_Categoria FROM categoria WHERE nomeCategoria = :n");

@@ -18,11 +18,10 @@
             $this->pdo = Conexao::getConexao();
         }
 
+        //Buscar Categorias para TELA PEDIDO
         public function buscarCategoria(){
 
             $cmd = $this->pdo->prepare("SELECT nomeCategoria, id_Categoria FROM categoria");
-            $cmd->execute();
-
             $cmd->execute();
 
             if ($cmd->rowCount()>0) {
@@ -33,10 +32,10 @@
         }
 
 
-        //FUNÇÃO CADASTRA FREELANCER NO BANCO DE DADOS
+        //FUNÇÃO CADASTRAR PEDIDOS NO BANCO DE DADOS
         public function cadastrarPedido($cep, $rua, $bairro,$cidade, $estado, $telefone,$mensagem, $idCategoria, $idCliente){
       
-             $cmd = $this->pdo->prepare("INSERT INTO pedido (cep, rua, bairro, cidade, estado, telefone,mensagem, idCategoria, idCliente) VALUES ( :cep, :r, :b,:c,:e, :t,:m, :idC, :idCl)");
+             $cmd = $this->pdo->prepare("INSERT INTO pedido (cep, rua, bairro, cidade, estado, telefone,mensagem, idCat, idCliente) VALUES ( :cep, :r, :b,:c,:e, :t,:m, :idC, :idCl)");
 
              
              $cmd->bindValue(":cep", $cep);
@@ -60,17 +59,19 @@
         public function buscarDados(){
 
             $res = array();
-            $cmd = $this->pdo->prepare("SELECT nomeCliente, nomeCategoria,telefone, cidade, estado  FROM pedido 
-            JOIN cliente ON idCliente = id_Cliente JOIN categoria ON idCategoria = id_Categoria");
+            $cmd = $this->pdo->query("SELECT nomeCliente, nomeCategoria, telefone, cidade, estado FROM pedido 
+            JOIN cliente ON idCliente = id_Cliente
+            JOIN categoria ON idCat = id_Categoria");
             $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $res;
         }
 
+        //LISTAR OS PEDIDOS DO CLIENTE ESPECÍFICO
         public function pedidosCliente($id){
             
             
-            $cmd = $this->pdo->prepare("SELECT nomeCategoria, dataPedido, idFreelancer FROM pedido 
-            JOIN categoria ON idCategoria = id_Categoria WHERE idCliente = :id");
+            $cmd = $this->pdo->prepare("SELECT id_Pedido,nomeCategoria, dataPedido, idFreelancer FROM pedido 
+            JOIN categoria ON idCat = id_Categoria WHERE idCliente = :id");
             $cmd->bindValue(":id", $id);
             $cmd->execute();
             if ($cmd->rowCount()>0) {                  
@@ -91,40 +92,57 @@
                             
                             <br>";
                     
-                    if ($dados['idFreelancer'] != 0) {
+                    if ($dados['idFreelancer'] != "") {
                         echo"
                                 <div class='card-body'>
                                     {$dados['idFreelancer']}
+                                    
                                 </div>
                             </div>
-                            <br>";
-                    }else{
+                        <br>";
+                    }
+                    else if ($dados['idFreelancer'] == ""){
                         echo"   <div class='card-body'>
-                                    Nenhum Profissional
+                                    Nenhum Profissional    
+                                    <a href='excluirPedido.php?id={$dados['id_Pedido']}' >
+                                        <button style='float:right' type='button' class='btn btn-danger'>
+                                            <i class='fas fa-trash-alt'></i>
+                                        </button>
+                                    </a>                                
                                 </div>
                             </div>
-                            <br>";
+                        <br>";
                     }
                 }
-                    
             }
-                      
-            
-            
         }
 
-        //TOTAL DE CATEGORIAS REGISTRADAS
+        //TOTAL DE PEDIDOS REGISTRADAS
         public function totalRegistroPedido(){
             
             $res = array();
-            $cmd = $this->pdo->prepare("SELECT * FROM pedido");
+            $cmd = $this->pdo->query("SELECT * FROM pedido");
             $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $res;
            
         }
 
-      
+        //TOTAL DE PEDIDOS POR CATEGORIA
+        public function totalPedidosPorCategoria($id){
+            $res = array();
+            $cmd = $this->pdo->prepare("SELECT id_Pedido FROM pedido JOIN freelancer ON idCategoria = idCat WHERE idCategoria = :id");
+            $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            $cmd->bindValue(":id", $id);
+            $cmd->execute();
+            return $res;
+        }
 
+        // EXLCUIR PEDIDOS
+        public function excluirPedido($id){
+            $cmd = $this->pdo->prepare("DELETE FROM pedido WHERE id_Pedido = :id");
+            $cmd->bindValue(":id", $id);
+            $cmd->execute();
+        }
         
     }
    

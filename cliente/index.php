@@ -40,57 +40,14 @@ $p = new Pedido();
                 <h1 class="h3 mb-0 text-gray-800">Bem Vindo! </h1>
             </div>
             <!-- Content Row -->
-
             <div class="row">
-                <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-12 col-md-12 mb-4">
-                    <div class="card border-left-info shadow h-100 py-2">
-                        <a href="pedidos.php">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Novos Pedidos
-                                        </div>
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <img class="imagem align-items-center justify-content-center h-100 w-100" src="src/img/img.png">
             </div>
-            <div class="row">
-
-                <!-- Pending Requests Card Example -->
-                <div class="col-xl-12 col-md-12 mb-4">
-                    <div class="card border-left-warning shadow h-100 py-2">
-                        <a href="pedidosFeitos.php">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            Pedidos Feitos</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+            <br>
+            <div class="text-center mb-4">
+                <h5>Conectamos Profissionais de todo o Brasil com pessoas solicitando serviço, atendendo com qualidade, 
+            facilidade e rapidez.</h5>
             </div>
-
-
-
         </div>
     </div>
 

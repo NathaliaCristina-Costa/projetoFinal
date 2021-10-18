@@ -23,14 +23,7 @@
         </div>
     </li>
     <li class="dropdown">
-        <a class="dropdown-toggle" type="button" id="moduleDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-bars mr-2 text-gray-400"></i>Pedidos
-        </a>
-        <div class="dropdown-menu" aria-labelledby="moduleDropDown">
-            <a class="dropdown-item" href="../pedido/registroPedido.php">Registrados</a>
-            <a class="dropdown-item" href="pedido/andamentoPedido.php">Andamento</a>
-            <a class="dropdown-item" href="pedido/concluidoPedido.php">Conluídos</a>
-        </div>
+            <a class="dropdown-item" href="../pedido/registroPedido.php">Pedidos</a>
     </li>
     <li>
         <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>

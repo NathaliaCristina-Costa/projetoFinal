@@ -8,13 +8,14 @@ require_once "../classe/Freelancer.php";
 require_once "../classe/Atendimento.php";
 require_once "../classe/Admin.php";
 require_once "../classe/AtendeFreelancer.php";
-$cat    = new Categoria();
-$cli    = new Cliente();
-$freela = new Freelancer();
-$atend  = new Atendimento();
-$admin  = new Admin();
+require_once "../classe/Pedido.php";
+$cat        = new Categoria();
+$cli        = new Cliente();
+$freela     = new Freelancer();
+$atend      = new Atendimento();
+$admin      = new Admin();
 $freelAtend = new AtendeFreelancer();
-
+$p          = new Pedido();
 // Inicia sessões
 
 session_start();
@@ -79,14 +80,7 @@ if (!isset($_SESSION['id_Admin'])) {
                     </div>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" type="button" id="moduleDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-bars mr-2 text-gray-400"></i>Pedidos
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="moduleDropDown">
-                        <a class="dropdown-item" href="pedido/registroPedido.php">Registrados</a>
-                        <a class="dropdown-item" href="pedido/andamentoPedido.php">Andamento</a>
-                        <a class="dropdown-item" href="pedido/concluidoPedido.php">Conluídos</a>
-                    </div>
+                <a href="pedido/registroPedido.php"><i class="fas fa-user-friends mr-2 text-gray-400">Pedidos</a>
                 </li>
                 <li>
                     <a href="logout.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
@@ -111,7 +105,7 @@ if (!isset($_SESSION['id_Admin'])) {
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-3">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-3 align-items-center">
                                             Total de Categorias
                                         </div>
                                         <div class="text-center font-weight-bold text-primary text-uppercase mb-1">
@@ -121,10 +115,6 @@ if (!isset($_SESSION['id_Admin'])) {
                                             ?>
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                                    </div>
-                                    <div class="col-auto">
-
-                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>
@@ -139,7 +129,7 @@ if (!isset($_SESSION['id_Admin'])) {
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1 align-items-center">
                                             Total Freelancers</div>
                                         <div class="text-center text-success h5 mb-0 font-weight-bold text-gray-800">
                                             <?php
@@ -147,9 +137,6 @@ if (!isset($_SESSION['id_Admin'])) {
                                             echo "<h2>" . count($dados) . "</h2>";
                                             ?>
                                         </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>
@@ -162,7 +149,7 @@ if (!isset($_SESSION['id_Admin'])) {
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1 align-items-center">
                                             Total de Clientes
                                         </div>
                                         <div class="text-center font-weight-bold text-info text-uppercase mb-1">
@@ -176,9 +163,6 @@ if (!isset($_SESSION['id_Admin'])) {
                                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>
@@ -194,20 +178,20 @@ if (!isset($_SESSION['id_Admin'])) {
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1 align-items-center">
                                             Total de Pedidos
                                         </div>
                                         <div class="text-center font-weight-bold text-danger text-uppercase mb-1">
-
+                                            <?php
+                                            $dados = $p->totalRegistroPedido();
+                                            echo "<h2>" . count($dados) . "</h2>";
+                                            ?>
                                         </div>
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
                                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>
@@ -222,7 +206,7 @@ if (!isset($_SESSION['id_Admin'])) {
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1 align-items-center">
                                             Total de Mensagens - CLIENTES
                                         </div>
                                         <div class="text-center font-weight-bold text-warning text-uppercase mb-1">
@@ -237,9 +221,6 @@ if (!isset($_SESSION['id_Admin'])) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -252,7 +233,7 @@ if (!isset($_SESSION['id_Admin'])) {
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                                        <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1 align-items-center">
                                             Total de Mensagens - freelancer
                                         </div>
                                         <div class="text-center font-weight-bold text-secondary text-uppercase mb-1">
@@ -266,9 +247,6 @@ if (!isset($_SESSION['id_Admin'])) {
                                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>

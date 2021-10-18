@@ -7,7 +7,9 @@ body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
 }
-
+#imagem{
+    border-radius: 0%;
+}
 p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;

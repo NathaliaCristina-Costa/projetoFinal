@@ -3,8 +3,6 @@ require_once "../classe/Freelancer.php";
 $freela = new Freelancer();
 
 
-
-
 ?>
 <!DOCTYPE html>
 
@@ -39,41 +37,20 @@ $freela = new Freelancer();
         <!-- Page Content  -->
         <div id="content">
             <?php
-            if (isset($_GET['idEditar'])) {
-                $idEditar = addslashes($_GET['idEditar']);
-                $res = $freela->buscarDadosFreelancer($idEditar);
+            if (isset($_GET['idConta'])) {
+                $idConta = addslashes($_GET['idConta']);
+                $res = $freela->buscarDadosFreelancer($idConta);
             }
             ?>
+
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Editar Minha Conta</h1>
+                <h1 class="h3 mb-0 text-gray-800">Minha Conta</h1>
             </div>
+
+
             <div class="container-fluid">
                 <div class="row">
                     <?php
-
-                    //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
-                    if (isset($_POST['nome'])) {
-
-                        if (isset($_GET['idEditar']) && !empty($_GET['idEditar'])) {
-                            //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
-                            $idEditar = addslashes($_GET['idEditar']);
-                            $nome = addslashes($_POST['nome']);
-                            $telefone = addslashes($_POST['telefone']);
-                            $email = addslashes($_POST['email']);
-                            $cep = addslashes($_POST['cep']);
-                            $rua = addslashes($_POST['rua']);
-                            $bairro = addslashes($_POST['bairro']);
-                            $cidade = addslashes($_POST['cidade']);
-                            $uf = addslashes($_POST['uf']);
-                            $idCategoria = addslashes($_POST['idCategoria']);
-
-                            if ($freela->editarMinhaConta($id, $nome, $email, $telefone, $cep, $rua, $bairro, $cidade, $ufx, $idCategoria) == true) {
-
-                                header("location: conta.php?idConta=" . $_SESSION['id_Freelancer']);
-                            }
-                        }
-                    }
-
                     ?>
                     <div class="col-lg-12">
                         <div class="card">
@@ -85,25 +62,25 @@ $freela = new Freelancer();
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label for="assunto" class="form-label">Nome</label>
-                                                    <input type="text" name="nome" class="form-control" placeholder="Nome" value="<?php if (isset($res)) {
-                                                                                                                                        echo $res['nome'];
-                                                                                                                                    } ?>">
+                                                    <input type="text" name="nome" class="form-control" placeholder="Nome" disabled value="<?php if (isset($res)) {
+                                                                                                                                                echo $res['nome'];
+                                                                                                                                            } ?>">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label for="assunto" class="form-label">E-mail</label>
-                                                    <input type="email" name="email" class="form-control" placeholder="Email" value="<?php if (isset($res)) {
-                                                                                                                                            echo $res['email'];
-                                                                                                                                        } ?>">
+                                                    <input type="email" name="email" class="form-control" placeholder="Email" disabled value="<?php if (isset($res)) {
+                                                                                                                                                    echo $res['email'];
+                                                                                                                                                } ?>">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label for="assunto" class="form-label">Telefone </label>
-                                                    <input type="text" data-mask="(00) 00000-0000" class="form-control" placeholder="Telefone" id="telefone" name="telefone" value="<?php if (isset($res)) {
-                                                                                                                                                                                        echo $res['telefone'];
-                                                                                                                                                                                    } ?>">
+                                                    <input type="text" data-mask="(00) 00000-0000" class="form-control" placeholder="Telefone" id="telefone" name="telefone" disabled value="<?php if (isset($res)) {
+                                                                                                                                                                                                    echo $res['telefone'];
+                                                                                                                                                                                                } ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -111,25 +88,25 @@ $freela = new Freelancer();
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label for="assunto" class="form-label">CEP </label>
-                                                    <input type="text" class="form-control" data-mask='00000-000' form-control-user" name="cep" id="cep" placeholder="CEP" value="<?php if (isset($res)) {
-                                                                                                                                                                                        echo $res['cep'];
-                                                                                                                                                                                    } ?>">
+                                                    <input type="text" class="form-control" data-mask='00000-000' form-control-user" name="cep" id="cep" placeholder="CEP" disabled value="<?php if (isset($res)) {
+                                                                                                                                                                                                echo $res['cep'];
+                                                                                                                                                                                            } ?>">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label for="assunto" class="form-label">Rua </label>
-                                                    <input type="text" class="form-control form-control-user" name="rua" id="rua" placeholder="Rua" value="<?php if (isset($res)) {
-                                                                                                                                                                echo $res['rua'];
-                                                                                                                                                            } ?>">
+                                                    <input type="text" class="form-control form-control-user" name="rua" id="rua" placeholder="Rua" disabled value="<?php if (isset($res)) {
+                                                                                                                                                                        echo $res['cep'];
+                                                                                                                                                                    } ?>">
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label for="assunto" class="form-label">Bairro </label>
-                                                    <input type="text" class="form-control form-control-user" name="bairro" id="bairro" placeholder="Bairro" value="<?php if (isset($res)) {
-                                                                                                                                                                        echo $res['bairro'];
-                                                                                                                                                                    } ?>">
+                                                    <input type="text" class="form-control form-control-user" name="bairro" id="bairro" placeholder="Bairro" disabled value="<?php if (isset($res)) {
+                                                                                                                                                                                    echo $res['bairro'];
+                                                                                                                                                                                } ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -137,33 +114,27 @@ $freela = new Freelancer();
                                             <div class="col-lg-5">
                                                 <div class="form-group">
                                                     <label for="assunto" class="form-label">Cidade </label>
-                                                    <input type="text" class="form-control form-control-user" name="cidade" id="cidade" placeholder="Cidade" value="<?php if (isset($res)) {
-                                                                                                                                                                        echo $res['cidade'];
-                                                                                                                                                                    } ?>">
+                                                    <input type="text" class="form-control form-control-user" name="cidade" id="cidade" placeholder="Cidade" disabled value="<?php if (isset($res)) {
+                                                                                                                                                                                    echo $res['cidade'];
+                                                                                                                                                                                } ?>">
                                                 </div>
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="form-group">
                                                     <label for="assunto" class="form-label">Estado </label>
-                                                    <input type="text" class="form-control form-control-user" name="uf" id="uf" placeholder="UF" value="<?php if (isset($res)) {
-                                                                                                                                                                echo $res['uf'];
-                                                                                                                                                            } ?>">
+                                                    <input type="text" class="form-control form-control-user" name="estado" id="uf" placeholder="UF" disabled value="<?php if (isset($res)) {
+                                                                                                                                                                            echo $res['uf'];
+                                                                                                                                                                        } ?>">
                                                 </div>
                                             </div>
                                             <div class="col-lg-5">
                                                 <label for="assunto" class="form-label">Categoria </label>
-                                                <select class="form-control" name="idCategoria">
-                                                    <option value="selecione" selected><?php if (isset($res)) {
-                                                                                            echo $res['nomeCategoria'];
-                                                                                        } ?></option>
-                                                    <?php
-                                                    $freela->buscarCategoria();
-                                                    ?>
-
-                                                </select>
+                                                <input type="text" class="form-control form-control-user" name="categoria" id="categoria" placeholder="categoria" disabled value="<?php if (isset($res)) {
+                                                                                                                                                                            echo $res['nomeCategoria'];
+                                                                                                                                                                        } ?>">
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-success" name="btEditar">Salvar</button>
+                                        <a href="editarConta.php?idEditar=<?php echo $_SESSION['id_Freelancer']; ?>" type="submit" class="btn btn-dark" name="btEditar">Editar</a>
                                     </form>
                                 </div>
                             </div>
@@ -172,8 +143,6 @@ $freela = new Freelancer();
 
                 </div>
             </div>
-
-
 
 
 

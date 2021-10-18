@@ -35,7 +35,6 @@
             
             
         }
-
         
         //VISUALIZAR
         public function buscarDadosAtendimento($id){
@@ -51,9 +50,7 @@
             return $res;
         }
 
-       
-
-        //TOTAL DE CATEGORIAS REGISTRADAS
+        //TOTAL DE ATENDIMENTOS REGISTRADAS
         public function totalRegistroAtendimentoFreela(){
             
             $res = array();
