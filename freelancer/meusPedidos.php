@@ -2,7 +2,8 @@
 require_once "../classe/Freelancer.php";
 $freela = new Freelancer();
 
-
+require_once "../classe/Pedido.php";
+$p = new Pedido();
 
 
 ?>
@@ -30,10 +31,11 @@ $freela = new Freelancer();
 
 <body>
     <div class="wrapper">
-        
+
         <!-- Sidebar  -->
         <nav id="sidebar" style="background-color: black;">
-            <?php include 'menu.php';?>
+
+            <?php include 'menu.php'; ?>
         </nav>
 
         <!-- Page Content  -->
@@ -43,34 +45,8 @@ $freela = new Freelancer();
                 <h1 class="h3 mb-0 text-gray-800">Meus Pedidos</h1>
             </div>
 
-
-            <div class="row">
-                <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-12 col-md-6 mb-4">
-                    <div class="card border-left-info shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col-auto">
-                                            
-                                                
-                                           
-                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                   
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
+            
+            
 
         </div>
     </div>

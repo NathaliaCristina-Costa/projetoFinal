@@ -79,8 +79,8 @@ if (!isset($_SESSION['id_Admin'])) {
                         <a class="dropdown-item" href="atendimento/atendimentoFreelancer.php">Freelancers</a>
                     </div>
                 </li>
-                <li class="dropdown">
-                <a href="pedido/registroPedido.php"><i class="fas fa-user-friends mr-2 text-gray-400">Pedidos</a>
+                <li>
+                    <a href="pedido/registroPedido.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Pedidos</a>
                 </li>
                 <li>
                     <a href="logout.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>

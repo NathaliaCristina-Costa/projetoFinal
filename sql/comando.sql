@@ -13,7 +13,7 @@ ALTER TABLE pedido ADD CONSTRAINT fk_CatgPedido FOREIGN KEY (id_Categoria) REFER
 
 ALTER TABLE pedido ADD CONSTRAINT fk_ClientePedido FOREIGN KEY (idCliente) REFERENCES cliente (id_Cliente);
 
-ALTER TABLE pedido ADD CONSTRAINT fk_FreelaPedido FOREIGN KEY (id_Freelancer) REFERENCES freelancer (id_Freelancer);
+ALTER TABLE pedido ADD CONSTRAINT fk_FreelaPedido FOREIGN KEY (idFreelancer) REFERENCES freelancer (id_Freelancer);
 
 ALTER TABLE pagamento ADD CONSTRAINT fk_FreelaPagamento FOREIGN KEY (idFreelancer) REFERENCES freelancer (id_Freelancer);
 
