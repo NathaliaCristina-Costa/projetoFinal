@@ -45,7 +45,9 @@ $p = new Pedido();
                 <h1 class="h3 mb-0 text-gray-800">Meus Pedidos</h1>
             </div>
 
-            
+            <?php
+                $p->meusPedidosFreelancer($_SESSION['id_Freelancer']);
+            ?>
             
 
         </div>

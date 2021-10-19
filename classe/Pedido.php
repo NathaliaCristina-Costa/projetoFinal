@@ -9,8 +9,10 @@
         public $estado;               
         public $telefone; 
         public $mensagem;  
+        public $status;
         public $idCategoria;       
-        public $idCliente; 
+        public $idCliente;
+        public $idFreelancer; 
         private $pdo;
         
        
@@ -50,10 +52,7 @@
              $cmd->bindValue(":idC", $idCategoria);       
              $cmd->bindValue(":idCl", $idCliente); 
 
-             $cmd->execute();
-              
-                
-               
+             $cmd->execute();               
             
         }
 
@@ -68,18 +67,82 @@
             return $res;
         }
 
-       
-
         //LISTAR PEDIDOS DISPONÍVEL DE ACORDO COM A CATEGORIA DO FREELANCER LOGADO
-        public function pedidosFreelancer($id){
+        public function pedidosDisponiveisFreelancer($id){
             
             
-            $cmd = $this->pdo->prepare("SELECT nomeCliente,nomeCategoria,telefonePedido,cidadePedido,mensagemPedido, estadoPedido FROM `pedido` 
+            $cmd = $this->pdo->prepare("SELECT nomeCliente,nomeCategoria,telefonePedido,cidadePedido,estadoPedido,
+            ruaPedido, bairroPedido,mensagemPedido,statusPedido  FROM `pedido` 
             JOIN cliente ON idCliente = id_Cliente 
             JOIN categoria ON idCat = id_Categoria 
             JOIN freelancer ON idCat = idCategoria 
             WHERE idCat = idCategoria
             AND id_Freelancer = :id");
+            $cmd->bindValue(":id", $id);
+            $cmd->execute();
+            if ($cmd->rowCount()>0) {                  
+                    while ($dados = $cmd->fetch(PDO::FETCH_ASSOC)) {
+                        if ($dados['statusPedido'] != "A") {
+                            echo "
+                            <div class='card'>
+                                <div class='card-header'>
+                                    <h5 class='mb-0'>
+                                        <span style='float:left'> 
+                                            <i>{$dados['nomeCliente']}</i>
+                                        </span>
+                                        <br>
+                                        <p>{$dados['ruaPedido']}, {$dados['bairroPedido']}. {$dados['cidadePedido']} - {$dados['estadoPedido']}</p>
+                                         
+                                    </h5>
+                                    <a href='https://api.whatsapp.com/send?phone=
+                                        55{$dados['telefonePedido']}&text=Olá {$dados['nomeCliente']},estou aqui pelo seu pedido na plataforma!'>
+                                          <button type='button' class='btn btn-success'>
+                                              <i class='fa fa-phone'></i>
+                                          </button>
+                                    </a>
+                                        {$dados['telefonePedido']} 
+                                </div>
+                                <div class='card-body'>
+                                  <b>{$dados['nomeCategoria']}</b><br>
+                                  {$dados['mensagemPedido']}
+                                  <hr>
+                                  <form method='POST' action='statusPedido.php'>
+                                    <button type='submit' class='btn btn-primary'>
+                                        <i class='fas fa-check-circle'></i>
+                                    </button>
+                                    <label>Aceitar</label>  
+                                    <input type='hidden' name='status' value='A'> 
+                                    <input type='hidden' name='idFreelancer' value='{$_SESSION['id_Freelancer']}'>                                  
+                                  </form>                              
+                                </div>              
+                            </div>
+                            
+                            <br>";
+                        }                        
+                    }
+                }
+        }
+
+        
+
+        //PEDIDO ACEITO PELO FREELANCER
+        public function statusPedido($status, $idFreelancer){
+            $cmd = $this->pdo->prepare("INSERT INTO pedido (statusPedido, idFreelancer) VALUES (:s, :idF)");
+
+            $cmd->bindValue(":s", $status);
+            $cmd->bindValue(":idF", $idFreelancer);
+
+            $cmd->execute();
+        }
+
+        //LISTAR PEDIDOS DE CADA FREELANCER
+        public function meusPedidosFreelancer($id){
+            
+            
+            $cmd = $this->pdo->prepare("SELECT nomeCliente, telefonePedido, mensagemPedido, cidadePedido, estadoPedido, nomeCategoria FROM pedido 
+            JOIN categoria ON idCat = id_Categoria
+            JOIN cliente ON idCliente = id_Cliente
+            WHERE idFreelancer = :id");
             $cmd->bindValue(":id", $id);
             $cmd->execute();
             if ($cmd->rowCount()>0) {                  
