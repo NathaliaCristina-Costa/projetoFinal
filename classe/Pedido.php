@@ -133,7 +133,7 @@
                                         <i class='fas fa-check-circle'></i>
                                         </button>                             
                                         <select name='status'>
-                                            <option value='Aceito'>Aceitar Pedido ?</option>
+                                            <option>Aceitar Pedido ?</option>
                                             <option value='Aceito'>Sim</option>
                                         </select>  
                                     <input type='hidden' name='idFreelancer' value='{$_SESSION['id_Freelancer']}'>                                  
@@ -176,7 +176,7 @@
                                   <b>{$dados['nomeCategoria']}</b><br>
                                   {$dados['mensagemPedido']}
                                   <hr> 
-                                  <form method='POST' action='statusPedido.php?id={$dados['id_Pedido']}'>
+                                  <form method='POST'>
                                     
                                         <button type='submit' class='btn btn-success'>
                                         <i class='fas fa-check-circle'></i>
