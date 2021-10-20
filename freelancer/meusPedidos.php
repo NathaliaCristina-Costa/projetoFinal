@@ -41,14 +41,15 @@ $p = new Pedido();
         <div id="content">
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Meus Pedidos</h1>
+                <h1 class="h3 mb-0 text-gray-800">Meus Pedidos<h1><br>
             </div>
-
+            <div class="row">
+                <a href="relatorio/relatorioMensagemCliente.php"><button type="button" class="btn btn-dark">Relatório</button></a>
+            </div>
+            <br>
             <?php
-                $p->meusPedidosFreelancer($_SESSION['id_Freelancer']);
+            $p->meusPedidosFreelancer($_SESSION['id_Freelancer']);
             ?>
-            
-
         </div>
     </div>
 

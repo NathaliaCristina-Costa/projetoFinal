@@ -103,7 +103,7 @@
             $cmd->execute();
             if ($cmd->rowCount()>0) {                  
                     while ($dados = $cmd->fetch(PDO::FETCH_ASSOC)) {
-                        if ($dados['statusPedido'] != "Aceito") {
+                        if (($dados['statusPedido'] != "Aceito")&&($dados['statusPedido'] != "Realizado")&&($dados['statusPedido'] != "Não Realizado")) {
                             echo "
                             <div class='card'>
                                 <div class='card-header'>
@@ -151,7 +151,7 @@
         public function meusPedidosFreelancer($id){
             
             
-            $cmd = $this->pdo->prepare("SELECT id_Pedido, nomeCliente, telefonePedido, mensagemPedido, cidadePedido, estadoPedido, nomeCategoria FROM pedido 
+            $cmd = $this->pdo->prepare("SELECT id_Pedido,statusPedido, nomeCliente, telefonePedido, mensagemPedido, cidadePedido, estadoPedido, nomeCategoria FROM pedido 
             JOIN categoria ON idCat = id_Categoria
             JOIN cliente ON idCliente = id_Cliente
             WHERE idFreelancer = :id");
@@ -175,23 +175,31 @@
                                 <div class='card-body'>
                                   <b>{$dados['nomeCategoria']}</b><br>
                                   {$dados['mensagemPedido']}
-                                  <hr> 
-                                  <form method='POST'>
-                                    
+                                  <hr>";
+                        if($dados['statusPedido'] == 'Aceito'){
+                                    echo"  
+                                    <form method='POST' action='statusRealizado.php?id={$dados['id_Pedido']}'>
+                                       
                                         <button type='submit' class='btn btn-success'>
                                         <i class='fas fa-check-circle'></i>
                                         </button>                             
                                         <select name='status'>
-                                            <option value='Realizado'>Pedido Foi Finalizado ?</option>
+                                            <option value=''>Pedido Foi Finalizado ?</option>
                                             <option value='Realizado'>Sim</option>
                                             <option value='Não Realizado'>Não</option>
                                         </select>  
                                         <input type='hidden' name='idFreelancer' value='{$_SESSION['id_Freelancer']}'>                                  
-                                  </form>              
+                                    </form>              
+                                ";
+                        }else{
+                            echo"
+                                    <b><i>Status dos Pedido:</i></b> {$dados['statusPedido']}
                                 </div>
                             </div>
-                            
-                        <br>";
+                        
+                            <br>";
+                        }
+                                
                     }
                 }
         }
@@ -230,12 +238,32 @@
                                     <i>{$dados['nome']}<br>
                                     {$dados['telefone']}<br>
                                     {$dados['cidade']} - {$dados['uf']}</i><br><br> 
-                                    <hr>     
-                                    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']}                     
+                                    <hr>";
+                            if($dados['statusPedido'] == 'Aceito'){
+                                    echo"    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']}                     
                                 </div>
-                                
                             </div>
                             <br>";
+                            }elseif($dados['statusPedido'] == 'Não Realizdo'){
+                                echo"    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']} 
+                                        <button style='float:right' type='button' class='btn btn-danger'>
+                                            Deseja Fazer um novo pedido?
+                                        </button>                   
+                                </div>
+                            </div>
+                            <br>";
+                            }else{
+                                echo"    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']} 
+                                    <button style='float:right' type='button' class='btn btn-info'>
+                                        Deseja Avaliar o Serviço?
+                                    </button>                   
+                                 </div>
+                            </div>
+                            <br>";    
+                            }
+                                
+                                
+                            
                         }else{
                             echo"
                             <div class='card'>
