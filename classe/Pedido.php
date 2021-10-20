@@ -67,7 +67,7 @@
             return $res;
         }
 
-        //PEDIDO ACEITO PELO FREELANCER
+        //ATUALIZAÇÃO DO STATUS DO PEDIDO
         public function statusPedido($id, $status, $idFreelancer){
             $cmd = $this->pdo->prepare("SELECT id_Pedido FROM pedido WHERE statusPedido = :sp AND idFreelancer = :idF");
             $cmd->bindValue(":sp", $status);
@@ -88,6 +88,7 @@
                 return true;
             }
         }
+        
         //LISTAR PEDIDOS DISPONÍVEL DE ACORDO COM A CATEGORIA DO FREELANCER LOGADO
         public function pedidosDisponiveisFreelancer($id){
             
