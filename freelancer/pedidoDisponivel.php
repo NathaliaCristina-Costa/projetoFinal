@@ -49,7 +49,7 @@ $p = new Pedido();
             <?php
                 $p->pedidosDisponiveisFreelancer($_SESSION['id_Freelancer']);
             ?>
-
+            
         </div>
     </div>
 

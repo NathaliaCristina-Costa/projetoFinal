@@ -5,7 +5,6 @@ $freela = new Freelancer();
 require_once "../classe/Pedido.php";
 $p = new Pedido();
 
-
 ?>
 <!DOCTYPE html>
 

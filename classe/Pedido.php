@@ -67,11 +67,32 @@
             return $res;
         }
 
+        //PEDIDO ACEITO PELO FREELANCER
+        public function statusPedido($id, $status, $idFreelancer){
+            $cmd = $this->pdo->prepare("SELECT id_Pedido FROM pedido WHERE statusPedido = :sp AND idFreelancer = :idF");
+            $cmd->bindValue(":sp", $status);
+            $cmd->bindValue(":idF", $idFreelancer);
+            $cmd->execute();
+
+            //Se rowCount for > 0 é pq Categoria já existe no banco de dados então retorna falso
+            if($cmd->rowCount()>0){
+                return false;
+            }else{ 
+
+                $cmd = $this->pdo->prepare("UPDATE pedido SET statusPedido = :sp, idFreelancer = :idF WHERE id_Pedido = :id");
+                $cmd->bindValue(":sp", $status);
+                $cmd->bindValue(":idF", $idFreelancer);
+                $cmd->bindValue(":id", $id);
+
+                $cmd->execute();
+                return true;
+            }
+        }
         //LISTAR PEDIDOS DISPONÍVEL DE ACORDO COM A CATEGORIA DO FREELANCER LOGADO
         public function pedidosDisponiveisFreelancer($id){
             
             
-            $cmd = $this->pdo->prepare("SELECT nomeCliente,nomeCategoria,telefonePedido,cidadePedido,estadoPedido,
+            $cmd = $this->pdo->prepare("SELECT id_Pedido,nomeCliente,nomeCategoria,telefonePedido,cidadePedido,estadoPedido,
             ruaPedido, bairroPedido,mensagemPedido,statusPedido  FROM `pedido` 
             JOIN cliente ON idCliente = id_Cliente 
             JOIN categoria ON idCat = id_Categoria 
@@ -82,7 +103,7 @@
             $cmd->execute();
             if ($cmd->rowCount()>0) {                  
                     while ($dados = $cmd->fetch(PDO::FETCH_ASSOC)) {
-                        if ($dados['statusPedido'] != "A") {
+                        if ($dados['statusPedido'] != "Aceito") {
                             echo "
                             <div class='card'>
                                 <div class='card-header'>
@@ -106,12 +127,15 @@
                                   <b>{$dados['nomeCategoria']}</b><br>
                                   {$dados['mensagemPedido']}
                                   <hr>
-                                  <form method='POST' action='statusPedido.php'>
-                                    <button type='submit' class='btn btn-primary'>
+                                  <form method='POST' action='statusPedido.php?id={$dados['id_Pedido']}'>
+                                    
+                                        <button type='submit' class='btn btn-primary'>
                                         <i class='fas fa-check-circle'></i>
-                                    </button>
-                                    <label>Aceitar</label>  
-                                    <input type='hidden' name='status' value='A'> 
+                                        </button>                             
+                                        <select name='status'>
+                                            <option value='Aceito'>Aceitar Pedido ?</option>
+                                            <option value='Aceito'>Sim</option>
+                                        </select>  
                                     <input type='hidden' name='idFreelancer' value='{$_SESSION['id_Freelancer']}'>                                  
                                   </form>                              
                                 </div>              
@@ -123,23 +147,11 @@
                 }
         }
 
-        
-
-        //PEDIDO ACEITO PELO FREELANCER
-        public function statusPedido($status, $idFreelancer){
-            $cmd = $this->pdo->prepare("INSERT INTO pedido (statusPedido, idFreelancer) VALUES (:s, :idF)");
-
-            $cmd->bindValue(":s", $status);
-            $cmd->bindValue(":idF", $idFreelancer);
-
-            $cmd->execute();
-        }
-
         //LISTAR PEDIDOS DE CADA FREELANCER
         public function meusPedidosFreelancer($id){
             
             
-            $cmd = $this->pdo->prepare("SELECT nomeCliente, telefonePedido, mensagemPedido, cidadePedido, estadoPedido, nomeCategoria FROM pedido 
+            $cmd = $this->pdo->prepare("SELECT id_Pedido, nomeCliente, telefonePedido, mensagemPedido, cidadePedido, estadoPedido, nomeCategoria FROM pedido 
             JOIN categoria ON idCat = id_Categoria
             JOIN cliente ON idCliente = id_Cliente
             WHERE idFreelancer = :id");
@@ -163,7 +175,19 @@
                                 <div class='card-body'>
                                   <b>{$dados['nomeCategoria']}</b><br>
                                   {$dados['mensagemPedido']}
-                                  
+                                  <hr> 
+                                  <form method='POST' action='statusPedido.php?id={$dados['id_Pedido']}'>
+                                    
+                                        <button type='submit' class='btn btn-success'>
+                                        <i class='fas fa-check-circle'></i>
+                                        </button>                             
+                                        <select name='status'>
+                                            <option value='Realizado'>Pedido Foi Finalizado ?</option>
+                                            <option value='Realizado'>Sim</option>
+                                            <option value='Não Realizado'>Não</option>
+                                        </select>  
+                                        <input type='hidden' name='idFreelancer' value='{$_SESSION['id_Freelancer']}'>                                  
+                                  </form>              
                                 </div>
                             </div>
                             
@@ -177,7 +201,7 @@
         public function pedidosCliente($id){
             
             
-            $cmd = $this->pdo->prepare("SELECT id_Pedido,nomeCategoria, dataPedido, idFreelancer, nome,telefone, cidade, uf
+            $cmd = $this->pdo->prepare("SELECT id_Pedido,nomeCategoria, dataPedido, idFreelancer, nome,telefone, cidade, uf, statusPedido
             FROM pedido
             INNER JOIN categoria
             ON idCat = id_Categoria
@@ -206,19 +230,8 @@
                                     <i>{$dados['nome']}<br>
                                     {$dados['telefone']}<br>
                                     {$dados['cidade']} - {$dados['uf']}</i><br><br> 
-                                    <hr> 
-                                    <a href='' >
-                                        Realizado
-                                        <button type='button' class='btn btn-success'>
-                                            <i class='fas fa-check-circle'></i>
-                                        </button>
-                                    </a>
-                                    <a>
-                                        Não-Realizado
-                                        <button type='button' class='btn btn-danger'>
-                                            <i class='fas fa-times-circle'></i>
-                                        </button>
-                                    </a>                             
+                                    <hr>     
+                                    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']}                     
                                 </div>
                                 
                             </div>
@@ -243,6 +256,8 @@
                                             <i class='fas fa-trash-alt'></i>
                                         </button>
                                     </a>    
+                                    <hr>
+                                    <i><b>Status do Pedido:</b></i> Pendente
                                 </div>
                             </div>
                             <br>";
