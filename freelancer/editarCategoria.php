@@ -3,6 +3,8 @@ require_once "../classe/Freelancer.php";
 $freela = new Freelancer();
 
 
+
+
 ?>
 <!DOCTYPE html>
 
@@ -37,20 +39,33 @@ $freela = new Freelancer();
         <!-- Page Content  -->
         <div id="content">
             <?php
-            if (isset($_GET['idCat'])) {
-                $idCat = addslashes($_GET['idCat']);
-                $res   = $freela->buscarCatgoriaFreelancer($idCat);
+            if (isset($_GET['idEdCat'])) {
+                $idEdCat = addslashes($_GET['idEdCat']);
+                $res = $freela->buscarCatgoriaFreelancer($idEdCat);
             }
             ?>
-
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Minha Conta</h1>
+                <h1 class="h3 mb-0 text-gray-800">Editar Minha Conta</h1>
             </div>
-
-
             <div class="container-fluid">
                 <div class="row">
                     <?php
+
+               
+                
+
+                        if (isset($_GET['idEdCat']) && !empty($_GET['idEdCat'])) {
+                            //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
+                            $idEdCat = addslashes($_GET['idEdCat']);
+                            $idCategoria = addslashes($_POST['idCategoria']);
+
+                            if ($freela->editarMinhaCategoria($idEdCat, $idCategoria) == true) {
+
+                                 header("location: minhaCategoria.php?idCat=" . $_SESSION['id_Freelancer']);
+                            }
+                        }
+                    
+
                     ?>
                     <div class="col-lg-12">
                         <div class="card">
@@ -60,14 +75,20 @@ $freela = new Freelancer();
                                     <form method="POST">
                                         <div class="row">
                                             <div class="col-lg-5">
-                                                <label for="assunto" class="form-label">Categoria </label>
-                                                <input type="text" class="form-control form-control-user" name="categoria" id="categoria" placeholder="categoria" disabled value="<?php if (isset($res)) {
-                                                                                                                                                                            echo $res['nomeCategoria'];
-                                                                                                                                                                        } ?>">
+                                                <label class="form-label">Categoria </label>
+                                                <select class="form-control" name="idCategoria">
+                                                <option value="selecione" selected><?php if (isset($res)) {
+                                                                                            echo $res['nomeCategoria'];
+                                                                                        } ?></option>
+                                                    <?php
+                                                    $freela->buscarCategoria();
+                                                    ?>
+
+                                                </select>
                                             </div>
                                         </div>
                                         <br>
-                                        <a href="editarCategoria.php?idEdCat=<?php echo $_SESSION['id_Freelancer']; ?>" type="submit" class="btn btn-dark" name="btEditar">Editar</a>
+                                        <button type="submit" class="btn btn-success" name="btEditar">Salvar</button>
                                     </form>
                                 </div>
                             </div>
@@ -75,12 +96,9 @@ $freela = new Freelancer();
                     </div>
 
                 </div>
-                <div class="row">
-                 <div class="col-lg-12">
-                                                                                                                                                                        
-                 </div>
-                </div>
             </div>
+
+
 
 
 
