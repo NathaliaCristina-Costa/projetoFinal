@@ -39,6 +39,13 @@ $p = new Pedido();
 
         <!-- Page Content  -->
         <div id="content">
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                    </ol>
+                </div>
+            </div>
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Meus Pedidos<h1><br>

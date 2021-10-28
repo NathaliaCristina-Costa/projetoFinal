@@ -2,9 +2,6 @@
 require_once "../classe/Freelancer.php";
 $freela = new Freelancer();
 
-require_once "../classe/Pedido.php";
-$p = new Pedido();
-
 
 ?>
 <!DOCTYPE html>
@@ -34,28 +31,58 @@ $p = new Pedido();
 
         <!-- Sidebar  -->
         <nav id="sidebar" style="background-color: black;">
-
             <?php include 'menu.php'; ?>
         </nav>
 
         <!-- Page Content  -->
         <div id="content">
-            <div class="row page-titles mx-0">
-                <div class="col p-md-0">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                    </ol>
+            <?php
+            if (isset($_GET['idCat'])) {
+                $idCat = addslashes($_GET['idCat']);
+                $res   = $freela->buscarCatgoriaFreelancer($idCat);
+            }
+            ?>
+
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Minha Categoria</h1>
+            </div>
+
+
+            <div class="container-fluid">
+                <div class="row">
+                    <?php
+                    ?>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="basic-form">
+                                    <form method="POST">
+                                        <div class="row">
+                                            <div class="col-lg-5">
+                                                <label for="assunto" class="form-label">Categoria </label>
+                                                <input type="text" class="form-control form-control-user" name="categoria" id="categoria" placeholder="categoria" disabled value="<?php if (isset($res)) {
+                                                                                                                                                                            echo $res['nomeCategoria'];
+                                                                                                                                                                        } ?>">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <a href="editarCategoria.php?idEdCat=<?php echo $_SESSION['id_Freelancer']; ?>" type="submit" class="btn btn-dark" name="btEditar">Editar</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                 <div class="col-lg-12">
+                                                                                                                                                                        
+                 </div>
                 </div>
             </div>
 
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Pedidos Disponíveis</h1>
-            </div>
 
-
-            <?php
-            $p->pedidosDisponiveisFreelancer($_SESSION['id_Freelancer']);
-            ?>
 
         </div>
     </div>
@@ -80,13 +107,7 @@ $p = new Pedido();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
 
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#sidebarCollapse').on('click', function() {
-                $('#sidebar').toggleClass('active');
-            });
-        });
-    </script>
+
 </body>
 
 </html>

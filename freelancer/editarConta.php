@@ -38,6 +38,13 @@ $freela = new Freelancer();
 
         <!-- Page Content  -->
         <div id="content">
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                    </ol>
+                </div>
+            </div>
             <?php
             if (isset($_GET['idEditar'])) {
                 $idEditar = addslashes($_GET['idEditar']);
@@ -65,9 +72,8 @@ $freela = new Freelancer();
                             $bairro = addslashes($_POST['bairro']);
                             $cidade = addslashes($_POST['cidade']);
                             $uf = addslashes($_POST['uf']);
-                            $idCategoria = addslashes($_POST['idCategoria']);
 
-                            if ($freela->editarMinhaConta($id, $nome, $email, $telefone, $cep, $rua, $bairro, $cidade, $ufx, $idCategoria) == true) {
+                            if ($freela->editarMinhaConta($idEditar, $nome, $email, $telefone, $cep, $rua, $bairro, $cidade, $uf) == true) {
 
                                 header("location: conta.php?idConta=" . $_SESSION['id_Freelancer']);
                             }
@@ -146,21 +152,9 @@ $freela = new Freelancer();
                                                 <div class="form-group">
                                                     <label for="assunto" class="form-label">Estado </label>
                                                     <input type="text" class="form-control form-control-user" name="uf" id="uf" placeholder="UF" value="<?php if (isset($res)) {
-                                                                                                                                                                echo $res['uf'];
-                                                                                                                                                            } ?>">
+                                                                                                                                                            echo $res['uf'];
+                                                                                                                                                        } ?>">
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-5">
-                                                <label for="assunto" class="form-label">Categoria </label>
-                                                <select class="form-control" name="idCategoria">
-                                                    <option value="selecione" selected><?php if (isset($res)) {
-                                                                                            echo $res['nomeCategoria'];
-                                                                                        } ?></option>
-                                                    <?php
-                                                    $freela->buscarCategoria();
-                                                    ?>
-
-                                                </select>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-success" name="btEditar">Salvar</button>

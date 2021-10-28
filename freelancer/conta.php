@@ -42,7 +42,13 @@ $freela = new Freelancer();
                 $res = $freela->buscarDadosFreelancer($idConta);
             }
             ?>
-
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                    </ol>
+                </div>
+            </div>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h1 class="h3 mb-0 text-gray-800">Minha Conta</h1>
             </div>
@@ -97,7 +103,7 @@ $freela = new Freelancer();
                                                 <div class="form-group">
                                                     <label for="assunto" class="form-label">Rua </label>
                                                     <input type="text" class="form-control form-control-user" name="rua" id="rua" placeholder="Rua" disabled value="<?php if (isset($res)) {
-                                                                                                                                                                        echo $res['cep'];
+                                                                                                                                                                        echo $res['rua'];
                                                                                                                                                                     } ?>">
                                                 </div>
                                             </div>
@@ -127,12 +133,6 @@ $freela = new Freelancer();
                                                                                                                                                                         } ?>">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-5">
-                                                <label for="assunto" class="form-label">Categoria </label>
-                                                <input type="text" class="form-control form-control-user" name="categoria" id="categoria" placeholder="categoria" disabled value="<?php if (isset($res)) {
-                                                                                                                                                                            echo $res['nomeCategoria'];
-                                                                                                                                                                        } ?>">
-                                            </div>
                                         </div>
                                         <a href="editarConta.php?idEditar=<?php echo $_SESSION['id_Freelancer']; ?>" type="submit" class="btn btn-dark" name="btEditar">Editar</a>
                                     </form>
@@ -141,6 +141,11 @@ $freela = new Freelancer();
                         </div>
                     </div>
 
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+
+                    </div>
                 </div>
             </div>
 

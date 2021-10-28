@@ -135,8 +135,8 @@
             
             $res = array();
             
-            $cmd = $this->pdo->prepare("SELECT nome, email, telefone, cep, rua, bairro, cidade, uf,nomeCategoria FROM freelancer
-             JOIN categoria ON idCategoria = id_Categoria  WHERE id_Freelancer = :id");
+            $cmd = $this->pdo->prepare("SELECT nome, email, telefone, cep, rua, bairro, cidade, uf FROM freelancer
+            WHERE id_Freelancer = :id");
             $cmd->bindValue(":id", $id);
             $cmd->execute();
 
@@ -161,7 +161,7 @@
         }
 
         //ATUALIZAR DADOS NO BANCO DE DADOS
-        public function editarMinhaConta($id, $nome, $email, $telefone, $cep, $rua, $bairro, $cidade, $uf, $idCategoria){
+        public function editarMinhaConta($id, $nome, $email, $telefone, $cep, $rua, $bairro, $cidade, $uf){
             $cmd = $this->pdo->prepare("SELECT id_Freelancer FROM freelancer WHERE nome = :n AND email = :e AND telefone = :t AND cep = :cep AND rua = :r 
             AND bairro = :b AND cidade = :c AND uf = :uf ");
             $cmd->bindValue(":n", $nome);
