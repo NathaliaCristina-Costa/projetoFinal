@@ -88,7 +88,7 @@
                 return true;
             }
         }
-        
+
         //LISTAR PEDIDOS DISPONÍVEL DE ACORDO COM A CATEGORIA DO FREELANCER LOGADO
         public function pedidosDisponiveisFreelancer($id){
             
@@ -190,7 +190,10 @@
                                             <option value='Não Realizado'>Não</option>
                                         </select>  
                                         <input type='hidden' name='idFreelancer' value='{$_SESSION['id_Freelancer']}'>                                  
-                                    </form>              
+                                    </form> 
+                                </div>
+                        
+                                <br>             
                                 ";
                         }else{
                             echo"
@@ -247,17 +250,21 @@
                             <br>";
                             }elseif($dados['statusPedido'] == 'Não Realizdo'){
                                 echo"    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']} 
-                                        <button style='float:right' type='button' class='btn btn-danger'>
-                                            Deseja Fazer um novo pedido?
-                                        </button>                   
+                                        <a href='http://localhost/projetoFinal/cliente/pedidos.php'>
+                                            <button style='float:right' type='button' class='btn btn-danger'>
+                                                Deseja Fazer um novo pedido?
+                                            </button>                   
+                                        </a>
                                 </div>
                             </div>
                             <br>";
                             }else{
                                 echo"    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']} 
-                                    <button style='float:right' type='button' class='btn btn-info'>
-                                        Deseja Avaliar o Serviço?
-                                    </button>                   
+                                    <a>
+                                        <button style='float:right' type='button' class='btn btn-info'>
+                                            Deseja Avaliar o Serviço?
+                                        </button>                   
+                                    </a>
                                  </div>
                             </div>
                             <br>";    

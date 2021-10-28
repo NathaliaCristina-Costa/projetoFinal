@@ -77,7 +77,7 @@ a:focus {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #23bd16;
 }
 
 #sidebar ul p {
@@ -92,14 +92,14 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
+    color: #73d580;
+    background: #000;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
-    color: #fff;
-    background: #6d7fcc;
+    color: #000;
+    background: #73d580;
 }
 
 a[data-toggle="collapse"] {

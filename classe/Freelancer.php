@@ -37,6 +37,7 @@
             $cmd->execute();
 
             if ($cmd->rowCount()>0) {
+                    echo"<option value='selecione' selected>Escolha sua Categoria</option>";
                 while ($dados = $cmd->fetch(PDO::FETCH_ASSOC)) {
                     echo "<option value='{$dados['id_Categoria']}'>{$dados['nomeCategoria']}</option>";
                 }
@@ -144,10 +145,25 @@
             return $res;
         }
 
+        //BUSCAR DADOS DE FREELANCER ESPECÍFICO
+        public function buscarCatgoriaFreelancer($id){
+            
+            $res = array();
+            
+            $cmd = $this->pdo->prepare("SELECT nomeCategoria FROM freelancer
+             JOIN categoria ON idCategoria = id_Categoria  WHERE id_Freelancer = :id");
+            $cmd->bindValue(":id", $id);
+            $cmd->execute();
+
+            //fetchAll SE FOSSE VARIOS REGISTROS
+            $res = $cmd->fetch(PDO::FETCH_ASSOC);
+            return $res;
+        }
+
         //ATUALIZAR DADOS NO BANCO DE DADOS
         public function editarMinhaConta($id, $nome, $email, $telefone, $cep, $rua, $bairro, $cidade, $uf, $idCategoria){
             $cmd = $this->pdo->prepare("SELECT id_Freelancer FROM freelancer WHERE nome = :n AND email = :e AND telefone = :t AND cep = :cep AND rua = :r 
-            AND bairro = :b AND cidade = :c AND uf = :uf AND idCategoria = :idC");
+            AND bairro = :b AND cidade = :c AND uf = :uf ");
             $cmd->bindValue(":n", $nome);
             $cmd->bindValue(":e", $email);
             $cmd->bindValue(":t", $telefone);
@@ -156,7 +172,6 @@
             $cmd->bindValue(":b", $bairro);
             $cmd->bindValue(":c", $cidade);
             $cmd->bindValue(":uf", $uf);
-            $cmd->bindValue(":idC", $idCategoria);
             
             $cmd->execute();
 
@@ -166,7 +181,7 @@
             }else{ 
 
                 $cmd = $this->pdo->prepare("UPDATE freelancer SET 
-                nome= :n, email = :e, telefone = :t, cep = :cep, rua = :r, bairro = :b, cidade = :c, uf = :uf, idCategoria = :idC 
+                nome= :n, email = :e, telefone = :t, cep = :cep, rua = :r, bairro = :b, cidade = :c, uf = :uf
                 WHERE id_Freelancer = :id");
                 $cmd->bindValue(":n", $nome);
                 $cmd->bindValue(":e", $email);
@@ -177,6 +192,30 @@
                 $cmd->bindValue(":b", $bairro);
                 $cmd->bindValue(":c", $cidade);
                 $cmd->bindValue(":uf", $uf);
+            
+
+                $cmd->execute();
+                return true;
+            }
+
+        }
+
+        //ATUALIZAR DADOS NO BANCO DE DADOS
+        public function editarMinhaCategoria($id, $idCategoria){
+            $cmd = $this->pdo->prepare("SELECT id_Freelancer FROM freelancer WHERE idCategoria = :idC");
+            
+            $cmd->bindValue(":idC", $idCategoria);
+            
+            $cmd->execute();
+
+            //Se rowCount for > 0 é pq Categoria já existe no banco de dados então retorna falso
+            if($cmd->rowCount()>0){
+                return false;
+            }else{ 
+
+                $cmd = $this->pdo->prepare("UPDATE freelancer SET  idCategoria = :idC 
+                WHERE id_Freelancer = :id");
+                $cmd->bindValue(":id", $id);
                 $cmd->bindValue(":idC", $idCategoria);
             
 
@@ -188,9 +227,4 @@
 
         
     }
-   
 ?>
-
-
-
-            
