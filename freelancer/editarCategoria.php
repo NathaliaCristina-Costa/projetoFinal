@@ -50,22 +50,19 @@ $freela = new Freelancer();
             <div class="container-fluid">
                 <div class="row">
                     <?php
-
-               
-                
-
-                        if (isset($_GET['idEdCat']) && !empty($_GET['idEdCat'])) {
+                   
+                        if (isset($_GET['idEdCat']) && isset($_POST['categoria'])) {
                             //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
                             $idEdCat = addslashes($_GET['idEdCat']);
-                            $idCategoria = addslashes($_POST['idCategoria']);
-
+                            $idCategoria = addslashes($_POST['categoria']);
+    
                             if ($freela->editarMinhaCategoria($idEdCat, $idCategoria) == true) {
-
-                                 header("location: minhaCategoria.php?idCat=" . $_SESSION['id_Freelancer']);
+    
+                                header("location: minhaCategoria.php?idCat=" . $_SESSION['id_Freelancer']);
                             }
                         }
-                    
-
+               
+                        
                     ?>
                     <div class="col-lg-12">
                         <div class="card">
@@ -75,11 +72,8 @@ $freela = new Freelancer();
                                     <form method="POST">
                                         <div class="row">
                                             <div class="col-lg-5">
-                                                <label class="form-label">Categoria </label>
-                                                <select class="form-control" name="idCategoria">
-                                                <option value="selecione" selected><?php if (isset($res)) {
-                                                                                            echo $res['nomeCategoria'];
-                                                                                        } ?></option>
+                                                <select class="form-control" name="categoria">
+
                                                     <?php
                                                     $freela->buscarCategoria();
                                                     ?>

@@ -192,7 +192,7 @@
                                         <input type='hidden' name='idFreelancer' value='{$_SESSION['id_Freelancer']}'>                                  
                                     </form> 
                                 </div>
-                        
+                            </div>
                                 <br>             
                                 ";
                         }else{
@@ -248,11 +248,11 @@
                                 </div>
                             </div>
                             <br>";
-                            }elseif($dados['statusPedido'] == 'Não Realizdo'){
+                            }elseif($dados['statusPedido'] != 'Não Realizado'){
                                 echo"    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']} 
-                                        <a href='http://localhost/projetoFinal/cliente/pedidos.php'>
-                                            <button style='float:right' type='button' class='btn btn-danger'>
-                                                Deseja Fazer um novo pedido?
+                                        <a href='http://localhost/projetoFinal/cliente/avaliacao.php'>
+                                            <button style='float:right' type='button' class='btn btn-info'>
+                                                Deseja Avaliar o Serviço?
                                             </button>                   
                                         </a>
                                 </div>
@@ -260,9 +260,9 @@
                             <br>";
                             }else{
                                 echo"    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']} 
-                                    <a>
-                                        <button style='float:right' type='button' class='btn btn-info'>
-                                            Deseja Avaliar o Serviço?
+                                    <a href='http://localhost/projetoFinal/cliente/pedidos.php'>
+                                        <button style='float:right' type='button' class='btn btn-danger'>
+                                            Deseja Fazer um novo pedido?                                            
                                         </button>                   
                                     </a>
                                  </div>
