@@ -28,7 +28,7 @@ $atend = new AtendeFreelancer();
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
-            <?php include '../menu.php';?>
+            <?php include '../menu.php'; ?>
         </nav>
 
         <!-- Page Content  -->
@@ -50,8 +50,8 @@ $atend = new AtendeFreelancer();
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-dark">Lista de Mensagens - FREELANCER</h6><br>
-                            <a href="relatorio/relatorioMensagemFreelancer.php"><button type="button" class="btn btn-dark">Relatório</button></a>
+                            <h6 class="m-0 font-weight-bold text-dark">Lista de Mensagens - FREELANCER</h6>
+                            
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -83,15 +83,13 @@ $atend = new AtendeFreelancer();
                                                             Ações
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="visualizaAtendimento.php?id=<?php echo $dados[$i]['id_Atendimento']; ?>">Visualizar</a>
+                                                            <a class="dropdown-item" href="visualizaAtendimentoFreelancer.php?id=<?php echo $dados[$i]['idAtenFreelancer'];?>">Visualizar</a>
                                                         </div>
                                                     </div>
                                                 </td>
                                         <?php
                                                 echo "</tr>";
                                             }
-                                        } else //Não há registros.
-                                        {
                                         }
                                         ?>
                                     </tbody>

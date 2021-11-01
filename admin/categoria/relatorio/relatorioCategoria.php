@@ -11,7 +11,7 @@
 
     $pdo = new PDO('mysql:host=localhost; dbname=projetofinal', 'root', '');
 
-    $sql = $pdo->query('SELECT * FROM categoria');
+    $sql = $pdo->query('SELECT COUNT(id_Freelancer), nomeCategoria FROM freelancer JOIN categoria ON idCategoria = id_Categoria WHERE idCategoria');
 
     $html = '<table border=1 width=100%>';	
 	$html .= '<thead>';

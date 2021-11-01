@@ -25,7 +25,7 @@
         {
 
             $res = array();
-            $cmd = $this->pdo->query("SELECT nome,cpf, nomeCategoria FROM freelancer JOIN categoria ON idCategoria = id_Categoria");
+            $cmd = $this->pdo->query("SELECT nome,cpf,telefone, nomeCategoria, id_Freelancer FROM freelancer JOIN categoria ON idCategoria = id_Categoria");
             $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $res;
         }

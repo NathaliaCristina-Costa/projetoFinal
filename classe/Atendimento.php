@@ -16,7 +16,7 @@
         public function buscarDados(){
 
             $res = array();
-            $cmd = $this->pdo->query("SELECT nomeCliente,emailCliente, telefoneCliente, assunto, dataMensagem FROM atendimentocliente 
+            $cmd = $this->pdo->query("SELECT nomeCliente,emailCliente, telefoneCliente, assunto, dataMensagem, mensagem, id_Atendimento FROM atendimentocliente 
             JOIN cliente ON idCliente= id_Cliente");
             $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $res;
@@ -43,7 +43,7 @@
             
             $res = array();
             
-            $cmd = $this->pdo->prepare("SELECT email,telefone, assunto, mensagem, idCliente 
+            $cmd = $this->pdo->prepare("SELECT assunto, mensagem 
             FROM atendimentocliente WHERE id_Atendimento = :id");
             $cmd->bindValue(":id", $id);
             $cmd->execute();

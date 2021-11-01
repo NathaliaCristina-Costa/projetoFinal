@@ -250,7 +250,7 @@
                             <br>";
                             }elseif($dados['statusPedido'] != 'Não Realizado'){
                                 echo"    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']} 
-                                        <a href='http://localhost/projetoFinal/cliente/avaliacao.php'>
+                                        <a href='http://localhost/projetoFinal/cliente/avaliacao.php?idPedido={$dados['id_Pedido']}'>
                                             <button style='float:right' type='button' class='btn btn-info'>
                                                 Deseja Avaliar o Serviço?
                                             </button>                   
@@ -320,6 +320,13 @@
             $cmd->execute();
         }
         
+        public function notificacaoPedido(){
+            $cmd = $this->pdo->query("SELECT * FROM pedido");
+            $cmd->fetchAll(PDO::FETCH_ASSOC);
+            if($cmd->rowCount()>0){
+                echo "<small><i class='fas fa-dot-circle'></i></small>";
+            }
+        }
     }
    
 ?>

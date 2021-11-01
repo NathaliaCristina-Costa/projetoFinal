@@ -79,9 +79,9 @@ if (!isset($_SESSION['id_Admin'])) {
                         <a class="dropdown-item" href="atendimento/atendimentoFreelancer.php">Freelancers</a>
                     </div>
                 </li>
-                <li>
+                <!--li>
                     <a href="pedido/registroPedido.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Pedidos</a>
-                </li>
+                </li-->
                 <li>
                     <a href="logout.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
                 </li>
@@ -171,36 +171,9 @@ if (!isset($_SESSION['id_Admin'])) {
                 </div>
             </div>
             <div class="row">
-                <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-4 col-md-4 mb-4">
-                    <div class="card border-left-danger shadow h-100 py-2">
-                        <a href="pedido/registroPedido.php">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1 align-items-center">
-                                            Total de Pedidos
-                                        </div>
-                                        <div class="text-center font-weight-bold text-danger text-uppercase mb-1">
-                                            <?php
-                                            $dados = $p->totalRegistroPedido();
-                                            echo "<h2>" . count($dados) . "</h2>";
-                                            ?>
-                                        </div>
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
 
                 <!-- Pending Requests Card Example -->
-                <div class="col-xl-4 col-md-4 mb-4">
+                <div class="col-xl-6 col-md-6 mb-6">
                     <div class="card border-left-warning shadow h-100 py-2">
                         <a href="atendimento/atendimento.php">
                             <div class="card-body">
@@ -227,7 +200,7 @@ if (!isset($_SESSION['id_Admin'])) {
                     </div>
                 </div>
                 <!-- Pending Requests Card Example -->
-                <div class="col-xl-4 col-md-4 mb-4">
+                <div class="col-xl-6 col-md-6 mb-6">
                     <div class="card border-left-warning shadow h-100 py-2">
                         <a href="atendimento/atendimentoFreelancer.php">
                             <div class="card-body">

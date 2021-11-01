@@ -1,6 +1,6 @@
 <?php
-require_once "../../classe/Atendimento.php";
-$atende = new Atendimento();
+require_once "../../classe/AtendeFreelancer.php";
+$atende = new AtendeFreelancer();
 
 
 ?>
@@ -58,19 +58,12 @@ $atende = new Atendimento();
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">Atendimento Ao Cliente</h4>
+                                    <h4 class="card-title">Atendimento Ao Freelacner</h4>
                                     <p class="text-muted"><small>Mensagem Atendimento</small></p>
                                     <div class="basic-form">
 
                                         <form class="" method="POST" action="">
-                                            <div class="mb-3">
-                                                <label for="nome" class="form-label">Nome</label>
-                                                <input type="text" class="form-control" id="nome" placeholder="Nome" disabled value="<?php if (isset($res)) {echo $res['nome']; } ?>">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="email" class="form-label">Email</label>
-                                                <input type="email" class="form-control" name="email" id="email" placeholder="nome@examplo.com" disabled value="<?php if (isset($res)) {echo $res['email']; } ?>">
-                                            </div>
+                                            
                                             <div class="mb-3">
                                                 <label for="assunto" class="form-label">Assunto</label>
                                                 <input type="text" class="form-control" name="assunto" id="assunto" placeholder="" disabled value="<?php if (isset($res)) {echo $res['assunto']; } ?>">

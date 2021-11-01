@@ -14,24 +14,25 @@
         }
 
         //BUSCAR DADOS DO BANCO E MOSTRAR NA TABELA DA TELA
-        public function buscarDados(){
+        /*public function buscarDados(){
 
             $res = array();
             $cmd = $this->pdo->query("SELECT nomeCliente,emailCliente, telefoneCliente, assunto, dataMensagem FROM atendimentocliente 
             JOIN cliente ON idCliente= id_Cliente");
             $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $res;
-        }
+        }*/
 
         //FUNÇÃO CADASTRA FREELANCER NO BANCO DE DADOS
-        public function cadastrarAtendimento( $assunto, $mensagem,$idCliente){
+        public function cadastrarAvaliacao($nota,$mensagem,$idCliente,$idPedido){
             
-                $cmd = $this->pdo->prepare("INSERT INTO atendimentocliente (assunto, mensagem, idCliente) VALUES ( :a, :m, :idC)");
+                $cmd = $this->pdo->prepare("INSERT INTO avaliacao (nota, mensagem, idCliente, idPedido) VALUES ( :n, :m, :idC, :idP)");
 
                 
-                $cmd->bindValue(":a", $assunto);
+                $cmd->bindValue(":n", $nota);
                 $cmd->bindValue(":m", $mensagem); 
-                $cmd->bindValue(":idC", $idCliente);              
+                $cmd->bindValue(":idC", $idCliente);   
+                $cmd->bindValue(":idP", $idPedido);            
                 
                 $cmd->execute();
                 return true;

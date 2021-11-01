@@ -22,9 +22,9 @@
             <a class="dropdown-item" href="../atendimento/atendimentoFreelancer.php">Freelancers</a>
         </div>
     </li>
-    <li>
+    <!--li>
             <a href="../pedido/registroPedido.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Pedidos</a>
-    </li>
+    </li-->
     <li>
         <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
     </li>

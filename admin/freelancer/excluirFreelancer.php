@@ -6,7 +6,7 @@
     //EXCLUIR E ATUALIZAR
     if (isset($_GET['id'])) {
         $idFreelancer = addslashes($_GET['id']);
-       $freela->excluirFreelancer($idFreelancer);
+        $freela->excluirFreelancer($idFreelancer);
 
         header('location: /projetoFinal/admin/freelancer/freelancer.php');
     }

@@ -52,8 +52,8 @@ $freela = new Freelancer();
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-dark">Lista de Freelancer</h6><br>
-                            <h6><a href="relatorio/relatorioFreelancer.php"><button type="button" class="btn btn-dark">Relatório</button></a></h6>
+                            <h6 class="m-0 font-weight-bold text-dark">Lista de Freelancer</h6>
+                            
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -62,6 +62,7 @@ $freela = new Freelancer();
                                         <tr>
                                             <th>Nome</th>
                                             <th>CPF</th>
+                                            <th>Telefone</th>
                                             <th>Categoria</th>
                                             <th>Ações</th>
                                         </tr>
@@ -84,16 +85,14 @@ $freela = new Freelancer();
                                                             Ações
                                                         </button>
                                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item">Excluir</a>
+                                                          <a class="dropdown-item" href="excluirFreelancer.php?id=<?php echo $dados[$i]['id_Freelancer'];?>">Excluir</a>
                                                         </div>
                                                     </div>
                                                 </td>
                                         <?php
                                                 echo "</tr>";
                                             }
-                                        } else //Não há registros.
-                                        {
-                                        }
+                                        } 
                                         ?>
                                     </tbody>
                                 </table>

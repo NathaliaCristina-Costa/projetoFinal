@@ -2,6 +2,9 @@
     require_once "../classe/Cliente.php";
     $cli = new Cliente();
 
+    require_once "../classe/Pedido.php";
+    $p = new Pedido();
+
     session_start();
 
     if (isset($_SESSION['id_Cliente']) && !empty($_SESSION['id_Cliente'])) {
@@ -21,13 +24,17 @@
         <a href="conta.php?idConta=<?php echo $_SESSION['id_Cliente']; ?>"><i class="fas fa-edit mr-2 text-gray-400"></i> Minha Conta</a>
     </li>
     <li>
-        <a href="pedidosFeitos.php"><i class="fas fa-hand-holding-usd mr-2 text-gray-400"></i> Pedidos que Fiz</a>
+        <a href="pedidosFeitos.php"><i class="fas fa-hand-holding-usd mr-2 text-gray-400"></i> 
+       Pedidos que Fiz
+        </a>
+        
     </li>
     <li>
         <a href="pedidos.php"><i class="fas fa-shopping-cart mr-2 text-gray-400"></i> Novo Pedido</a>
     </li>
     <li>
         <a href="atendimentoCliente.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Atendimento ao Cliente</a>
+     
     </li>
 
     <li>

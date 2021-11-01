@@ -1,6 +1,6 @@
 <?php
-
-
+require_once("../classe/Avaliacao.php");
+$p = new Avalicao();
 ?>
 
 <!DOCTYPE html>
@@ -59,40 +59,55 @@
                                         <?php
 
                                         //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
-                                        if (isset($_POST['assunto'])) {
-                                            //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
+                                        if (isset($_POST['nota'])) {
 
-                                            $assunto = addslashes($_POST['assunto']);
-                                            $mensagem = addslashes($_POST['mensagem']);
-                                            $idCliente = addslashes($_POST['idCliente']);
+                                            if (isset($_GET['idPedido']) && !empty($_GET['idPedido'])) {
+                                                //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
+                                                $idPedido = addslashes($_GET['idPedido']);
+                                                $nota = addslashes($_POST['nota']);
+                                                $mensagem = addslashes($_POST['mensagem']);
+                                                $idCliente = addslashes($_POST['idCliente']);
 
+                                                if ($p->cadastrarAvaliacao($nota,$mensagem,$idCliente,$idPedido) == true) {
 
-                                            if ($at->cadastrarAtendimento($assunto, $mensagem, $idCliente) == true) {
-                                                echo "<script>alert('Mensagem Registrado com Sucesso!Em breve Retornaremos');</script>";
+                                                    header("location: http://localhost/projetoFinal/cliente/index.php");
+                                                }
                                             }
                                         }
                                         ?>
                                         <form method=POST>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                                <label class="form-check-label" for="inlineRadio1">1</label>
+                                            <label for="mensagem" class="form-label">Nota (1- Ruim / 5 - Muito Bom)</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="nota" id="exampleRadios1" value="1" checked>
+                                                <label class="form-check-label" for="exampleRadios1">
+                                                    1
+                                                </label>
                                             </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                                <label class="form-check-label" for="inlineRadio2">2</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="nota" id="exampleRadios2" value="2">
+                                                <label class="form-check-label" for="exampleRadios2">
+                                                    2
+                                                </label>
                                             </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" disabled>
-                                                <label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="nota" id="exampleRadios3" value="3">
+                                                <label class="form-check-label" for="exampleRadios3">
+                                                    3
+                                                </label>
                                             </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                                <label class="form-check-label" for="inlineRadio2">2</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="nota" id="exampleRadios3" value="4">
+                                                <label class="form-check-label" for="exampleRadios3">
+                                                    4
+                                                </label>
                                             </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                                <label class="form-check-label" for="inlineRadio2">2</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="nota" id="exampleRadios3" value="5">
+                                                <label class="form-check-label" for="exampleRadios3">
+                                                    5
+                                                </label>
                                             </div>
+                                            <br>
                                             <div class="form-group row">
                                                 <div class="col-sm-12">
                                                     <label for="mensagem" class="form-label">Mensagem</label>
