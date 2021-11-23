@@ -9,6 +9,6 @@
         $idExcluir = addslashes($_GET['id']);
         $p->excluirPedido($idExcluir);
 
-        header('location: http://localhost/projetoFinal/cliente/pedidosFeitos.php');
+        header('location: https://localhost/projetoFinal/cliente/pedidosFeitos.php');
     }
 ?>

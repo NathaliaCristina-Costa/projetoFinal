@@ -72,7 +72,7 @@ $cat = new Categoria();
                                                 $nome = addslashes($_POST['nome']);
 
                                                 if ($cat->atualizarDados($idEditar, $nome) == true) {
-                                                    echo  "<script>window.location.replace('http://localhost/projetoFinal/admin/categoria/categoria.php');</script>";
+                                                    echo  "<script>window.location.replace('https://localhost/projetoFinal/admin/categoria/categoria.php');</script>";
                                                     
                                                 }
                                             }

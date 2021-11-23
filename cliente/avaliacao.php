@@ -1,8 +1,7 @@
 <?php
-require_once("../classe/Avaliacao.php");
-$p = new Avalicao();
+require_once "../classe/Avaliacao.php";
+$a = new Avalicao();
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -47,6 +46,21 @@ $p = new Avalicao();
                 <div class="container-fluid">
                     <div class="row">
                         <?php
+                        //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
+                        if (isset($_POST['nota'])) {
+                            //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
+                            if (isset($_GET['idPedido']) && !empty($_GET['idPedido'])){
+                                $nota = addslashes($_POST['nota']);
+                                $mensagem = addslashes($_POST['mensagem']);
+                                $idCliente = addslashes($_POST['idCliente']);
+                                $idPedido = addslashes($_POST['idPedido']);
+                            }
+
+                            if ($a->cadastrarAvaliacao($nota,$mensagem,$idCliente,$idPedido)){
+                                header("location: https://localhost/projetoFinal/cliente/index.php");
+                            }
+                            
+                        }
                         ?>
                         <div class="col-lg-12">
                             <div class="card">
@@ -56,25 +70,7 @@ $p = new Avalicao();
                                     </h4>
                                     <br>
                                     <div class="basic-form">
-                                        <?php
 
-                                        //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
-                                        if (isset($_POST['nota'])) {
-
-                                            if (isset($_GET['idPedido']) && !empty($_GET['idPedido'])) {
-                                                //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
-                                                $idPedido = addslashes($_GET['idPedido']);
-                                                $nota = addslashes($_POST['nota']);
-                                                $mensagem = addslashes($_POST['mensagem']);
-                                                $idCliente = addslashes($_POST['idCliente']);
-
-                                                if ($p->cadastrarAvaliacao($nota,$mensagem,$idCliente,$idPedido) == true) {
-
-                                                    header("location: http://localhost/projetoFinal/cliente/index.php");
-                                                }
-                                            }
-                                        }
-                                        ?>
                                         <form method=POST>
                                             <label for="mensagem" class="form-label">Nota (1- Ruim / 5 - Muito Bom)</label>
                                             <div class="form-check">

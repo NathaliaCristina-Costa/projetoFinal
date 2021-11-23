@@ -250,7 +250,7 @@
                             <br>";
                             }elseif($dados['statusPedido'] != 'Não Realizado'){
                                 echo"    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']} 
-                                        <a href='http://localhost/projetoFinal/cliente/avaliacao.php?idPedido={$dados['id_Pedido']}'>
+                                        <a href='https://localhost/projetoFinal/cliente/avaliacao.php?idPedido={$dados['id_Pedido']}'>
                                             <button style='float:right' type='button' class='btn btn-info'>
                                                 Deseja Avaliar o Serviço?
                                             </button>                   
@@ -260,7 +260,7 @@
                             <br>";
                             }else{
                                 echo"    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']} 
-                                    <a href='http://localhost/projetoFinal/cliente/pedidos.php'>
+                                    <a href='https://localhost/projetoFinal/cliente/pedidos.php'>
                                         <button style='float:right' type='button' class='btn btn-danger'>
                                             Deseja Fazer um novo pedido?                                            
                                         </button>                   
