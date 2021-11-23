@@ -54,7 +54,7 @@ $('#numCartao').on('keyup', function(){
             $('.bandeira-cartao').html("<img src='https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/42x20/"+ imgBand +".png'>");
         },
         error: function (retorno){
-
+            $('.bandeira-cartao').empty();
         },
         complete: function (retorno){
 
