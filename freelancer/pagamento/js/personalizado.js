@@ -43,6 +43,22 @@ function listarMeiosPag(){
     });
 }
 
+$('#numCartao').on('keyup', function(){
+    var numCartao = $(this).val();
+    //console.log(numCartao);
+    PagSeguroDirectPayment.getBrand({
+        cardBin: 411111,
+        success: function(retorno){
+
+        },
+        error: function (retorno){
+
+        },
+        complete: function (retorno){
+            
+        }
+    });
+});
 
 /*var amount = $('#amount').val();
 //var amount = "600.00";
