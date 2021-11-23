@@ -28,8 +28,13 @@ include './configuracao1.php';
                 </div>
             </div>
         </div>
-
-
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <div class="bandeira-cartao"></div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-4">
                 <div class="form-group">

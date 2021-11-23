@@ -47,15 +47,17 @@ $('#numCartao').on('keyup', function(){
     var numCartao = $(this).val();
     //console.log(numCartao);
     PagSeguroDirectPayment.getBrand({
-        cardBin: 411111,
+        cardBin: numCartao,
         success: function(retorno){
-
+            //console.log(retorno);
+            var imgBand = retorno.brand.name;
+            $('.bandeira-cartao').html("<img src='https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/42x20/"+ imgBand +".png'>");
         },
         error: function (retorno){
 
         },
         complete: function (retorno){
-            
+
         }
     });
 });
