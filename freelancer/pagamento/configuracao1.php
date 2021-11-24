@@ -10,7 +10,7 @@ if ($sandbox) {
     define("TOKEN_PAGSEGURO", "128A5869D1C04D8994B561564EA38300");
     define("URL_PAGSEGURO", "https://ws.sandbox.pagseguro.uol.com.br/v2/");
     define("SCRIPT_PAGSEGURO", "https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js");
-    define("EMAIL_LOJA", "E-mail de suporte pós venda");
+    define("EMAIL_LOJA", "ncacrj@gmail.com");
     define("MOEDA_PAGAMENTO", "BRL");
     define("URL_NOTIFICACAO", "https://sualoja.com.br/notifica.html");
 } else {

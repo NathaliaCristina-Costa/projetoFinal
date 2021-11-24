@@ -1,3 +1,4 @@
+var amount = "600.00";
 pagamento();
 function pagamento(){
     var endereco = jQuery('.endereco').attr("data-endereco");
@@ -17,7 +18,7 @@ function pagamento(){
 
 function listarMeiosPag(){
     PagSeguroDirectPayment.getPaymentMethods({
-        amount: 500.00,
+        amount: amount,
         success: function (retorno){
             //console.log(retorno);
             $('.meio-pg').append("<div>Cartão de Crédito</div>");
@@ -38,55 +39,120 @@ function listarMeiosPag(){
 
         },
         complete: function (retorno){
-
+            //recupTokemCartao();
         }
     });
 }
 
 $('#numCartao').on('keyup', function(){
     var numCartao = $(this).val();
+    var qntNumero = numCartao.length;
     //console.log(numCartao);
-    PagSeguroDirectPayment.getBrand({
-        cardBin: numCartao,
-        success: function(retorno){
-            //console.log(retorno);
-            var imgBand = retorno.brand.name;
-            $('.bandeira-cartao').html("<img src='https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/42x20/"+ imgBand +".png'>");
-        },
-        error: function (retorno){
-            $('.bandeira-cartao').empty();
-        },
-        complete: function (retorno){
+    
+    if (qntNumero == 6) {
+        PagSeguroDirectPayment.getBrand({
+            cardBin: numCartao,
+            success: function(retorno){
+                //console.log(retorno);
+                $('#msg').empty();
+                var imgBand = retorno.brand.name;
+                $('.bandeira-cartao').html("<img src='https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/42x20/"+ imgBand +".png'>");
+                $('#bandeiraCartao').val(imgBand);
+                recupParcelas();
+            },
+            error: function (retorno) {
+    
+                //Enviar para o index a mensagem de erro
+                $('.bandeira-cartao').empty();
+                $('#msg').html("Cartão inválido");
+            },
+            complete: function (retorno){
+    
+            }
+        });
+    }
 
-        }
-    });
 });
 
-/*var amount = $('#amount').val();
-//var amount = "600.00";
-pagamento();
+//Recuperar a quantidade de parcelas e o valor das parcelas
+function recupParcelas(bandeira) {
+    PagSeguroDirectPayment.getInstallments({
 
-function pagamento() {
-    $('.bankName').hide();
-    $('.creditCard').hide();
-    //Endereco padrão do projeto
-    var endereco = jQuery('.endereco').attr("data-endereco");
-    $.ajax({
+        //Valor do produto
+        amount: amount,
 
-        //URL completa do local do arquivo responsável em buscar o ID da sessão
-        url: endereco + "pagamento.php",
-        type: 'POST',
-        dataType: 'json',
+        //Quantidade de parcelas sem juro
+        maxInstallmentNoInterest: 3,
+
+        //Tipo da bandeira
+        brand: bandeira,
         success: function (retorno) {
+            $.each(retorno.installments, function (ia, obja) {
+                $.each(obja, function (ib, objb) {
 
-            //ID da sessão retornada pelo PagSeguro
-            PagSeguroDirectPayment.setSessionId(retorno.id);
+                    //Converter o preço para o formato real com JavaScript
+                    var valorParcela = objb.installmentAmount.toFixed(2).replace(".", ",");
+
+                    //Apresentar quantidade de parcelas e o valor das parcelas para o usuário no campo SELECT
+                    $('#qntParcelas').show().append("<option value='" + objb.quantity + "' data-parcelas='" + objb.installmentAmount + "'>" + objb.quantity + " parcelas de R$ " + valorParcela + "</option>");
+                });
+            });
+        },
+        error: function (retorno) {
+            // callback para chamadas que falharam.
         },
         complete: function (retorno) {
-            listarMeiosPag();
+            // Callback para todas chamadas.
         }
     });
 }
+
+//Enviar o valor parcela para o formulário
+$('#qntParcelas').change(function () {
+    $('#valorParcelas').val($('#qntParcelas').find(':selected').attr('data-parcelas'));
+});
+
+$('#formPagamento').on("submit", function(event){
+    event.preventDefault();
+    PagSeguroDirectPayment.createCardToken ({
+        cardNumber: $('#numCartao').val(),
+        brand: $('#bandeiraCartao').val(),
+        cvv: $('#cvvCartao').val(),
+        expirationMonth: $('#mesValidade').val(),
+        expirationYear: $('#anoValidade').val(),
+
+        success: function (retorno){
+            //console.log(retorno);
+            $('#tokenCartao').val(retorno.card.token);
+        },
+        error: function (retorno){
+
+        },
+        complete: function (retorno){
+            recuperarHashCartao();
+        }
+    });
+    
+});
+
+function recuperarHashCartao() {
+    PagSeguroDirectPayment.onSenderHashReady(function (retorno) {
+        if (retorno.status == 'error') {
+            console.log(retorno.massage);
+            return false;
+        }else{
+            //console.log (retorno.senderHash);
+            $("#hashCartao").val(retorno.senderHash);
+                var dados = $("#formPagamento").serialize();
+                console.log(dados);
+        }
+        
+    });
+}
+
+/*
+
+
 
 function listarMeiosPag() {
     PagSeguroDirectPayment.getPaymentMethods({
@@ -121,39 +187,7 @@ function listarMeiosPag() {
     });
 }
 
-//Receber os dados do formulário, usando o evento "keyup" para receber sempre que tiver alguma alteração no campo do formulário
-$('#numCartao').on('keyup', function () {
 
-    //Receber o número do cartão digitado pelo usuário
-    var numCartao = $(this).val();
-
-    //Contar quantos números o usuário digitou
-    var qntNumero = numCartao.length;
-
-    //Validar o cartão quando o usuário digitar 6 digitos do cartão
-    if (qntNumero == 6) {
-
-        //Instanciar a API do PagSeguro para validar o cartão
-        PagSeguroDirectPayment.getBrand({
-            cardBin: numCartao,
-            success: function (retorno) {
-                $('#msg').empty();
-
-                //Enviar para o index a imagem da bandeira
-                var imgBand = retorno.brand.name;
-                $('.bandeira-cartao').html("<img src='https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/42x20/" + imgBand + ".png'>");
-                $('#bandeiraCartao').val(imgBand);
-                recupParcelas(imgBand);
-            },
-            error: function (retorno) {
-
-                //Enviar para o index a mensagem de erro
-                $('.bandeira-cartao').empty();
-                $('#msg').html("Cartão inválido");
-            }
-        });
-    }
-});
 
 //Recuperar a quantidade de parcelas e o valor das parcelas no PagSeguro
 function recupParcelas(bandeira) {
