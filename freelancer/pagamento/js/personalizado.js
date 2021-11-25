@@ -145,6 +145,21 @@ function recuperarHashCartao() {
             $("#hashCartao").val(retorno.senderHash);
                 var dados = $("#formPagamento").serialize();
                 console.log(dados);
+
+                var endereco = jQuery('.endereco').attr("data-endereco");
+                console.log(endereco);
+                $.ajax({
+                    method: "POST",
+                    url: endereco + "proc_pag.php",
+                    data: dados,
+                    dataType: 'json',
+                    success: function(retorna){
+                        console.log("Sucesso" + JSON.stringify(retorna));
+                    },
+                    error: function(retorno){
+                        console.log("Erro");
+                    }
+                });
         }
         
     });

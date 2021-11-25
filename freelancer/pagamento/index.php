@@ -75,6 +75,31 @@ include './configuracao1.php';
 
             <input type="hidden" name="hashCartao" id="hashCartao">
 
+            <h2>Endereço do dono do cartão</h2>
+
+            <label>Logradouro</label>
+            <input type="text" name="billingAddressStreet" id="billingAddressStreet" placeholder="Av. Rua" required><br><br>
+
+            <label>Número</label>
+            <input type="text" name="billingAddressNumber" id="billingAddressNumber" placeholder="Número" required><br><br>
+
+            <label>Complemento</label>
+            <input type="text" name="billingAddressComplement" id="billingAddressComplement" placeholder="Complemento"><br><br>
+
+            <label>Bairro</label>
+            <input type="text" name="billingAddressDistrict" id="billingAddressDistrict" placeholder="Bairro"><br><br>
+
+            <label>CEP</label>
+            <input type="text" name="billingAddressPostalCode" id="billingAddressPostalCode" placeholder="CEP sem traço" required><br><br>
+
+            <label>Cidade</label>
+            <input type="text" name="billingAddressCity" id="billingAddressCity" placeholder="Cidade" required><br><br>
+
+            <label>Estado</label>
+            <input type="text" name="billingAddressState" id="billingAddressState" placeholder="Sigla do Estado" required><br><br>
+
+            <input type="hidden" name="billingAddressCountry" id="billingAddressCountry" value="BRL">
+
             <h2>Dados do Comprador</h2>
 
             <label>Nome</label>
@@ -93,7 +118,39 @@ include './configuracao1.php';
             <label>E-mail</label>
             <input type="email" name="senderEmail" id="senderEmail" placeholder="E-mail do comprador" required><br><br>
 
+            <h2>Endereço de Entrega</h2>
+            <input type="hidden" name="shippingAddressRequired" id="shippingAddressRequired" value="true">
 
+            <label>Logradouro</label>
+            <input type="text" name="shippingAddressStreet" id="shippingAddressStreet" placeholder="Av. Rua"><br><br>
+
+            <label>Número</label>
+            <input type="text" name="shippingAddressNumber" id="shippingAddressNumber" placeholder="Número"><br><br>
+
+            <label>Complemento</label>
+            <input type="text" name="shippingAddressComplement" id="shippingAddressComplement" placeholder="Complemento"><br><br>
+
+            <label>Bairro</label>
+            <input type="text" name="shippingAddressDistrict" id="shippingAddressDistrict" placeholder="Bairro"><br><br>
+
+            <label>CEP</label>
+            <input type="text" name="shippingAddressPostalCode" id="shippingAddressPostalCode" placeholder="CEP sem traço"><br><br>
+
+            <label>Cidade</label>
+            <input type="text" name="shippingAddressCity" id="shippingAddressCity" placeholder="Cidade"><br><br>
+
+            <label>Estado</label>
+            <input type="text" name="shippingAddressState" id="shippingAddressState" placeholder="Sigla do Estado"><br><br>
+
+            <input type="hidden" name="shippingAddressCountry" id="shippingAddressCountry" value="BRL">
+
+            <label>Frete</label>
+            <input type="radio" name="shippingType" value="1"> PAC
+            <input type="radio" name="shippingType" value="2"> SEDEX
+            <input type="radio" name="shippingType" value="3"> Sem frete<br><br>
+
+            <label>Valor Frete</label>
+            <input type="text" name="shippingCost" id="senderCPF" placeholder="Preço do frete. Ex: 2.10"><br><br>
 
 
             <input type="submit" name="btnPagar" id="btnPagar" value="Pagar" class="btn btn-success">

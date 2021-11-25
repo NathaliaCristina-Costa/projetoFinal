@@ -1,9 +1,13 @@
 <?php
 
-include './configuracao1.php';
+include 'configuracao1.php';
 /* INCLUIR ARQUIVO DO BANCO */
-
 $Dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+$retorna = ['erro' => true, 'dados' => $Dados];
+header('Content-Type: application/json');
+echo json_encode($retorna);
+/*
 
 $DadosArray["email"] = EMAIL_PAGSEGURO;
 $DadosArray["token"] = TOKEN_PAGSEGURO;
@@ -94,6 +98,6 @@ $xml = simplexml_load_string($retorno);
 
 
 $retorna = ['erro' => true, 'dados' => $xml, 'DadosArray' => $DadosArray];
-header('Content-Type: application/json');
-echo json_encode($retorna);
+
+*/
 ?>
