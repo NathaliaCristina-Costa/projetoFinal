@@ -235,7 +235,7 @@
                 echo "<h5>Escolha seu Plano e Consiga mais Clientes todos os dias!</h5><br>
                       <a href='pagamento/index.php'><button class='btn btn-warning'>PLANOS</button></a>";
             }else{
-                echo " <h5></h5>";
+                echo " <h5>Veja os Pedidos Diponíveis para sua Categoria!</h5>";
             }
         }
 
