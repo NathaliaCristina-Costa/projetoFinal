@@ -22,9 +22,16 @@
             <a class="dropdown-item" href="../atendimento/atendimentoFreelancer.php">Freelancers</a>
         </div>
     </li>
-    <!--li>
-            <a href="../pedido/registroPedido.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Pedidos</a>
-    </li-->
+    <li class="dropdown">
+        <a class="dropdown-toggle" type="button" id="moduleDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-address-book mr-2 text-gray-400"></i> Relatórios
+        </a>
+        <div class="dropdown-menu" aria-labelledby="moduleDropDown">
+            <a class="dropdown-item" href="../atendimento/atendimento.php">Relatorio Cliente</a>
+            <a class="dropdown-item" href="../atendimento/atendimentoFreelancer.php">Relatório Freelancers</a>
+            <a class="dropdown-item" href="../atendimento/atendimentoFreelancer.php">Relatório Pedidos</a>
+        </div>
+    </li>
     <li>
         <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
     </li>

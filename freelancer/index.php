@@ -50,7 +50,9 @@ $p = new Pedido();
             </div>
             <br>
             <div class="text-center mb-4">
-                <h5>Consiga mais Clientes todos os dias!</h5>
+               <?php
+                $f->restricaoAcesso($_SESSION['id_Freelancer']);
+               ?>
             </div>
         </div>
     </div>

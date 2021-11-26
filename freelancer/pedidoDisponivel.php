@@ -54,6 +54,7 @@ $p = new Pedido();
 
 
             <?php
+            $freela->restricaoAcesso($_SESSION['id_Freelancer']);
             $p->pedidosDisponiveisFreelancer($_SESSION['id_Freelancer']);
             ?>
 
