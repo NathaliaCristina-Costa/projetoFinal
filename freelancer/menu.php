@@ -10,6 +10,8 @@ if (isset($_SESSION['id_Freelancer']) && !empty($_SESSION['id_Freelancer'])) {
     header('location: login.php');
 }
 
+require_once "../classe/Pagamento.php";
+$pg = new Pagamento();
 
 ?>
 <div class="sidebar-header" style="background-color: black;">
@@ -26,10 +28,15 @@ if (isset($_SESSION['id_Freelancer']) && !empty($_SESSION['id_Freelancer'])) {
             <a href="minhaCategoria.php?idCat=<?php echo $_SESSION['id_Freelancer']; ?>"> Minha Categoria</a>
         </div>
     </li>
-    
     <li>
         <a href="atendimentoFreelancer.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Fale Conosco</a>
     </li>
+
+    
+    <?php
+    $pg->restricaoAcesso($_SESSION['id_Freelancer']);
+    ?>
+
     <li>
         <a href="logout.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
     </li>

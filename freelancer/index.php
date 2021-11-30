@@ -53,9 +53,8 @@ $pg = new Pagamento();
             </div>
             <br>
             <div class="text-center mb-4">
-                <!--h5>Veja os Pedidos Diponíveis para sua Categoria!</h5-->
                 <?php
-                    //$pg->restricaoAcesso($_SESSION['id_Freelancer']);
+                    $pg->dataFinal($_SESSION['id_Freelancer']);
                 ?>
             </div>
         </div>

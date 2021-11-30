@@ -40,68 +40,56 @@
         }    
         
         public function dataFinal($id){
-            $cmd = $this->pdo->prepare("SELECT * FROM pagamento JOIN freelancer ON idFr = id_Freelancer WHERE idFr = :idF");
+            $cmd = $this->pdo->prepare("SELECT * FROM pagamento 
+            JOIN freelancer ON idFr = id_Freelancer 
+            JOIN produto ON idProduto = id_Produto
+            WHERE idFr = :idF");
             $cmd->bindValue(":idF", $id);
             $cmd->execute();
             $dados = $cmd->fetch(PDO::FETCH_ASSOC);
             if($dados['idProduto'] == 1){
                 $cmd = $this->pdo->prepare("UPDATE pagamento SET dataFinal = NOW()+INTERVAL 120 DAY WHERE idFr = :idF");
-                $cmd->bindValue(":id", $id);
+                $cmd->bindValue(":idF", $id);
 
-                $cmd->execute();
-                return true;
+                $cmd->execute();           
+
 
                 echo"<div class='card text-center'>
                         <div class='card-header'>
-                            Featured
+                            <b>Plano: </b>{$dados['nomeProduto']}
                         </div>
                         <div class='card-body'>
-                            <h5 class='card-title'>Special title treatment</h5>
-                            <p class='card-text'>With supporting text below as a natural lead-in to additional content.</p>
-                            <a href='#' class='btn btn-primary'>Go somewhere</a>
-                        </div>
-                        <div class='card-footer text-muted'>
-                            2 days ago
+                            <b>Data Final: </b>{$dados['dataFinal']}
                         </div>
                     </div>";
             }elseif($dados['idProduto'] == 2){
                 $cmd = $this->pdo->prepare("UPDATE pagamento SET dataFinal = NOW()+INTERVAL 180 DAY WHERE idFr = :idF");
-                $cmd->bindValue(":id", $id);
+                $cmd->bindValue(":idF", $id);
 
                 $cmd->execute();
-                return true;
+                
 
                 echo"<div class='card text-center'>
                         <div class='card-header'>
-                            Featured
+                            <b>Plano: </b>{$dados['nomeProduto']}
                         </div>
                         <div class='card-body'>
-                            <h5 class='card-title'>Special title treatment</h5>
-                            <p class='card-text'>With supporting text below as a natural lead-in to additional content.</p>
-                            <a href='#' class='btn btn-primary'>Go somewhere</a>
-                        </div>
-                        <div class='card-footer text-muted'>
-                            2 days ago
+                            <b>Data Final: </b>{$dados['dataFinal']}
                         </div>
                     </div>";
             }elseif($dados['idProduto'] == 3){
                 $cmd = $this->pdo->prepare("UPDATE pagamento SET dataFinal = NOW()+INTERVAL 365 DAY WHERE idFr = :idF");
-                $cmd->bindValue(":id", $id);
+                $cmd->bindValue(":idF", $id);
 
                 $cmd->execute();
-                return true;
+              
 
                 echo"<div class='card text-center'>
                         <div class='card-header'>
-                            Featured
+                            <b>Plano: </b>{$dados['nomeProduto']}
                         </div>
                         <div class='card-body'>
-                            <h5 class='card-title'>Special title treatment</h5>
-                            <p class='card-text'>With supporting text below as a natural lead-in to additional content.</p>
-                            <a href='#' class='btn btn-primary'>Go somewhere</a>
-                        </div>
-                        <div class='card-footer text-muted'>
-                            2 days ago
+                            <b>Data Final: </b>{$dados['dataFinal']}
                         </div>
                     </div>";
             }
@@ -115,10 +103,16 @@
             
 
             if($cmd->rowCount()>0){
-                echo "<h5>Veja os Pedidos Diponíveis para sua Categoria!</h5>";
+                echo "<li>
+                        <a href='pedidoDisponivel.php'><i class='fas fa-receipt mr-2 text-gray-400'></i> Pedidos Disponíveis</a>
+                      </li>
+                     <li>
+                        <a href='meusPedidos.php'><i class='fas fa-dollar-sign mr-2 text-gray-400'></i> Meus Pedidos</a>
+                     </li>";
             }else{
-                echo "<h5>Escolha seu Plano e Consiga mais Clientes todos os dias!</h5><br>
-                <a href='pagamento/index.php'><button class='btn btn-warning'>PLANOS</button></a>";
+                echo "<li>                        
+                        <a href='pagamento/index.php'><i class='fas fa-dollar-sign mr-2 text-gray-400'></i> PAGAMENTO PARA LIBERAÇÃO DOS PEDIDOS</a>
+                     </li>";
             }
         }
       

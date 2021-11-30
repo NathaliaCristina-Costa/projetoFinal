@@ -53,9 +53,8 @@ $p = new Pedido();
             </div>
 
 
-            <?php
-          
-            $p->pedidosDisponiveisFreelancer($_SESSION['id_Freelancer']);
+            <?php          
+                $p->pedidosDisponiveisFreelancer($_SESSION['id_Freelancer']);
             ?>
 
         </div>
