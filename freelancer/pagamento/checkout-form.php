@@ -1,6 +1,14 @@
 <?php
 require_once "../../classe/Produto.php";
 $p = new Produto();
+
+require_once "../../classe/Freelancer.php";
+$f = new Freelancer();
+
+require_once "../../classe/Pagamento.php";
+$pg = new Pagamento();
+
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -29,7 +37,9 @@ $p = new Produto();
         <div class="row mb-5">
             <div class="col-md-12">
                 <h4 class="mb-3">Informações Pessoais</h4>
-
+                <?php
+                   
+                ?>
                 <form method="POST" action="comprar.php">
                     <div class="form-row">
                         <div class="form-group col-md-4">

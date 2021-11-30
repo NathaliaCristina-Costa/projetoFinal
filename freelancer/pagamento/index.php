@@ -2,6 +2,8 @@
 require_once "../../classe/Produto.php";
 
 $p = new Produto();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

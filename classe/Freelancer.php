@@ -37,12 +37,12 @@
             $cmd->execute();
 
             if ($cmd->rowCount()>0) {
-                    echo"<select class='form-control' name='idCategoria'>
+                    echo"
                                   <option value='selecione' selected>Escolha sua Categoria</option>";
                 while ($dados = $cmd->fetch(PDO::FETCH_ASSOC)) {
                             echo "<option value='{$dados['id_Categoria']}'>{$dados['nomeCategoria']}</option>";
                 }
-                    echo "</select>";
+                   
             }
         }
 
@@ -227,19 +227,7 @@
 
         }
 
-        public function restricaoAcesso($id){
-            $cmd = $this->pdo->prepare("SELECT idPlano, id_Freelancer FROM freelancer
-            WHERE id_Freelancer  = :id");
-            $cmd->bindValue(":id", $id);
-            $cmd->execute();
-            $dados = $cmd->fetch(PDO::FETCH_ASSOC);
-            if ($dados['idPlano'] == 0) {
-                echo "<h5>Escolha seu Plano e Consiga mais Clientes todos os dias!</h5><br>
-                      <a href='pagamento/index.php'><button class='btn btn-warning'>PLANOS</button></a>";
-            }else{
-                echo " <h5>Veja os Pedidos Diponíveis para sua Categoria!</h5>";
-            }
-        }
+        
 
         
     }

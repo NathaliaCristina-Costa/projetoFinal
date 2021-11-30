@@ -26,12 +26,7 @@ if (isset($_SESSION['id_Freelancer']) && !empty($_SESSION['id_Freelancer'])) {
             <a href="minhaCategoria.php?idCat=<?php echo $_SESSION['id_Freelancer']; ?>"> Minha Categoria</a>
         </div>
     </li>
-    <li>
-        <a href="pedidoDisponivel.php"><i class="fas fa-receipt mr-2 text-gray-400"></i> Pedidos Disponíveis</a>
-    </li>
-    <li>
-        <a href="meusPedidos.php"><i class="fas fa-dollar-sign mr-2 text-gray-400"></i> Meus Pedidos</a>
-    </li>
+    
     <li>
         <a href="atendimentoFreelancer.php"><i class="fas fa-comments mr-2 text-gray-400"></i> Fale Conosco</a>
     </li>

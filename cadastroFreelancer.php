@@ -3,10 +3,6 @@ include_once("classe/Freelancer.php");
 include_once("classe/Categoria.php");
 $freela = new Freelancer();
 
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html class="cor-fundo" lang="pt-br">
@@ -146,11 +142,11 @@ $freela = new Freelancer();
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-sm-12 mb-3 mb-sm-12">                                                              
-                                                                    
+                                                                <select class='form-control' name='idCategoria'>    
                                                                     <?php
                                                                     $freela->buscarCategoria();
                                                                     ?>
-
+                                                                </select>
                                                                 
                                                             </div>
                                                         </div>

@@ -3,21 +3,39 @@
     $f = new Freelancer();
 
     require_once "../../classe/Pagamento.php";
-    $p = new Pagamento();
+    $pg = new Pagamento();
+
+    require_once "../../classe/Produto.php";
+    $p = new Produto();
+
+    session_start();
 
         //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
         if (isset($_POST['primeiroNome'])) {
             //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
-            $primeiroNome     = addslashes($_POST['primeiroNome']);
+            $primeiroNome   = addslashes($_POST['primeiroNome']);
             $ultimoNome     = addslashes($_POST['ultimoNome']);
             $cpf            = addslashes($_POST['cpf']);
             $telefone       = addslashes($_POST['telefone']);
             $email          = addslashes($_POST['email']);
-            $idFr   = addslashes($_POST['idFreelancer']);
+            $idProduto      = addslashes($_POST['idProduto']);
+            $idFr           = addslashes($_POST['idFreelancer']);
 
 
-            if ($p->cadastrarPagamento($primeiroNome, $ultimoNome, $cpf, $telefone, $email, $idFr)) {
-                echo "<script>alert('Pedido Registrado com Sucesso!');</script>";
+            if ($pg->cadastrarPagamento($primeiroNome, $ultimoNome, $cpf, $telefone, $email, $idProduto, $idFr)) {
+                echo "<div class='card text-center'>
+                        <div class='card-header'>
+                            Featured
+                        </div>
+                        <div class='card-body'>
+                            <h5 class='card-title'>Special title treatment</h5>
+                            <p class='card-text'>With supporting text below as a natural lead-in to additional content.</p>
+                            <a href='#' class='btn btn-primary'>Go somewhere</a>
+                        </div>
+                        <div class='card-footer text-muted'>
+                            2 days ago
+                        </div>
+                    </div>";
             }
         }
 ?>

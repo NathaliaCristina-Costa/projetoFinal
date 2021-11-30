@@ -104,6 +104,7 @@
             $cmd->execute();
             if ($cmd->rowCount()>0) {                  
                     while ($dados = $cmd->fetch(PDO::FETCH_ASSOC)) {
+                        
                         if (($dados['statusPedido'] != "Aceito")&&($dados['statusPedido'] != "Realizado")&&($dados['statusPedido'] != "Não Realizado")) {
                             echo "
                             <div class='card'>

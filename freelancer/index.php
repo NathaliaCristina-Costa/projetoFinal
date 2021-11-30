@@ -4,6 +4,9 @@ $f = new Freelancer();
 
 require_once "../classe/Pedido.php";
 $p = new Pedido();
+
+require_once "../classe/Pagamento.php";
+$pg = new Pagamento();
 ?>
 <!DOCTYPE html>
 
@@ -50,9 +53,10 @@ $p = new Pedido();
             </div>
             <br>
             <div class="text-center mb-4">
-               <?php
-                $f->restricaoAcesso($_SESSION['id_Freelancer']);
-               ?>
+                <!--h5>Veja os Pedidos Diponíveis para sua Categoria!</h5-->
+                <?php
+                    //$pg->restricaoAcesso($_SESSION['id_Freelancer']);
+                ?>
             </div>
         </div>
     </div>
