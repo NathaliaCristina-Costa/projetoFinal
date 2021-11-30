@@ -1,8 +1,6 @@
 <?php
    require_once "../classe/AtendeFreelancer.php";
-   $at = new AtendeFreelancer();
-
-    
+   $at = new AtendeFreelancer();    
 ?>
 <!DOCTYPE html>
 

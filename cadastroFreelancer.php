@@ -145,14 +145,13 @@ $freela = new Freelancer();
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-sm-12 mb-3 mb-sm-12">
-                                                                <select class="form-control" name="idCategoria">
+                                                            <div class="col-sm-12 mb-3 mb-sm-12">                                                              
                                                                     
                                                                     <?php
                                                                     $freela->buscarCategoria();
                                                                     ?>
 
-                                                                </select>
+                                                                
                                                             </div>
                                                         </div>
                                                     </form>

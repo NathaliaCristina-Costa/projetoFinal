@@ -20,10 +20,20 @@ $p = new Produto();
         <h2 class="display-4 mt-5 mb-5">Planos</h2>
 
         <div class="row row-cols-1 row-cols-md-3">
-           <?php
-                $p-> produtosDisponiveis();
-           ?>
+            <?php
+            $p->produtosDisponiveis();
+            ?>
         </div>
+
+    </div>
+    <div class="text-center">
+        
+        <div class="card-body">
+            <h5 class="card-title">Faça Sua Compra!</h5>
+           
+            <a href="checkout-form.php" class="btn btn-primary">Clique Aqui</a>
+        </div>
+        
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

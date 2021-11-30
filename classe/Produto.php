@@ -28,13 +28,26 @@
                                 <div class='card-body'>
                                     <h5 class='card-title'>{$dados['descricao']}</h5>
                                     <p class='card-text'>R$ {$dados['preco']}</p>
-                                    <a href='checkout-form.php?id={$dados['id_Produto']}' class='btn btn-primary'>Comprar</a>
+                                    
                                 </div>
                             </div>
                         </div>";
                
                 }               
                    
+            }
+        }
+
+        public function comprarProduto(){
+            $cmd = $this->pdo->prepare("SELECT id_Produto, nomeProduto, preco FROM produto ORDER BY id_Produto ASC");
+            $cmd->execute();
+            if ($cmd->rowCount()>0) {
+                    echo"<select class='form-control' name='idProduto'>
+                                <option value='selecione' selected>Escolha um Plano</option>";
+                while ($dados = $cmd->fetch(PDO::FETCH_ASSOC)) {
+                            echo "<option value='{$dados['id_Produto']}'>{$dados['nomeProduto']} - R$ <b>{$dados['preco']}</b></option>";
+                }
+                    echo "</select>";
             }
         }
 

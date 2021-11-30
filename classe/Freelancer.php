@@ -37,10 +37,12 @@
             $cmd->execute();
 
             if ($cmd->rowCount()>0) {
-                    echo"<option value='selecione' selected>Escolha sua Categoria</option>";
+                    echo"<select class='form-control' name='idCategoria'>
+                                  <option value='selecione' selected>Escolha sua Categoria</option>";
                 while ($dados = $cmd->fetch(PDO::FETCH_ASSOC)) {
-                    echo "<option value='{$dados['id_Categoria']}'>{$dados['nomeCategoria']}</option>";
+                            echo "<option value='{$dados['id_Categoria']}'>{$dados['nomeCategoria']}</option>";
                 }
+                    echo "</select>";
             }
         }
 
