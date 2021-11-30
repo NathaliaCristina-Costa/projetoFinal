@@ -78,7 +78,7 @@ if (!isset($_SESSION['id_Admin'])) {
             <div class="row">
                 <div class="col-xl-4 col-md-4 mb-4">
                     <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                        <a href="categoria/categoria.php">
+                        <a href="relatorio/relatorioCliente.php">
                             <div class="card-body">
                                 <h5 class="card-title">Relatório Cliente</h5>
                             </div>
@@ -87,7 +87,7 @@ if (!isset($_SESSION['id_Admin'])) {
                 </div>
                 <div class="col-xl-4 col-md-4 mb-4">
                     <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;">
-                        <a href="categoria/categoria.php">
+                        <a href="relatorio/relatorioFreelancer.php">
                             <div class="card-body">
                                 <h5 class="card-title">Relatório Freelancer</h5>
                             </div>
@@ -96,7 +96,7 @@ if (!isset($_SESSION['id_Admin'])) {
                 </div>
                 <div class="col-xl-4 col-md-4 mb-4">
                     <div class="card text-white bg-success mb-3" style="max-width: 18rem;">                      
-                        <a href="categoria/categoria.php">
+                        <a href="relatorio/relatorioFinanceiro.php">
                             <div class="card-body">
                                 <h5 class="card-title">Relatório Financeiro</h5>                            
                             </div>

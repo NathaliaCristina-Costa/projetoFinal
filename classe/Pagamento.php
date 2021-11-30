@@ -18,6 +18,14 @@
             $this->pdo = Conexao::getConexao();
         }
 
+        public function buscarDados(){
+
+            $res = array();
+            $cmd = $this->pdo->query("SELECT id_Pagamento, primeiroNome, ultimoNome, CPF, nomeProduto, dataCompra, dataFinal
+            FROM pagamento JOIN produto ON idProduto = id_Produto");
+            $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+        }
 
         //FUNÇÃO CADASTRAR PAGAMENTOS NO BANCO DE DADOS
         public function cadastrarPagamento($primeiroNome, $ultimoNome, $cpf, $telefone, $email, $idProduto, $idFr){

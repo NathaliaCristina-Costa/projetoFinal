@@ -30,6 +30,15 @@
             return $res;
         }
 
+        public function buscarDadosRelatorio()
+        {
+
+            $res = array();
+            $cmd = $this->pdo->query("SELECT id_Freelancer, nome, email, telefone,  nomeCategoria, cpf, cidade, uf FROM freelancer JOIN categoria ON idCategoria = id_Categoria");
+            $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+        }
+
         //BUSCAR CATEGORIAS PARA TELA DE CADASTRO
         public function buscarCategoria(){
 

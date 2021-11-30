@@ -56,7 +56,7 @@ $cat = new Categoria();
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">
                                 <a href="cadastroCategoria.php"><button type="button" class="btn btn-dark">Adicionar</button></a>
-                                <a href="relatorio/relatorioCategoria.php"><button style="float:right" type="button" class="btn btn-dark">Relatório</button></a>
+                                
                             </h6>
 
                         </div>
