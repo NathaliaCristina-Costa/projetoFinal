@@ -1,9 +1,11 @@
 <div class="sidebar-header">
-    <h3><a href="../index.php"><i class="fas fa-user-shield"></i>Admin</a></h3>
+    <h3><i class="fas fa-user-shield"></i>Admin</h3>
 </div>
 
-<ul class="list-unstyled components">   
-
+<ul class="list-unstyled components">
+    <li>
+        <a href="../index.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Relatório</a>
+    </li>
     <li>
         <a href="../categoria/categoria.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Categorias</a>
     </li>
@@ -21,9 +23,6 @@
             <a class="dropdown-item" href="../atendimento/atendimento.php">Clientes</a>
             <a class="dropdown-item" href="../atendimento/atendimentoFreelancer.php">Freelancers</a>
         </div>
-    </li>
-    <li>
-        <a href="../cliente/cliente.php"><i class="fa fa-address-book mr-2 text-gray-400"></i> Relatórios
     </li>
     <li>
         <a href="../login.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>

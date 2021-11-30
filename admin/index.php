@@ -1,21 +1,4 @@
 <?php
-
-
-
-require_once "../classe/Categoria.php";
-require_once "../classe/Cliente.php";
-require_once "../classe/Freelancer.php";
-require_once "../classe/Atendimento.php";
-require_once "../classe/Admin.php";
-require_once "../classe/AtendeFreelancer.php";
-require_once "../classe/Pedido.php";
-$cat        = new Categoria();
-$cli        = new Cliente();
-$freela     = new Freelancer();
-$atend      = new Atendimento();
-$admin      = new Admin();
-$freelAtend = new AtendeFreelancer();
-$p          = new Pedido();
 // Inicia sessões
 
 session_start();
@@ -24,9 +7,6 @@ if (!isset($_SESSION['id_Admin'])) {
     header('location: login.php');
     die();
 }
-
-
-
 
 ?>
 <!DOCTYPE html>
@@ -60,7 +40,9 @@ if (!isset($_SESSION['id_Admin'])) {
             </div>
 
             <ul class="list-unstyled components">
-
+                <li>
+                    <a href="index.php"><i class="fas fa-bars mr-2 text-gray-400"></i> Relatório</a>
+                </li>
                 <li>
                     <a href="categoria/categoria.php    "><i class="fas fa-bars mr-2 text-gray-400"></i> Categorias</a>
                 </li>
@@ -79,16 +61,6 @@ if (!isset($_SESSION['id_Admin'])) {
                         <a class="dropdown-item" href="atendimento/atendimentoFreelancer.php">Freelancers</a>
                     </div>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" type="button" id="moduleDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-address-book mr-2 text-gray-400"></i> Relatórios
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="moduleDropDown">
-                        <a class="dropdown-item" href="../atendimento/atendimento.php">Relatorio Cliente</a>
-                        <a class="dropdown-item" href="../atendimento/atendimentoFreelancer.php">Relatório Freelancers</a>
-                        <a class="dropdown-item" href="../atendimento/atendimentoFreelancer.php">Relatório Pedidos</a>
-                    </div>
-                </li>
                 <li>
                     <a href="logout.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair</a>
                 </li>
@@ -99,142 +71,39 @@ if (!isset($_SESSION['id_Admin'])) {
         <div id="content">
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                <h1 class="h3 mb-0 text-gray-800">Relatórios do Sistema</h1>
             </div>
 
             <!-- Content Row -->
             <div class="row">
-
-                <!-- Earnings (Monthly) Card Example -->
                 <div class="col-xl-4 col-md-4 mb-4">
-                    <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                         <a href="categoria/categoria.php">
                             <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-3 align-items-center">
-                                            Total de Categorias
-                                        </div>
-                                        <div class="text-center font-weight-bold text-primary text-uppercase mb-1">
-                                            <?php
-                                            $dados = $cat->totalRegistroCategoria();
-                                            echo "<h2>" . count($dados) . "</h2>";
-                                            ?>
-                                        </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Earnings (Monthly) Card Example -->
-                <div class="col-xl-4 col-md-4 mb-4">
-                    <div class="card border-left-success shadow h-100 py-2">
-                        <a href="freelancer/freelancer.php">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1 align-items-center">
-                                            Total Freelancers</div>
-                                        <div class="text-center text-success h5 mb-0 font-weight-bold text-gray-800">
-                                            <?php
-                                            $dados = $freela->totalRegistroFreelancer();
-                                            echo "<h2>" . count($dados) . "</h2>";
-                                            ?>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h5 class="card-title">Relatório Cliente</h5>
                             </div>
                         </a>
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-4 mb-4">
-                    <div class="card border-left-info shadow h-100 py-2">
-                        <a href="cliente/cliente.php">
+                    <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;">
+                        <a href="categoria/categoria.php">
                             <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1 align-items-center">
-                                            Total de Clientes
-                                        </div>
-                                        <div class="text-center font-weight-bold text-info text-uppercase mb-1">
-                                            <?php
-                                            $dados = $cli->totalRegistroCliente();
-                                            echo "<h2>" . count($dados) . "</h2>";
-                                            ?>
-                                        </div>
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <h5 class="card-title">Relatório Freelancer</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-4 mb-4">
+                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">                      
+                        <a href="categoria/categoria.php">
+                            <div class="card-body">
+                                <h5 class="card-title">Relatório Financeiro</h5>                            
                             </div>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="row">
-
-                <!-- Pending Requests Card Example -->
-                <div class="col-xl-6 col-md-6 mb-6">
-                    <div class="card border-left-warning shadow h-100 py-2">
-                        <a href="atendimento/atendimento.php">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1 align-items-center">
-                                            Total de Mensagens - CLIENTES
-                                        </div>
-                                        <div class="text-center font-weight-bold text-warning text-uppercase mb-1">
-                                            <?php
-                                            $dados = $atend->totalRegistroAtendimento();
-                                            echo "<h2>" . count($dados) . "</h2>";
-                                            ?>
-                                        </div>
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <!-- Pending Requests Card Example -->
-                <div class="col-xl-6 col-md-6 mb-6">
-                    <div class="card border-left-warning shadow h-100 py-2">
-                        <a href="atendimento/atendimentoFreelancer.php">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1 align-items-center">
-                                            Total de Mensagens - freelancer
-                                        </div>
-                                        <div class="text-center font-weight-bold text-secondary text-uppercase mb-1">
-                                            <?php
-                                            $dados = $freelAtend->totalRegistroAtendimentoFreela();
-                                            echo "<h2>" . count($dados) . "</h2>";
-                                            ?>
-                                        </div>
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 
