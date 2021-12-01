@@ -51,11 +51,11 @@ $cli = new Cliente();
                                 <a href="cadastroCategoria.php"><button style="float:right" type="button" class="btn btn-primary"><i class="fas fa-file-alt"></i></button></a>
 
                             </h6>
-                            <form method="POST" action="salva.php">
+                            <form method="POST" action="">
                                 <div class="colunm3">
                                     <div class="espaco-min"></div>
                                     <label>Data Inicial</label><br>
-                                    <input type="date" name="initial" required class="border-1px datetime">
+                                    <input type="date" name="inicio" required class="border-1px datetime" value="01/01/1900">
                                     <div class="espaco-min"></div>
                                 </div>
 
@@ -77,23 +77,17 @@ $cli = new Cliente();
                                         <th>Nome</th>
                                         <th>Email</th>
                                         <th>Telefone</th>
+                                        <th>Data Cadastro</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $dados = $cli->buscarDados();
-                                    if (count($dados) > 0) {
-                                        for ($i = 0; $i < count($dados); $i++) {
-                                            echo "<tr>";
-                                            foreach ($dados[$i] as $k => $v) {
-                                                if ($k != "senhaCliente") {
-                                                    echo "<td>" . $v . "</td>";
-                                                }
-                                            }
+                                        if (!empty([$_POST['inicio']])) {
+                                            $dtInicio = addslashes($_POST['inicio']);
+                                            $dtFim = addslashes($_POST['final']);
 
-                                            echo "</tr>";
+                                            $cli->buscarDadosRelatorio($dtInicio, $dtFim);
                                         }
-                                    }
                                     ?>
                                 </tbody>
                             </table>

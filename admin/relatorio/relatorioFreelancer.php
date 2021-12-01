@@ -52,11 +52,11 @@ $freela = new Freelancer();
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <a href="cadastroCategoria.php"><button style="float:right" type="button" class="btn btn-warning"><i class="fas fa-file-alt"></i></button></a>
-                            <form method="POST" action="salva.php">
+                            <form method="POST" action="">
                                 <div class="colunm3">
                                     <div class="espaco-min"></div>
                                     <label>Data Inicial</label><br>
-                                    <input type="date" name="initial" required class="border-1px datetime">
+                                    <input type="date" name="inicio" required class="border-1px datetime" value="01/01/1900">
                                     <div class="espaco-min"></div>
                                 </div>
 
@@ -85,22 +85,19 @@ $freela = new Freelancer();
                                             <th>CPF</th>
                                             <th>Cidade</th>
                                             <th>Estado</th>
+                                            <th>Data Cadastro</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $dados = $freela->buscarDadosRelatorio();
-                                        if (count($dados) > 0) {
-                                            for ($i = 0; $i < count($dados); $i++) {
-                                                echo "<tr>";
-                                                foreach ($dados[$i] as $k => $v) {
-                                                    if ($k != "senha") {
-                                                        echo "<td>" . $v . "</td>";
-                                                    }
-                                                }
+                                            if (!empty([$_POST['inicio']])) {
+
+                                                $dtInicio = addslashes($_POST['inicio']);
+                                                $dtFim = addslashes($_POST['final']);
+
+                                                $freela->buscarDadosRelatorio($dtInicio, $dtFim);
                                             }
-                                        }
                                         ?>
                                     </tbody>
                                 </table>

@@ -52,11 +52,11 @@ $pg = new Pagamento();
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <a href="cadastroCategoria.php"><button style="float:right" type="button" class="btn btn-success"><i class="fas fa-file-alt"></i></button></a>
-                            <form method="POST" action="salva.php">
+                            <form method="POST" action="">
                                 <div class="colunm3">
                                     <div class="espaco-min"></div>
                                     <label>Data Inicial</label><br>
-                                    <input type="date" name="initial" required class="border-1px datetime">
+                                    <input type="date" name="inicio" required class="border-1px datetime" value="01/01/1900">
                                     <div class="espaco-min"></div>
                                 </div>
 
@@ -85,49 +85,16 @@ $pg = new Pagamento();
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $dados = $pg->buscarDados();
-                                    if (count($dados) > 0) {
-                                        for ($i = 0; $i < count($dados); $i++) {
-                                            echo "<tr>";
-                                            foreach ($dados[$i] as $k => $v) {
-                                                if ($k != "senha") {
-                                                    echo "<td>" . $v . "</td>";
-                                                }
-                                            }
+                                        if (!empty([$_POST['inicio']])) {
+
+                                            $dtInicio = addslashes($_POST['inicio']);
+                                            $dtFim = addslashes($_POST['final']);
+
+                                            $pg->buscarDados($dtInicio, $dtFim);
+                                        }                                        
                                     ?>
                                 </tbody>
                             </table>
-                            <!--div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Nome</th>
-                                            <th>CPF</th>
-                                            <th>Telefone</th>
-                                            <th>Categoria</th>
-                                            <th>Ações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                                <td>
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Ações
-                                                        </button>
-                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                          <a class="dropdown-item" href="excluirFreelancer.php?id=<?php echo $dados[$i]['id_Freelancer']; ?>">Excluir</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                        <?php
-                                            echo "</tr>";
-                                        }
-                                    }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div-->
                         </div>
                     </div>
                 </div>

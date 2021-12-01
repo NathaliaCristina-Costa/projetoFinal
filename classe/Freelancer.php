@@ -30,13 +30,31 @@
             return $res;
         }
 
-        public function buscarDadosRelatorio()
+        public function buscarDadosRelatorio($dtInicio, $dtFim)
         {
+            $cmd = $this->pdo->prepare("SELECT id_Freelancer, nome, email, telefone, nomeCategoria, cpf, cidade, uf, dataCad 
+            FROM freelancer 
+            JOIN categoria ON idCategoria = id_Categoria 
+            WHERE dataCad BETWEEN :inicio AND :final");
+            $cmd->bindValue(":inicio", $dtInicio);
+            $cmd->bindValue(":final", $dtFim);
+            $cmd->execute();
 
-            $res = array();
-            $cmd = $this->pdo->query("SELECT id_Freelancer, nome, email, telefone,  nomeCategoria, cpf, cidade, uf FROM freelancer JOIN categoria ON idCategoria = id_Categoria");
-            $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
-            return $res;
+            if ($cmd->rowCount()>0) {
+                while ($dados = $cmd->fetch(PDO::FETCH_ASSOC)) {
+                    echo"<tr>
+                            <td>{$dados['id_Freelancer']}</td>
+                            <td>{$dados['nome']}</td>
+                            <td>{$dados['email']}</td>
+                            <td>{$dados['telefone']}</td>
+                            <td>{$dados['nomeCategoria']}</td>
+                            <td>{$dados['cpf']}</td>
+                            <td>{$dados['cidade']}</td>
+                            <td>{$dados['uf']}</td>
+                            <td>{$dados['dataCad']}</td>
+                        </tr>";
+                }
+            }
         }
 
         //BUSCAR CATEGORIAS PARA TELA DE CADASTRO

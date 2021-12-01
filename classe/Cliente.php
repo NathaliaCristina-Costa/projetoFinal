@@ -14,12 +14,34 @@
         }
 
         //BUSCAR DADOS DO BANCO E MOSTRAR NA TABELA DA TELA
-        public function buscarDados(){
-
+        public function buscarDados()
+        {
             $res = array();
             $cmd = $this->pdo->query("SELECT * FROM cliente ORDER BY id_Cliente");
             $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
             return $res;
+        }
+
+        public function buscarDadosRelatorio($dtInicio, $dtFim){
+
+            $cmd = $this->pdo->prepare("SELECT id_Cliente, nomeCliente, emailCliente, telefoneCliente, dataCadastro 
+            FROM cliente 
+            WHERE dataCadastro BETWEEN :inicio AND :final");
+            $cmd->bindValue(":inicio", $dtInicio);
+            $cmd->bindValue(":final", $dtFim);
+            $cmd->execute();
+
+            if ($cmd->rowCount()>0) {
+                while ($dados = $cmd->fetch(PDO::FETCH_ASSOC)) {
+                    echo "<tr>
+                            <td>{$dados['id_Cliente']}</td>
+                            <td>{$dados['nomeCliente']}</td>
+                            <td>{$dados['emailCliente']}</td>
+                            <td>{$dados['telefoneCliente']}</td>
+                            <td>{$dados['dataCadastro']}</td>
+                          </tr>";
+                }
+            }
         }
 
         //FUNÇÃO CADASTRA CLIENTE NO BANCO DE DADOS

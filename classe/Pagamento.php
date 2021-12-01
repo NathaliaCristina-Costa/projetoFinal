@@ -18,13 +18,28 @@
             $this->pdo = Conexao::getConexao();
         }
 
-        public function buscarDados(){
+        public function buscarDados($dtInicio, $dtFim){
+            $cmd = $this->pdo->prepare("SELECT id_Pagamento, primeiroNome, ultimoNome, cpf, nomeProduto, dataCompra, dataFinal 
+            FROM pagamento 
+            JOIN produto ON idProduto = id_Produto
+            WHERE dataCompra BETWEEN :inicio AND :final");
+            $cmd->bindValue(":inicio", $dtInicio);
+            $cmd->bindValue(":final", $dtFim);
+            $cmd->execute();
 
-            $res = array();
-            $cmd = $this->pdo->query("SELECT id_Pagamento, primeiroNome, ultimoNome, CPF, nomeProduto, dataCompra, dataFinal
-            FROM pagamento JOIN produto ON idProduto = id_Produto");
-            $res = $cmd->fetchAll(PDO::FETCH_ASSOC);
-            return $res;
+            if($cmd->rowCount()>0){
+                while ($dados = $cmd->fetch(PDO::FETCH_ASSOC)) {
+                    echo "<tr>
+                            <td>{$dados['id_Pagamento']}</td>
+                            <td>{$dados['primeiroNome']}</td>
+                            <td>{$dados['ultimoNome']}</td>
+                            <td>{$dados['cpf']}</td>
+                            <td>{$dados['nomeProduto']}</td>
+                            <td>{$dados['dataCompra']}</td>
+                            <td>{$dados['dataFinal']}</td>
+                          </tr>";
+                }
+            }
         }
 
         //FUNÇÃO CADASTRAR PAGAMENTOS NO BANCO DE DADOS
