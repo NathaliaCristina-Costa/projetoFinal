@@ -73,7 +73,7 @@ $cli = new Cliente();
                                             for ($i = 0; $i < count($dados); $i++) {
                                                 echo "<tr>";
                                                 foreach ($dados[$i] as $k => $v) {
-                                                    if ($k != "id_Cliente" && $k != "senhaCliente") {
+                                                    if ($k != "id_Cliente" && $k != "senhaCliente" && $k != "dataCadastro") {
                                                         echo "<td>" . $v . "</td>";
                                                     }
                                                 }
