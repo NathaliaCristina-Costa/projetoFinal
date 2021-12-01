@@ -82,7 +82,7 @@ $cli = new Cliente();
                                 </thead>
                                 <tbody>
                                     <?php
-                                        if (!empty([$_POST['inicio']])) {
+                                        if (!empty($_POST)) {
                                             $dtInicio = addslashes($_POST['inicio']);
                                             $dtFim = addslashes($_POST['final']);
 

@@ -56,7 +56,7 @@ $freela = new Freelancer();
                                 <div class="colunm3">
                                     <div class="espaco-min"></div>
                                     <label>Data Inicial</label><br>
-                                    <input type="date" name="inicio" required class="border-1px datetime" value="01/01/1900">
+                                    <input type="date" name="inicio" required class="border-1px datetime" >
                                     <div class="espaco-min"></div>
                                 </div>
 
@@ -67,7 +67,7 @@ $freela = new Freelancer();
                                     <div class="espaco-min"></div>
                                 </div>
                                 <br>
-                                <button type="submit" class="btn btn-warning mb-2" name="btCadastrar"><i class="fas fa-search"></i></button>
+                                <button type="submit" class="btn btn-warning mb-2" name="btCadastra"><i class="fas fa-search"></i></button>
                             </form>
                         </div>
 
@@ -91,7 +91,7 @@ $freela = new Freelancer();
                                     </thead>
                                     <tbody>
                                         <?php
-                                            if (!empty([$_POST['inicio']])) {
+                                            if (!empty($_POST)) {
 
                                                 $dtInicio = addslashes($_POST['inicio']);
                                                 $dtFim = addslashes($_POST['final']);
