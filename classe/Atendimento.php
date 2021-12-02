@@ -22,7 +22,7 @@
             return $res;
         }
 
-        //FUNÇÃO CADASTRA FREELANCER NO BANCO DE DADOS
+        //FUNÇÃO ATENDIMENTOS NO BANCO DE DADOS
         public function cadastrarAtendimento( $assunto, $mensagem,$idCliente){
             
                 $cmd = $this->pdo->prepare("INSERT INTO atendimentocliente (assunto, mensagem, idCliente) VALUES ( :a, :m, :idC)");

@@ -68,7 +68,7 @@ $freela = new Freelancer();
 
                                                         if ($freela->cadastrarFreelancer($nome, $email, $senha, $telefone, $cpf, $cep, $rua, $bairro, $cidade, $uf, $id_Categoria) == true) {
                                                             echo "<script>alert('Conta Registrada com Sucesso!');</script>";
-                                                            header('location: /projetoFinal/freelancer/login.php');
+                                                            header('location: /projetoFinal/freelancer/pagamento/');
                                                         }
                                                         //Preenchimento obrigatório, VERIFICAR SE VARIÁVEIS ESTÃO VAZIAS
                                                         else if ((!empty($cpf))) {

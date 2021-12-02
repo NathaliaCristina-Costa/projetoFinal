@@ -45,9 +45,8 @@
         //FUNÇÃO CADASTRAR PAGAMENTOS NO BANCO DE DADOS
         public function cadastrarPagamento($primeiroNome, $ultimoNome, $cpf, $telefone, $email, $idProduto, $idFr){
       
-             $cmd = $this->pdo->prepare("INSERT INTO pagamento (primeiroNome, ultimoNome, cpf, 
-             telefone, email, idProduto, idFr,  dataFinal)
-             VALUES ( :p, :u, :c, :t, :e, :idP, :idF");
+            $cmd = $this->pdo->prepare("INSERT INTO pagamento (primeiroNome, ultimoNome, cpf, 
+            telefone, email, idProduto, idFr) VALUES (:p, :u, :c, :t, :e, :idP, :idF)");
 
              
              $cmd->bindValue(":p", $primeiroNome);
