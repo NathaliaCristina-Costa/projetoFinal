@@ -48,12 +48,15 @@ $p = new Pedido();
             </div>
 
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Meus Pedidos<h1><br>
+                <h1 class="h3 mb-0 text-gray-800">Meu Plano<h1><br>
             </div>
             <br>
-            <?php
-            $p->meusPedidosFreelancer($_SESSION['id_Freelancer']);
-            ?>
+            
+            <div class="text-center mb-4">
+                <?php
+                    $pg->dataFinal($_SESSION['id_Freelancer']);
+                ?>
+            </div>
         </div>
     </div>
 

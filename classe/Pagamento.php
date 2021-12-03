@@ -130,7 +130,11 @@
                       </li>
                      <li>
                         <a href='meusPedidos.php'><i class='fas fa-dollar-sign mr-2 text-gray-400'></i> Meus Pedidos</a>
-                     </li>";
+                     </li>
+                     <li>
+                        <a href='meusPedidos.php'><i class='fas fa-dollar-sign mr-2 text-gray-400'></i> Meu Plano</a>
+                     </li>
+                     ";
             }else{
                 echo "<li>                        
                         <a href='pagamento/index.php'><i class='fas fa-dollar-sign mr-2 text-gray-400'></i> PAGAMENTO PARA LIBERAÇÃO DOS PEDIDOS</a>

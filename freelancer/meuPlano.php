@@ -1,12 +1,10 @@
 <?php
 require_once "../classe/Freelancer.php";
-$f = new Freelancer();
+$freela = new Freelancer();
 
 require_once "../classe/Pedido.php";
 $p = new Pedido();
 
-require_once "../classe/Pagamento.php";
-$pg = new Pagamento();
 ?>
 <!DOCTYPE html>
 
@@ -35,23 +33,27 @@ $pg = new Pagamento();
 
         <!-- Sidebar  -->
         <nav id="sidebar" style="background-color: black;">
+
             <?php include 'menu.php'; ?>
         </nav>
 
         <!-- Page Content  -->
         <div id="content">
-
-
-
-            <div class="text-center mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Bem Vindo! </h1>
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                    </ol>
+                </div>
             </div>
-            <!-- Content Row -->
-            <div class="row">
-                <img class="imagem align-items-center justify-content-center h-100 w-100" style="max-width:1100px; max-height:350px;
-                width: auto;height: auto;" src="src/img/clientelogin.jpg">
+
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Meus Pedidos<h1><br>
             </div>
             <br>
+            <?php
+            $p->meusPedidosFreelancer($_SESSION['id_Freelancer']);
+            ?>
         </div>
     </div>
 
@@ -75,6 +77,13 @@ $pg = new Pagamento();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
 
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
 </body>
 
 </html>
