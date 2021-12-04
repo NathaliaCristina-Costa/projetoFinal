@@ -1,4 +1,6 @@
 <?php
+ob_flush();
+session_start();
 require_once "../../classe/Produto.php";
 $p = new Produto();
 
@@ -8,7 +10,7 @@ $f = new Freelancer();
 require_once "../../classe/Pagamento.php";
 $pg = new Pagamento();
 
-session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -49,8 +51,9 @@ session_start();
                     $idProduto      = addslashes($_POST['idProduto']);
                     $idFr           = addslashes($_POST['idFreelancer']);
 
-                    if ($pg->cadastrarPagamento($primeiroNome, $ultimoNome, $cpf, $telefone, $email, $idProduto, $idFr)) {
-                        header("location: https://localhost/projetoFinal/freelancer/meuPlano.php");
+                    if ($pg->cadastrarPagamento($primeiroNome, $ultimoNome, $cpf, $telefone, $email, $idProduto, $idFr) == true) {
+                  
+                        header('location: /projetoFinal/freelancer/meuPlano.php');
                     }
                 }
                 ?>

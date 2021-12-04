@@ -58,7 +58,7 @@
              $cmd->bindValue(":idF", $idFr);
         
              $cmd->execute();               
-            
+             return true;
         }    
         
         public function dataFinal($id){
