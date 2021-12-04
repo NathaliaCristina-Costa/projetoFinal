@@ -132,7 +132,7 @@
                         <a href='meusPedidos.php'><i class='fas fa-dollar-sign mr-2 text-gray-400'></i> Meus Pedidos</a>
                      </li>
                      <li>
-                        <a href='meusPedidos.php'><i class='fas fa-dollar-sign mr-2 text-gray-400'></i> Meu Plano</a>
+                        <a href='meuPlano.php'><i class='fas fa-dollar-sign mr-2 text-gray-400'></i> Meu Plano</a>
                      </li>
                      ";
             }else{
