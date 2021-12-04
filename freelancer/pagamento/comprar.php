@@ -23,7 +23,7 @@
 
 
             if ($pg->cadastrarPagamento($primeiroNome, $ultimoNome, $cpf, $telefone, $email, $idProduto, $idFr)) {
-                echo  "<script>window.location.replace('https://localhost/projetoFinal/freelancer/login.php');</script>";
+                header("location: https://localhost/projetoFinal/freelancer/meuPlano.php");
             }
         }
 ?>

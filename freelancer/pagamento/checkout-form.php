@@ -38,9 +38,23 @@ session_start();
             <div class="col-md-12">
                 <h4 class="mb-3">Informações Pessoais</h4>
                 <?php
-                   
+                    //Se o name existe e o botão cadastrar foi acionado, então as informações vão ser recolhidas
+                    if (isset($_POST['primeiroNome'])) {
+                    //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
+                    $primeiroNome   = addslashes($_POST['primeiroNome']);
+                    $ultimoNome     = addslashes($_POST['ultimoNome']);
+                    $cpf            = addslashes($_POST['cpf']);
+                    $telefone       = addslashes($_POST['telefone']);
+                    $email          = addslashes($_POST['email']);
+                    $idProduto      = addslashes($_POST['idProduto']);
+                    $idFr           = addslashes($_POST['idFreelancer']);
+
+                    if ($pg->cadastrarPagamento($primeiroNome, $ultimoNome, $cpf, $telefone, $email, $idProduto, $idFr)) {
+                        header("location: https://localhost/projetoFinal/freelancer/meuPlano.php");
+                    }
+                }
                 ?>
-                <form method="POST" action="comprar.php">
+                <form method="POST" action="">
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="first_name">Primeiro Nome</label>

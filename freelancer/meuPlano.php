@@ -2,8 +2,8 @@
 require_once "../classe/Freelancer.php";
 $freela = new Freelancer();
 
-require_once "../classe/Pedido.php";
-$p = new Pedido();
+require_once "../classe/Pagamento.php";
+$pg = new Pagamento();
 
 ?>
 <!DOCTYPE html>
@@ -52,7 +52,7 @@ $p = new Pedido();
             </div>
             <br>
             <?php
-            $p->meusPedidosFreelancer($_SESSION['id_Freelancer']);
+            $pg->dataFinal($_SESSION['id_Freelancer']);
             ?>
         </div>
     </div>
