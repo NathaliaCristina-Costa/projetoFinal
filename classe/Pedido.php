@@ -52,7 +52,9 @@
              $cmd->bindValue(":idC", $idCategoria);       
              $cmd->bindValue(":idCl", $idCliente); 
 
-             $cmd->execute();               
+             $cmd->execute();  
+             
+             return true;
             
         }
 

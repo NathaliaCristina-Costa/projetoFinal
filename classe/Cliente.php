@@ -136,10 +136,9 @@
         }
 
         //ATUALIZAR DADOS NO BANCO DE DADOS
-        public function editarMinhaConta($id, $nome, $email, $telefone){
-            $cmd = $this->pdo->prepare("SELECT id_Cliente FROM cliente WHERE nomeCliente = :n AND emailCliente = :e AND telefoneCliente = :t");
+        public function editarMinhaConta($id, $nome, $telefone){
+            $cmd = $this->pdo->prepare("SELECT id_Cliente FROM cliente WHERE nomeCliente = :n  AND telefoneCliente = :t");
             $cmd->bindValue(":n", $nome);
-            $cmd->bindValue(":e", $email);
              $cmd->bindValue(":t", $telefone);
             $cmd->execute();
 
@@ -148,9 +147,8 @@
                 return false;
             }else{ 
 
-                $cmd = $this->pdo->prepare("UPDATE cliente SET nomeCliente= :n, emailCliente = :e, telefoneCliente = :t WHERE id_Cliente = :id");
+                $cmd = $this->pdo->prepare("UPDATE cliente SET nomeCliente= :n, telefoneCliente = :t WHERE id_Cliente = :id");
                 $cmd->bindValue(":n", $nome);
-                $cmd->bindValue(":e", $email);
                 $cmd->bindValue(":t", $telefone);
                 $cmd->bindValue(":id", $id);
 

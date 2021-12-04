@@ -60,7 +60,7 @@ $cli = new Cliente();
                             $telefone = addslashes($_POST['telefone']);
                             $email = addslashes($_POST['email']);
 
-                            if ($cli->editarMinhaConta($idEditar, $nome, $email, $telefone) == true) {
+                            if ($cli->editarMinhaConta($idEditar, $nome, $telefone) == true) {
 
                                 header("location: conta.php?idConta=" . $_SESSION['id_Cliente']);
                             }

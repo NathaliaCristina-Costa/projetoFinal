@@ -70,14 +70,6 @@ $cli = new Cliente();
                                                                                                                                                                                                             } ?>">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-6 mb-3 mb-sm-6">
-                                                <label for="assunto" class="form-label">E-mail</label>
-                                                <input type="email" class="form-control form-control-user" name="email" id="email" disabled placeholder="Email" value="<?php if (isset($res)) {
-                                                                                                                                                                            echo $res['emailCliente'];
-                                                                                                                                                                        } ?>">
-                                            </div>
-                                        </div>
                                         <a href="editarConta.php?idEditar=<?php echo $_SESSION['id_Cliente']; ?>" type="submit" class="btn btn-dark" name="btEditar">Editar</a>
                                     </form>
                                 </div>
