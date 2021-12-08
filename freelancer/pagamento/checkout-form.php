@@ -93,6 +93,30 @@ $pg = new Pagamento();
                         </div>
                     </div>
                     <input type="hidden" name="idFreelancer" value="<?php echo $_SESSION['id_Freelancer']; ?>">
+                    <hr>
+                    
+                    <h4 class="mb-3">Dados do Cartão</h4>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="nomeCartao">Nome Impresso no Cartão</label>
+                            <input type="text" name="nomeCartao" id="nomeCartao " class="form-control" placeholder="Nome Cartão" autofocus>
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label for="numCartao">Número do Cartão</label>
+                            <input type="text" name="numCartao" id="numCartao" class="form-control" placeholder="Número do Cartão">
+                        </div>
+                        <div class="form-group col-md-1">
+                            <label for="CVV">CVV</label>
+                            <input type="number" name="CVV" id="CVV" class="form-control" placeholder="CVV">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for="data">Data Venciemnto</label>
+                            <input type="date" name="data" id="data" class="form-control" placeholder="Somente número do CPF" maxlength="14" oninput="maskCPF(this)">
+                        </div>
+                    </div>
+                    <hr>
                     <input type="submit" value="Comprar" class="btn btn-success">
                 </form>
             </div>
