@@ -57,10 +57,10 @@ $cli = new Cliente();
                             //Função permite bloquear códigos maliciosos que terceiros podem colocar ao registrar informação
                             $idEditar = addslashes($_GET['idEditar']);
                             $nome = addslashes($_POST['nome']);
-                            $telefone = addslashes($_POST['telefone']);
                             $email = addslashes($_POST['email']);
+                            $telefone = addslashes($_POST['telefone']);
 
-                            if ($cli->editarMinhaConta($idEditar, $nome, $telefone) == true) {
+                            if ($cli->editarMinhaConta($idEditar, $nome, $email, $telefone) == true) {
 
                                 header("location: conta.php?idConta=" . $_SESSION['id_Cliente']);
                             }
@@ -86,6 +86,13 @@ $cli = new Cliente();
                                                 <input type="tel" class="form-control form-control-user" data-mask="(00) 00000-0000" name="telefone" id="telefone" placeholder="Telefone" value="<?php if (isset($res)) {
                                                                                                                                                                                                         echo $res['telefoneCliente'];
                                                                                                                                                                                                     } ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 mb-3 mb-sm-6">
+                                                <input type="email" class="form-control form-control-user" name="email" id="email" placeholder="Email" value="<?php if (isset($res)) {
+                                                                                                                                                                    echo $res['emailCliente'];
+                                                                                                                                                                } ?>">
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-success" name="btEditar">Salvar</button>

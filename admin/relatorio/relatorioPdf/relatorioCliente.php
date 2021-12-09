@@ -11,19 +11,24 @@
 
     $pdo = new PDO('mysql:host=localhost; dbname=projetofinal', 'root', '');
 
-    $sql = $pdo->query('SELECT COUNT(id_Freelancer), nomeCategoria FROM freelancer JOIN categoria ON idCategoria = id_Categoria WHERE idCategoria');
+    $sql = $pdo->query('SELECT  nomeCliente, emailCliente, telefoneCliente, dataCadastro 
+	FROM cliente');
 
     $html = '<table border=1 width=100%>';	
 	$html .= '<thead>';
 	$html .= '<tr>';
-	$html .= '<th>ID</th>';
-	$html .= '<th>Categoria</th>';
+	$html .= '<th>Nome</th>';
+	$html .= '<th>Email</th>';
+	$html .= '<th>Telefone</th>';
+	$html .= '<th>Data Cadastro</th>';
 	$html .= '</thead>';
 	$html .= '<tbody>';
 
     while ($linha = $sql->fetch(PDO::FETCH_ASSOC)) {
-        $html .= '<tr><td>'. $linha['id_Categoria'] . '</td>';
-        $html .= '<td>'. $linha['nomeCategoria'] . '</td></tr>';
+        $html .= '<tr><td>'. $linha['nomeCliente'] . '</td>';
+		$html .= '<td>'. $linha['emailCliente'] . '</td>';
+		$html .= '<td>'. $linha['telefoneCliente'] . '</td>';
+        $html .= '<td>'. $linha['dataCadastro'] . '</td></tr>';
         
     }
 
@@ -35,7 +40,7 @@
 	
 	// Carrega seu HTML
 	$dompdf->loadHtml('
-			<h1 style="text-align: center;"> Relatório Categorias</h1>
+			<h1 style="text-align: center;"> Relatório Clientes Cadastrados no Site</h1>
 			'. $html .'
 		');
 
@@ -44,7 +49,7 @@
 
 	//Exibibir a página
 	$dompdf->stream(
-		"relatorioCategoria.pdf", 
+		"relatorioCliente.pdf", 
 		array(
 			"Attachment" => false //Para realizar o download somente alterar para true
 		)

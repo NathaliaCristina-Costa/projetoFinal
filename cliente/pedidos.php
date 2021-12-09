@@ -70,7 +70,7 @@
                                             $idCliente = addslashes($_POST['idCliente']);
 
                                             if ($p->cadastrarPedido($cep, $rua, $bairro, $cidade, $estado, $telefone, $mensagem, $idCategoria, $idCliente) == true) {
-                                                header('location: /projetoFinal/freelancer/pedidosFeitos.php');
+                                                header('location: /projetoFinal/cliente/pedidosFeitos.php');
                                             }
                                         }
                                         ?>

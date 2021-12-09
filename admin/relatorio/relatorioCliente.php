@@ -48,7 +48,7 @@ $cli = new Cliente();
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">
-                                <a href="cadastroCategoria.php"><button style="float:right" type="button" class="btn btn-primary"><i class="fas fa-file-alt"></i></button></a>
+                                <a href="relatorioPdf/relatorioCliente.php"><button style="float:right" type="button" class="btn btn-primary"><i class="fas fa-file-alt"></i></button></a>
 
                             </h6>
                             <form method="POST" action="">

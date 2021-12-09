@@ -51,7 +51,7 @@ $pg = new Pagamento();
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <a href="cadastroCategoria.php"><button style="float:right" type="button" class="btn btn-success"><i class="fas fa-file-alt"></i></button></a>
+                            <a href="relatorioPdf/relatorioFinanceiro.php"><button style="float:right" type="button" class="btn btn-success"><i class="fas fa-file-alt"></i></button></a>
                             <form method="POST" action="">
                                 <div class="colunm3">
                                     <div class="espaco-min"></div>
