@@ -1,7 +1,11 @@
 <?php
 include_once("classe/Freelancer.php");
 include_once("classe/Categoria.php");
+
 $freela = new Freelancer();
+
+
+
 
 ?>
 <!DOCTYPE html>
@@ -69,6 +73,7 @@ $freela = new Freelancer();
                                                         if ($freela->cadastrarFreelancer($nome, $email, $senha, $telefone, $cpf, $cep, $rua, $bairro, $cidade, $uf, $id_Categoria) == true) {
                                                             echo "<script>alert('Conta Registrada com Sucesso!');</script>";
                                                             header('location: /projetoFinal/freelancer/login.php');
+                                                        
                                                         }
                                                         //Preenchimento obrigatório, VERIFICAR SE VARIÁVEIS ESTÃO VAZIAS
                                                         else if ((!empty($cpf))) {
@@ -76,7 +81,11 @@ $freela = new Freelancer();
                                                                 echo  "<script>alert('CPF já Cadastrado! Cadastre Um novo CPF');</script>";
                                                             }
                                                         }
+                                                                             
+                                                    
                                                     }
+                                                      
+                                
                                                     ?>
 
                                                     <form method="POST">
@@ -147,8 +156,24 @@ $freela = new Freelancer();
                                                                     $freela->buscarCategoria();
                                                                     ?>
                                                                 </select>
-                                                                
+
                                                             </div>
+                                                            
+                                                            <div class="col-sm-12 mb-3 mb-sm-12">
+                                                            <input type="checkbox" id="act" name="aceite" value="aceite" required> 
+                                                            <label><h8>Eu declaro que estou de acordo com os termos oferecidos pela plataforma.  </h8></label>
+                                                            
+                                                            <a href="data:text/html;charset=utf-8,<html><body><h5> TERMO DE ACEITE </h5>
+                                                                   <p> Declaro, para os devidos fins, que concordo quanto ao processo de pagamento pelos projeto por mim finalizados.</p>
+                                                                    <p>Fica por conta do freelancer acordar a melhor forma em relação ao recebimento do pagamento, assim como, acordar o valor
+                                                                    pelo projeto realizado. </p>
+
+                                                                    <p>Concodamos que a plataforma oferece apenas os serviços disponiveis.</p>
+                                                                 </body></html>" download="Termo de aceitação"> Clique aqui </a>
+
+                                                            
+                                                            
+                                                </div>
                                                         </div>
                                                     </form>
                                                 </section>

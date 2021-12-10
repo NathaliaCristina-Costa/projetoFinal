@@ -62,7 +62,7 @@ $cli = new Cliente();
 
                             if ($cli->editarMinhaConta($idEditar, $nome, $email, $telefone) == true) {
 
-                                header("location: conta.php?idConta=" . $_SESSION['id_Cliente']);
+                                header("location: https://localhost/projetoFinal/cliente/conta.php?idConta=" . $_SESSION['id_Cliente']);
                             }
                         }
                     }

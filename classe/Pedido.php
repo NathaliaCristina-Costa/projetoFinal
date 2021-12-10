@@ -169,25 +169,26 @@
                                 <div class='card-header'>
                                     <h5 class='mb-0'>
                                         <span style='float:left'> 
-                                            <i>{$dados['nomeCliente']}</i>
+                                           <i>{$dados['nomeCliente']}</i>
                                         </span>
                                         <br>
-                                        <p>{$dados['cidadePedido']} - {$dados['estadoPedido']}</p>
+                                        <p  style='float:left'>{$dados['cidadePedido']} - {$dados['estadoPedido']}</p>
                                         
                                     </h5>
                                 </div>
                                 <div class='card-body'>
-                                  <b>{$dados['nomeCategoria']}</b><br>
-                                  {$dados['mensagemPedido']}
+                                  <b  style='float:left'>{$dados['nomeCategoria']}</b><br>
+                                  <span  style='float:left'>{$dados['mensagemPedido']}</span>
+                                  <br>
                                   <hr>";
                         if($dados['statusPedido'] == 'Aceito'){
                                     echo"  
                                     <form method='POST' action='statusRealizado.php?id={$dados['id_Pedido']}'>
                                        
-                                        <button type='submit' class='btn btn-success'>
-                                        <i class='fas fa-check-circle'></i>
+                                        <button type='submit' class='btn btn-success' style='float:left'>
+                                        <i class='fas fa-check-circle' style='float:left'></i>
                                         </button>                             
-                                        <select name='status'>
+                                        <select name='status'style='float:left'>
                                             <option value=''>Pedido Foi Finalizado ?</option>
                                             <option value='Realizado'>Sim</option>
                                             <option value='Não Realizado'>Não</option>
@@ -200,7 +201,7 @@
                                 ";
                         }else{
                             echo"
-                                    <b><i>Status dos Pedido:</i></b> {$dados['statusPedido']}
+                                    <b style='float:left'><i>Status dos Pedido : </i></b> <span  style='float:left'> {$dados['statusPedido']}</span>
                                 </div>
                             </div>
                         
@@ -245,34 +246,11 @@
                                     <i>{$dados['nome']}<br>
                                     {$dados['telefone']}<br>
                                     {$dados['cidade']} - {$dados['uf']}</i><br><br> 
-                                    <hr>";
-                            if($dados['statusPedido'] == 'Aceito'){
-                                    echo"    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']}                     
+                                    <hr>
+                                    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']}                     
                                 </div>
                             </div>
-                            <br>";
-                            }elseif($dados['statusPedido'] != 'Não Realizado'){
-                                echo"    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']} 
-                                        <a href='https://localhost/projetoFinal/cliente/avaliacao.php?idPedido={$dados['id_Pedido']}'>
-                                            <button style='float:right' type='button' class='btn btn-info'>
-                                                Deseja Avaliar o Serviço?
-                                            </button>                   
-                                        </a>
-                                </div>
-                            </div>
-                            <br>";
-                            }else{
-                                echo"    <i><b>Status do Pedido:</b></i> {$dados['statusPedido']} 
-                                    <a href='https://localhost/projetoFinal/cliente/pedidos.php'>
-                                        <button style='float:right' type='button' class='btn btn-danger'>
-                                            Deseja Fazer um novo pedido?                                            
-                                        </button>                   
-                                    </a>
-                                 </div>
-                            </div>
-                            <br>";    
-                            }
-                                
+                            <br>";                               
                                 
                             
                         }else{
